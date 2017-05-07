@@ -8,6 +8,7 @@
     <thead>
       <th>#</th>
       <th>图片</th>
+      <th>分类</th>
       <th>名称</th>
       <th>描述</th>
       <th>价格</th>
@@ -24,6 +25,7 @@
               <%= render_product_image(product, "products-img") %>
             <% end %>
           </td>
+          <td><%= product.category.name %></td>
           <td><%= product.title %></td>
           <td><%= render_text(product.description, length: 20) %></td>
           <td><%= render_price(product.price) %></td>

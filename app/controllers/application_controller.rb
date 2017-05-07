@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :load_categories
   helper_method :current_cart
 
   def admin_required
@@ -14,12 +15,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def get_products
-    if params[:category].blank?
-      @products = Product.order('created_at DESC')
-    else
-      @products = Product.where(category_id: params[:category].to_i)
-    end
+  def load_categories
+    @categories = Category.all
   end
 
   def get_cart

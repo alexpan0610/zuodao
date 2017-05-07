@@ -2,7 +2,7 @@ class Admin::ProductsController < Admin::AdminController
   before_action :find_product_by_id, only: [:edit, :update, :destroy]
 
   def index
-    @products = Product.all.page(params[:page]).per_page(10)
+    @products = Product.all.includes(:category).page(params[:page]).per_page(10)
   end
 
   def new

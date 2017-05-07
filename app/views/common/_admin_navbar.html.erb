@@ -20,11 +20,7 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li><%= link_to(fa_icon("bars", text: " 我的订单"), '#') %></li>
-          <% if current_user.admin? %>
-            <li class="divider"></li>
-            <li><%= link_to(fa_icon("lock", text: " 后台管理"), admin_products_path) %></li>
-          <% end %>
+          <li><%= link_to(fa_icon("arrow-left", text: " 回到前台"), products_path) %></li>
           <li class="divider"></li>
           <li><%= link_to(fa_icon("sign-out", text: " 退出"), destroy_user_session_path, method: :delete) %></li>
         </ul>

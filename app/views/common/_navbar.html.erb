@@ -4,6 +4,18 @@
       <a class="navbar-brand" href="/">JDstore</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="<%= products_path %>" class="dropdown-toggle" data-toggle="dropdown">Products</a>
+          <ul class="dropdown-menu">
+            <li><%= link_to("全部商品", products_path) %></li>
+            <% @categories.each do |category| %>
+              <li class="divider"></li>
+              <li><%= link_to(category.name, products_path(category: category.id)) %></li>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <% unless current_user %>
           <li>
@@ -24,7 +36,9 @@
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to(fa_icon("bars", text: " 我的订单"), '#') %></li>
+              <li><%= link_to(fa_icon("list-ul", text: " 我的订单"), account_orders_path) %></li>
+              <li class="divider"></li>
+              <li><%= link_to(fa_icon("address-card", text: " 收货地址"), account_receiving_infos_path) %></li>
               <% if current_user.admin? %>
                 <li class="divider"></li>
                 <li><%= link_to(fa_icon("lock", text: " 后台管理"), admin_products_path) %></li>

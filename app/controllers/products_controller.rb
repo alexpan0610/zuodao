@@ -1,13 +1,17 @@
 class ProductsController < ApplicationController
-  before_action :validate_search_key, only: [:search]
-  before_action :get_products, only: [:index, :show]
+  before_action :validate_search_key, only: [:index]
 
   def index
-    @products = Product.ransack(
+    @result = Product.ransack(
     title_cont: @query_string,
     description_cont: @query_string,
     m: 'or'
     ).result(distinct: true)
+    if params[:category].blank?
+      @products = @result.order('created_at DESC')
+    else
+      @products = @result.where(category_id: params[:category].to_i)
+    end
   end
 
   def show
