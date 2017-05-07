@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :load_common_data
+  before_action :load_categories
   helper_method :current_cart
 
   def admin_required
@@ -15,9 +15,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def load_common_data
+  def load_categories
     @categories = Category.all
-    @cart_items = current_cart.get_items
   end
 
   def get_cart

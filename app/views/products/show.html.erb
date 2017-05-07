@@ -11,17 +11,19 @@
           <%= @product.description %>
         </p>
       </div>
-      <div class="product-price"> ￥ <%= render_price(@product.price) %> </div>
+      <h4 class="product-price"><small>￥</small> <%= render_price(@product.price) %> </h4>
       <div class="product-quantity"> 库存 : <%= @product.quantity %> </div>
       <br/>
-      <%= simple_form_for '', remote: true, method: :post, url: add_to_cart_product_path(@product) do |f| %>
+      <%= simple_form_for @product, id: "add-to-cart", method: :post, remote: true, url: add_to_cart_product_path(@product) do |f| %>
         <div class="quantity">
           <%= link_to(fa_icon("minus"), "", onclick: "decrease_quantity()", id: "quantity-minus") %>
-          <%= f.input_field :quantity, value: '1', type: "text", class: "text-center quantity-input" %>
+          <%= f.input_field :quantity, value: '1', as: :integer, class: "quantity-input" %>
           <%= link_to(fa_icon("plus"), "", onclick: "increase_quantity()", id: "quantity-plus") %>
         </div>
         <div class="pull-right">
-          <%= f.submit("加入购物车", class: "btn btn-primary btn-lg btn-danger add-to-cart") %>
+          <%= f.button :button, type: "submit", class: "btn btn-primary btn-lg btn-danger" do %>
+            <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
+          <% end %>
         </div>
       <% end %>
     </div>

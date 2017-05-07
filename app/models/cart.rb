@@ -20,18 +20,22 @@ class Cart < ApplicationRecord
   end
 
   def add_product_to_cart(product, quantity)
-    cart_item = cart_items.build
-    cart_item.product = product
-    cart_item.quantity = quantity
-    cart_item.save
-    return cart_item
+    @cart_item = cart_items.build
+    change_quantity(product, quantity)
+    @cart_item.save
   end
 
   def increase_product_quantity(product, quantity)
-    cart_item = cart_items.find_by(product_id: product.id)
-    cart_item.quantity = cart_item.quantity + quantity
-    cart_item.save
-    quantity = cart_item.quantity
+    @cart_item = cart_items.find_by(product_id: product.id)
+    change_quantity(product, quantity)
+    @cart_item.save
+  end
+
+  def change_quantity(product, quantity)
+    @cart_item.product = product
+    @cart_item.quantity += quantity
+    product.quantity -= quantity
+    product.save
   end
 
   def total_price

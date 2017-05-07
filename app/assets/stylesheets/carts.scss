@@ -4,6 +4,9 @@
 
 // 导航条上的购物车
 .cart-nav {
+  .cart-empty {
+    padding: 5px 10px;
+  }
   .cart-item {
     margin: 0 6px;
     min-width: 260px;

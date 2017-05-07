@@ -26,9 +26,30 @@
       font-size: 2em;
       color: #B22222;
       font-weight: bold;
+      small {
+        color: #B22222;
+        font-weight: bold;
+      }
     }
     .product-quantity {
       margin-top: 20px;
+      font-size: 1.2em;
+    }
+    // 增减数量
+    .quantity {
+      #quantity-minus,
+      #quantity-plus {
+        color: #000;
+        border: 1px solid #DDD;
+        padding: 4px 10px;
+      }
+      .quantity-input {
+        text-align: center;
+        pointer-events: none;
+        width: 60px;
+        padding-left: 10px;
+        font-weight: bold;
+      }
     }
   }
 }
