@@ -1,0 +1,13 @@
+<div class="col-sm-4 col-md-3 col-lg-2">
+  <div class="product">
+    <%= link_to product_path(product) do %>
+      <% if product.images.present? %>
+        <%= image_tag(product.images[0].medium.url, class: "img-responsive") %>
+      <% else %>
+        <%= image_tag("no-image.jpg", class: "img-responsive") %>
+      <% end %>
+    <% end %>
+    <h4><%= product.title %></h4>
+    <p>¥ <%= render_price(product.price) %></p>
+  </div>
+</div>

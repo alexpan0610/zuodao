@@ -1,0 +1,60 @@
+/* 侧边导航 */
+@media(min-width:768px) {
+  .navbar-header {
+    .navbar-brand {
+      margin-left: 10px;
+    }
+  }
+
+  .navbar-right {
+    .dropdown {
+      margin-right: 20px;
+    }
+  }
+
+  .side-nav {
+    position: fixed;
+    top: 51px;
+    width: 225px;
+    margin-left: -255px;
+    border: none;
+    border-radius: 0;
+    overflow-y: auto;
+    background-color: #F8F8F8;
+    bottom: 0;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+  }
+
+  .side-nav > li > a {
+    width: 225px;
+  }
+
+  .side-nav li a:focus,
+  .side-nav li a:hover {
+    outline: none;
+    background-color: #FFF !important;
+  }
+}
+
+.side-nav > li > ul {
+  padding: 0;
+}
+
+.side-nav > li > ul > li > a {
+  display: block;
+  padding: 10px 15px 10px 38px;
+  text-decoration: none;
+  color: #999;
+}
+
+.side-nav > li > ul > li > a:hover {
+  color: #fff;
+}
+/* 内容区 */
+@media(min-width:768px) {
+  .admin-content {
+    padding-top: 51px;
+    padding-left: 226px;
+  }
+}

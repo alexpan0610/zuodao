@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jdstore 后台</title>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <%= render "common/admin_navbar" %>
+    <div class="admin-content">
+      <div class="container-fluid">
+        <div class="row">
+          <%= render "common/flashes" %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
