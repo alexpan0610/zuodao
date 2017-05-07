@@ -12,7 +12,7 @@ class Cart < ApplicationRecord
   has_many :products, through: :cart_items, source: :product
 
   def get_items
-    @items = cart_items.includes(:product, product: [:category])
+    @cart_items = cart_items.includes(:product)
   end
 
   def clean!

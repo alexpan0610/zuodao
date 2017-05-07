@@ -15,3 +15,19 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+/*增加数量*/
+function increase_quantity(){
+  event.preventDefault();
+	var num = parseInt($(".quantity-input").val()) + 1;
+	$(".quantity-input").val(num);
+}
+
+/*减少数量*/
+function decrease_quantity(){
+  event.preventDefault();
+	var num = parseInt($(".quantity-input").val());
+	if(num > 1){
+    $(".quantity-input").val(num - 1);
+	}
+}

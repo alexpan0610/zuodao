@@ -1,0 +1,37 @@
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">Cart<span class="badge"><%= current_cart.cart_items_count %></span></a>
+<ul class="dropdown-menu cart-nav-content">
+  <% if @cart_items.present? %>
+    <% @cart_items.each_with_index do |item, index| %>
+      <% if index != 0 %>
+        <li class="divider"></li>
+      <% end %>
+      <li class="cart-item">
+        <div class="media">
+          <div class="media-left media-top">
+            <%= render_product_image(item.product, "cart-img") %>
+          </div>
+          <div class="media-body">
+            <h5 class="media-heading">
+              <%= item.product.title %>
+            </h5>
+            <p><%= render_text(item.product.description) %></p>
+            <p class="pull-right">
+              ×<%= item.quantity %>
+              <%= link_to("删除", cart_item_path(item), method: :delete, remote: true) %>
+            </p>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    <li class="divider"></li>
+    <li>
+      <div class="cart-bottom">
+        <b><%= current_cart.cart_items_count %></b>件商品
+        共计：<b>¥ <%= current_cart.total_price %></b>
+        <%= link_to("去购物车", carts_path, class: "btn btn-danger btn-xs pull-right btn-to-cart") %>
+      </div>
+    </li>
+  <% else %>
+    <li><b>购物车空空如也！~</b></li>
+  <% end %>
+</ul>

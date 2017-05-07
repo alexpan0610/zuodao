@@ -1,4 +1,4 @@
-$('.delete-btn').bind('ajax:success', function(e, data) {
-  $('.cart-wrap').html('<%= escape_javascript render(partial: "products/cart") %>')
-  $('.cartPage-productList').html('<%= escape_javascript render(partial: "carts/product_list") %>')
+$('.cart-btn-delete').bind('ajax:success', function(e, data) {
+  $('.cart-nav').html('<%= escape_javascript render(partial: "common/cart") %>')
+  $('.cart-content').html('<%= escape_javascript render(partial: "carts/cart_items") %>')
 });

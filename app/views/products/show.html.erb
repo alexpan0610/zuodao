@@ -13,9 +13,17 @@
       </div>
       <div class="product-price"> ￥ <%= render_price(@product.price) %> </div>
       <div class="product-quantity"> 库存 : <%= @product.quantity %> </div>
-      <div class="pull-right">
-        <%= link_to("加入购物车", "#", :class => "btn btn-primary btn-lg btn-danger add-to-cart") %>
-      </div>
+      <br/>
+      <%= simple_form_for '', remote: true, method: :post, url: add_to_cart_product_path(@product) do |f| %>
+        <div class="quantity">
+          <%= link_to(fa_icon("minus"), "", onclick: "decrease_quantity()", id: "quantity-minus") %>
+          <%= f.input_field :quantity, value: '1', type: "text", class: "text-center quantity-input" %>
+          <%= link_to(fa_icon("plus"), "", onclick: "increase_quantity()", id: "quantity-plus") %>
+        </div>
+        <div class="pull-right">
+          <%= f.submit("加入购物车", class: "btn btn-primary btn-lg btn-danger add-to-cart") %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

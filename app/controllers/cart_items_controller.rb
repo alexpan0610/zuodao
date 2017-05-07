@@ -38,7 +38,7 @@ class CartItemsController < ApplicationController
 
   def find_cart_item
     @cart = current_cart
-    @cart_item = @cart.cart_items.find_by(product_id: params[:id])
+    @cart_item = @cart.cart_items.find(params[:id])
   end
 
   def cart_item_params
