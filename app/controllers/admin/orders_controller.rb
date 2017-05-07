@@ -1,17 +1,14 @@
 class Admin::OrdersController <  AdminController
-    before_action :find_order, only: [:show, :ship, :shipped, :cancel, :return]
-
+  before_action :authenticate_user!
+  before_action :require_is_admin
+  before_action :find_order, only: [:show, :ship, :shipped, :cancel, :return]
+  layout "admin"
+  
   def index
     if params[:start_date].present?
       start_date = Date.parse(params[:start_date])
       end_date = params[:end_date].present? ? Date.parse(params[:end_date]) : Date.today
       @orders = Order.where(created_at: start_date.beginning_of_day..end_date.end_of_day)
-      respond_to do |format|
-        format.html
-        format.xlsx {
-          response.headers['Content-Disposition'] = 'attachment; filename="Orders #{start_date}-#{end_date}.xlsx"'
-        }
-      end
     else
       @orders = Order.includes(:user).recent
     end

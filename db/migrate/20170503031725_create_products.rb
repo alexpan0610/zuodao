@@ -6,6 +6,8 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.text :description
       t.float :price
       t.integer :quantity, default: 0
+      t.boolean :is_hidden, default: true
+      t.belongs_to :category
 
       t.timestamps
     end
