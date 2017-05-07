@@ -4,7 +4,7 @@ module ProductsHelper
     if product.images.present?
       image_tag(product.images[0].thumb.url, class: style)
     else
-      image_tag("no-image.jpg", class: style)
+      image_tag("http://ww2.sinaimg.cn/large/006tNc79gy1ffcsd4b3ugj307n07ndfv.jpg", class: style)
     end
   end
 
@@ -12,7 +12,7 @@ module ProductsHelper
     if product.images.present?
       image_tag(product.images[0].medium.url, class: "product-img")
     else
-      image_tag("no-image.jpg", class: "product-img")
+      image_tag("http://ww2.sinaimg.cn/large/006tNc79gy1ffcsd4b3ugj307n07ndfv.jpg", class: "product-img")
     end
   end
 

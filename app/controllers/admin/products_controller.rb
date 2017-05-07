@@ -1,11 +1,8 @@
-class Admin::ProductsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :admin_required
+class Admin::ProductsController < Admin::AdminController
   before_action :find_product_by_id, only: [:edit, :update, :destroy]
-  layout "admin"
 
   def index
-    @products = Product.all.page(params[:page])
+    @products = Product.all.page(params[:page]).per_page(10)
   end
 
   def new

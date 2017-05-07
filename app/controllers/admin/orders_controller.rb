@@ -1,9 +1,6 @@
-class Admin::OrdersController <  AdminController
-  before_action :authenticate_user!
-  before_action :require_is_admin
+class Admin::OrdersController <  Admin::AdminController
   before_action :find_order, only: [:show, :ship, :shipped, :cancel, :return]
-  layout "admin"
-  
+
   def index
     if params[:start_date].present?
       start_date = Date.parse(params[:start_date])

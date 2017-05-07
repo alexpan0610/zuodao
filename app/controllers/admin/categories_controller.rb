@@ -1,8 +1,5 @@
-class Admin::CategoriesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :require_is_admin
+class Admin::CategoriesController < Admin::AdminController
   before_action :find_category_by_id, only: [:show, :edit, :update, :destroy]
-  layout "admin"
 
   def index
     @categories = Category.all

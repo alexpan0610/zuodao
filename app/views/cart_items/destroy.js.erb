@@ -1,0 +1,4 @@
+$('.delete-btn').bind('ajax:success', function(e, data) {
+  $('.cart-wrap').html('<%= escape_javascript render(partial: "products/cart") %>')
+  $('.cartPage-productList').html('<%= escape_javascript render(partial: "carts/product_list") %>')
+});

@@ -1,0 +1,3 @@
+$('.countNumber-btn-sub').bind('ajax:success', function(e, data) {
+  $('.cartPage-productList').html('<%= escape_javascript render(partial: "carts/product_list") %>')
+});

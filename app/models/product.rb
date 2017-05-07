@@ -8,6 +8,8 @@
 #  description :text
 #  price       :float
 #  quantity    :integer          default("0")
+#  is_hidden   :boolean          default("t")
+#  category_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

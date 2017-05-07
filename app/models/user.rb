@@ -27,6 +27,9 @@ class User < ApplicationRecord
   has_many :orders
   has_many :receiving_infos
 
+  validates :email, presence: true
+  validates :password, presence: true
+
   def admin?
     is_admin
   end

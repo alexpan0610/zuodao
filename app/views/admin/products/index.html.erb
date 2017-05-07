@@ -1,4 +1,4 @@
-<div class="panel panel-default admin-product-list">
+<div class="panel panel-default admin-products">
   <div class="panel-heading">
     <h3>商品列表
       <%= link_to(fa_icon("plus", text: " 新增"), new_admin_product_path, class: "btn btn-default pull-right") %>
@@ -21,7 +21,7 @@
           <td><%= index + 1 %></td>
           <td width="100">
             <%= link_to product_path(product) do %>
-              <%= render_product_image(product, "admin-product-img") %>
+              <%= render_product_image(product, "products-img") %>
             <% end %>
           </td>
           <td><%= product.title %></td>
@@ -38,4 +38,7 @@
       <% end %>
     </tbody>
   </table>
+  <div class="panel-footer text-center">
+    <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+  </div>
 </div>

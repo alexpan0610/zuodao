@@ -1,0 +1,10 @@
+<%= simple_form_for [:admin, @user] do |f| %>
+  <div class="form-inputs">
+    <%= f.input :email, label: "E-mail" %>
+    <%= f.input :password, label: "登录密码" %>
+    <%= f.input :is_admin, label: "管理员" %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "保存", data: {disable_with: "正在保存..."}, class: "btn btn-default" %>
+  </div>
+<% end %>
