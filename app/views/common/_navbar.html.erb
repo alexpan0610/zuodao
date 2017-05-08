@@ -6,18 +6,19 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products</a>
+          <a href="<%= products_path %>" class="dropdown-toggle">Products</a>
           <ul class="dropdown-menu">
-            <li><%= link_to("全部商品", products_path) %></li>
-            <% @categories.each do |category| %>
-              <li class="divider"></li>
+            <% @categories.each_with_index do |category, index| %>
+              <% if index != 0 %>
+                <li class="divider"></li>
+              <% end %>
               <li><%= link_to(category.name, products_path(category: category.id)) %></li>
             <% end %>
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown cart-nav">
+        <li class="dropdown cart-nav" id="auto-dropdown">
           <%= render "common/cart" %>
         </li>
         <% unless current_user %>

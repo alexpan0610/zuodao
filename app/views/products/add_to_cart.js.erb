@@ -1,3 +1,4 @@
-$('#add-to-cart').bind('ajax:success', function(e, data) {
-   $('.cart-nav').html('<%= escape_javascript render(partial: "common/cart") %>')
-});
+$('.cart-nav').html('<%= escape_javascript render(partial: "common/cart") %>')
+$('.product-quantity').html(' 库存 : <%= @product.quantity %>')
+$("#quantity-minus").addClass("disabled");
+$('.quantity-input').val('1')

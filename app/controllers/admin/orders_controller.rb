@@ -13,7 +13,7 @@ class Admin::OrdersController <  Admin::AdminController
   end
 
   def show
-    @product_lists = @order.product_lists
+    @order_details = @order.order_details
   end
 
   def ship

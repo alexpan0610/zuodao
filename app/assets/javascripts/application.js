@@ -11,16 +11,31 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+//= require turbolinks
+
+$(document).on('turbolinks:load', function() {
+  $('.dropdown').hover(function() {
+      $(this).addClass('open');
+  },
+  function() {
+      $(this).removeClass('open');
+  });
+});
+
 
 /*增加数量*/
 function increase_quantity(){
   event.preventDefault();
 	var num = parseInt($(".quantity-input").val()) + 1;
 	$(".quantity-input").val(num);
+  if(num > 1){
+    $("#quantity-minus").removeClass("disabled");
+  }
 }
 
 /*减少数量*/
@@ -28,6 +43,9 @@ function decrease_quantity(){
   event.preventDefault();
 	var num = parseInt($(".quantity-input").val());
 	if(num > 1){
-    $(".quantity-input").val(num - 1);
+    $(".quantity-input").val(num -= 1);
 	}
+  if(num <= 1){
+    $("#quantity-minus").addClass("disabled");
+  }
 }

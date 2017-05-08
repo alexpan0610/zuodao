@@ -11,13 +11,13 @@
           <%= @product.description %>
         </p>
       </div>
-      <h4 class="product-price"><small>￥</small> <%= render_price(@product.price) %> </h4>
-      <div class="product-quantity"> 库存 : <%= @product.quantity %> </div>
+      <h4 class="product-price"><small>￥</small> <%= render_price(@product.price) %></h4>
+      <div class="product-quantity"> 库存 : <%= @product.quantity %></div>
       <br/>
       <%= simple_form_for @product, id: "add-to-cart", method: :post, remote: true, url: add_to_cart_product_path(@product) do |f| %>
         <div class="quantity">
-          <%= link_to(fa_icon("minus"), "", onclick: "decrease_quantity()", id: "quantity-minus") %>
-          <%= f.input_field :quantity, value: '1', as: :integer, class: "quantity-input" %>
+          <%= link_to(fa_icon("minus"), "", onclick: "decrease_quantity()", id: "quantity-minus", class: "disabled") %>
+          <%= f.input_field "", name: "quantity", value: '1', as: :integer, class: "quantity-input" %>
           <%= link_to(fa_icon("plus"), "", onclick: "increase_quantity()", id: "quantity-plus") %>
         </div>
         <div class="pull-right">

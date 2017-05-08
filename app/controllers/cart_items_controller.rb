@@ -8,8 +8,7 @@ class CartItemsController < ApplicationController
   end
 
   def increase_quantity
-    change_quantity(@cart_item.product, 1)
-		@cart_item.save
+    change_quantity(1)
     respond_to do |format|
       format.js   { render layout: false }
     end
@@ -17,8 +16,7 @@ class CartItemsController < ApplicationController
 
 	def decrease_quantity
 		if @cart_item.quantity > 1
-			change_quantity(@cart_item.product, -1)
-			@cart_item.save
+			change_quantity( -1)
 		end
     respond_to do |format|
       format.js   { render layout: false }
@@ -26,8 +24,8 @@ class CartItemsController < ApplicationController
 	end
 
   def destroy
-    product = @cart_item.product
-    change_quantity(product, -@cart_item.quantity)
+    @product = @cart_item.product
+    change_quantity(-@cart_item.quantity)
     @cart_item.destroy
     respond_to do |format|
       format.js   { render layout: false }
@@ -36,11 +34,12 @@ class CartItemsController < ApplicationController
 
   private
 
-  def change_quantity(product, quantity)
-    @cart_item.product = product
+  def change_quantity(quantity)
+    @product = @cart_item.product
     @cart_item.quantity += quantity
-    product.quantity -= quantity
-    product.save
+    @product.quantity -= quantity
+    @cart_item.save
+    @product.save
   end
 
   def find_cart_item
