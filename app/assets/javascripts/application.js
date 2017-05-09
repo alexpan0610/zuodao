@@ -25,27 +25,26 @@ $(document).on('turbolinks:load', function() {
   function() {
       $(this).removeClass('open');
   });
+
+  /*增加数量*/
+  $("#quantity-plus").click(function(event){
+    event.preventDefault();
+    var num = parseInt($(".quantity-input").val()) + 1;
+    $(".quantity-input").val(num);
+    if(num > 1){
+      $("#quantity-minus").removeClass("disabled");
+    }
+  });
+
+  /*减少数量*/
+  $("#quantity-minus").click(function(event){
+    event.preventDefault();
+  	var num = parseInt($(".quantity-input").val());
+  	if(num > 1){
+      $(".quantity-input").val(num -= 1);
+  	}
+    if(num <= 1){
+      $("#quantity-minus").addClass("disabled");
+    }
+  });
 });
-
-
-/*增加数量*/
-function increase_quantity(){
-  event.preventDefault();
-	var num = parseInt($(".quantity-input").val()) + 1;
-	$(".quantity-input").val(num);
-  if(num > 1){
-    $("#quantity-minus").removeClass("disabled");
-  }
-}
-
-/*减少数量*/
-function decrease_quantity(){
-  event.preventDefault();
-	var num = parseInt($(".quantity-input").val());
-	if(num > 1){
-    $(".quantity-input").val(num -= 1);
-	}
-  if(num <= 1){
-    $("#quantity-minus").addClass("disabled");
-  }
-}

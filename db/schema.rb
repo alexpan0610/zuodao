@@ -47,12 +47,17 @@ ActiveRecord::Schema.define(version: 20170507055914) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.string   "number"
+    t.string   "payment_method"
+    t.float    "total_price",    default: 0.0
+    t.string   "aasm_state",     default: "placed"
     t.string   "name"
     t.string   "cellphone"
     t.string   "address"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.index ["aasm_state"], name: "index_orders_on_aasm_state"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
