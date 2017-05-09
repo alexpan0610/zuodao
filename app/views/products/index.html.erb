@@ -2,7 +2,11 @@
   <div class="row">
     <%= render "header" %>
     <div class="product-list">
-      <%= render partial: "product", collection: @products, as: :product %>
+      <% if params[:view] == 'grid' %>
+        <%= render partial: "grid_product", collection: @products, as: :product %>
+      <% elsif params[:view] == 'list' %>
+        <%= render partial: "list_product", collection: @products, as: :product %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -11,7 +11,9 @@ class Account::ReceivingInfosController < ApplicationController
   end
 
   def create
-    if @receiving_info.new(receiving_info_params)
+    @receiving_info = ReceivingInfo.new(receiving_info_params)
+    @receiving_info.user = current_user
+    if @receiving_info.save
       redirect_to account_receiving_infos_path
     else
       render :new

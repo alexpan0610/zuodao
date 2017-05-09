@@ -3,8 +3,8 @@ class ProductsController < ApplicationController
 
   def index
     @result = Product.ransack(
-    title_cont: @query_string,
-    description_cont: @query_string,
+    title_cont: @query,
+    description_cont: @query,
     m: 'or'
     ).result(distinct: true)
     if params[:category].blank?
@@ -12,6 +12,8 @@ class ProductsController < ApplicationController
     else
       @products = @result.where(category_id: params[:category].to_i)
     end
+    # 显示方式，列表或网格
+    params[:view] = params[:view].present? ? params[:view] : 'grid'
   end
 
   def show
@@ -35,6 +37,6 @@ class ProductsController < ApplicationController
   private
 
   def validate_search_key
-    @query_string = params[:query_string].gsub(/\|\'|\/|\?/, "") if params[:query_string].present?
+    @query = params[:query].gsub(/\|\'|\/|\?/, "") if params[:query].present?
   end
 end
