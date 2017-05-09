@@ -2,13 +2,17 @@
 #
 # Table name: orders
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  cellphone  :string
-#  address    :string
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :integer          not null, primary key
+#  number         :string
+#  payment_method :string
+#  total_price    :float            default("0.0")
+#  aasm_state     :string           default("placed")
+#  name           :string
+#  cellphone      :string
+#  address        :string
+#  user_id        :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 
 class Order < ApplicationRecord

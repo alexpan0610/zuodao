@@ -2,9 +2,10 @@
 #
 # Table name: carts
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id               :integer          not null, primary key
+#  cart_items_count :integer          default("0")
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 
 class Cart < ApplicationRecord
