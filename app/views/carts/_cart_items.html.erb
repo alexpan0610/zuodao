@@ -13,7 +13,7 @@
     <td><%= render_price(item.product.price) %></td>
     <td>
       <div class="quantity">
-        <%= link_to(fa_icon("minus"), decrease_cart_item_path(item, index: index), method: :post, remote: true, id: "quantity-minus-#{index}", class: "quantity-minus disabled") %>
+        <%= link_to(fa_icon("minus"), decrease_cart_item_path(item, index: index), method: :post, remote: true, id: "quantity-minus-#{index}", class: "quantity-minus") %>
         <input type="text" name="quantities[]" value="<%= item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input">
         <%= link_to(fa_icon("plus"), increase_cart_item_path(item, index: index), method: :post, remote: true, id: "quantity-plus-#{index}", class: "quantity-plus") %>
       </div>

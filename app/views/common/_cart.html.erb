@@ -18,10 +18,12 @@
               <%= item.product.title %>
             </h5>
             <p><%= render_text(item.product.description) %></p>
-            <p class="pull-right">
-              ×<%= item.quantity %>
+          </div>
+          <div class="media-right">
+            <p id="cart-item-quantity-<%= index %>">× <%= item.quantity %></p>
+            <small>
               <%= link_to("删除", cart_item_path(item), class: "cart-btn-delete", method: :delete, remote: true) %>
-            </p>
+            </small>
           </div>
         </div>
       </li>

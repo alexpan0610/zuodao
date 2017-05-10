@@ -1,3 +1,4 @@
 $('#quantity-minus-<%= params[:index] %>').on('ajax:success', function(e, data) {
-  $('#quantity-input-<%= params[:index] %>').val('<%= @cart_item.quantity %>')
+  $('#quantity-input-<%= params[:index] %>').val('<%= @cart_item.quantity %>');
+  $('#cart-item-quantity-<%= params[:index] %>').html('× <%= @cart_item.quantity %>');
 });

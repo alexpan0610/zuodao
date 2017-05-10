@@ -8,20 +8,30 @@
     padding: 5px 10px;
   }
   .cart-item {
-    margin: 0 6px;
-    min-width: 260px;
+    margin: 0 10px;
+    min-width: 300px;
     .media-body p {
       font-size: 0.8em;
       font-weight: 400;
     }
   }
   .cart-img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border: 1px solid #DDD;
   }
+  .media-right {
+    min-width: 50px;
+    p {
+      float: right;
+    }
+    .cart-btn-delete {
+      color: #B22222;
+      float: right;
+    }
+  }
   .cart-bottom {
-    padding: 0 6px;
+    padding: 0 10px;
     font-size: 0.9em;
     font-weight: 400;
     .btn-to-cart {
