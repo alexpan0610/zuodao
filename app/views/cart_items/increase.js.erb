@@ -1,0 +1,3 @@
+$('#quantity-plus-<%= params[:index] %>').on('ajax:success', function(e, data) {
+  $('#quantity-input-<%= params[:index] %>').val('<%= @cart_item.quantity %>')
+});

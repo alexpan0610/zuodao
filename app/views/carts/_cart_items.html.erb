@@ -1,6 +1,8 @@
 <% @cart_items.each_with_index do |item, index| %>
   <tr class="cart-item">
-    <td><%= index + 1 %></td>
+    <td>
+      <input type="checkbox" name="selects[]" value="<%= index %>">
+    </td>
     <td width="100">
       <%= link_to product_path(item.product) do %>
         <%= render_product_image(item.product, "product-img") %>
@@ -9,7 +11,13 @@
     <td><%= item.product.title %></td>
     <td><%= render_text(item.product.description, length: 20) %></td>
     <td><%= render_price(item.product.price) %></td>
-    <td><%= item.quantity %></td>
+    <td>
+      <div class="quantity">
+        <%= link_to(fa_icon("minus"), decrease_cart_item_path(item, index: index), method: :post, remote: true, id: "quantity-minus-#{index}", class: "quantity-minus disabled") %>
+        <input type="text" name="quantities[]" value="<%= item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input">
+        <%= link_to(fa_icon("plus"), increase_cart_item_path(item, index: index), method: :post, remote: true, id: "quantity-plus-#{index}", class: "quantity-plus") %>
+      </div>
+    </td>
     <td>
       <%= link_to '删除', cart_item_path(item), class: "btn btn-default btn-sm cart-btn-delete",
       method: :delete, remote: true, data: { confirm: "确定删除商品#{item.product.title}?" } %>

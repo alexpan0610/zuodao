@@ -27,7 +27,7 @@ $(document).on('turbolinks:load', function() {
     });
 
   /*只能输入数字*/
-  $('.quantity-input').on('input', function(event) {
+  $('#quantity-input').on('input', function(event) {
     var max = parseToInt($('.product-quantity').html());
     var num = parseToInt($(this).val());
     if (num <= 1) {
@@ -55,8 +55,8 @@ $(document).on('turbolinks:load', function() {
   $("#quantity-plus").click(function(event) {
     event.preventDefault();
     var max = parseToInt($('.product-quantity').html());
-    var num = parseInt($(".quantity-input").val()) + 1;
-    $(".quantity-input").val(num);
+    var num = parseInt($("#quantity-input").val()) + 1;
+    $("#quantity-input").val(num);
     $("#quantity-minus").removeClass("disabled");
     if (num >= max) {
       $(this).val(max);
@@ -67,9 +67,9 @@ $(document).on('turbolinks:load', function() {
   /*减少数量*/
   $("#quantity-minus").click(function(event) {
     event.preventDefault();
-    var num = parseInt($(".quantity-input").val());
+    var num = parseInt($("#quantity-input").val());
     if (num > 1) {
-      $(".quantity-input").val(num -= 1);
+      $("#quantity-input").val(num -= 1);
     }
     if (num <= 1) {
       $("#quantity-minus").addClass("disabled");

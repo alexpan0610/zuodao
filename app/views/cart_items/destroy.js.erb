@@ -4,5 +4,6 @@ $('.cart-btn-delete').bind('ajax:success', function(e, data) {
   $('.product-quantity').html(' 库存 : <%= @product.quantity %>')
   if(<%= @product.quantity %> > 1 ){
     $('#quantity-plus').removeClass("disabled");
+    $('#add-to-cart').removeClass("disabled");
   }
 });

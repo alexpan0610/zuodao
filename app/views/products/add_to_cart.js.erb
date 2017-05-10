@@ -1,4 +1,8 @@
 $('.cart-nav').html('<%= escape_javascript render(partial: "common/cart") %>')
 $('.product-quantity').html(' 库存 : <%= @product.quantity %>')
 $("#quantity-minus").addClass("disabled");
-$('.quantity-input').val('1')
+$('#quantity-input').val('1')
+if(<%= @product.quantity %> < 1 ){
+  $('#quantity-plus').addClass("disabled");
+  $('#add-to-cart').addClass("disabled");
+}

@@ -2,22 +2,26 @@
   <div class="panel-heading">
     <h4>购物车</h4>
   </div>
-  <div class="panel-body">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>图片</th>
-          <th>名称</th>
-          <th>描述</th>
-          <th>价格</th>
-          <th>数量</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody class="cart-content">
-        <%= render "cart_items" %>
-      </tbody>
-    </table>
-  </div>
+  <%= form_tag current_cart, url: checkout_cart_path(current_cart) do %>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <input type="checkbox" name="select-all" id="cart-select-all"/>
+            </th>
+            <th>图片</th>
+            <th>名称</th>
+            <th>描述</th>
+            <th>价格</th>
+            <th>数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody class="cart-content">
+          <%= render "cart_items" %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 </div>

@@ -1,4 +1,4 @@
-<a href="#" class="dropdown-toggle">Cart<span class="badge"><%= current_cart.cart_items_count %></span></a>
+<a href="<%= carts_path %>" class="dropdown-toggle">Cart<span class="badge"><%= current_cart.cart_items_count %></span></a>
 <ul class="dropdown-menu cart-nav-content">
   <% @cart_items = current_cart.get_items %>
   <% if @cart_items.present? %>

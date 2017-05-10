@@ -1,5 +1,5 @@
 class CartItemsController < ApplicationController
-  before_action :find_cart_item, only: [:destroy, :update, :increase_quantity, :decrease_quantity]
+  before_action :find_cart_item, only: [:destroy, :update, :increase, :decrease]
   respond_to :js
 
   def update
@@ -7,14 +7,14 @@ class CartItemsController < ApplicationController
     redirect_to carts_path
   end
 
-  def increase_quantity
+  def increase
     change_quantity(1)
     respond_to do |format|
       format.js   { render layout: false }
     end
 	end
 
-	def decrease_quantity
+	def decrease
 		if @cart_item.quantity > 1
 			change_quantity( -1)
 		end
@@ -43,8 +43,7 @@ class CartItemsController < ApplicationController
   end
 
   def find_cart_item
-    @cart = current_cart
-    @cart_item = @cart.cart_items.find(params[:id])
+    @cart_item = CartItem.find(params[:id])
   end
 
   def cart_item_params

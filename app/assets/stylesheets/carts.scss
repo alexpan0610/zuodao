@@ -31,3 +31,26 @@
     }
   }
 }
+
+// 购物车页是
+.carts {
+  // 增减数量
+  .quantity {
+    .quantity-minus,
+    .quantity-plus {
+      color: #000;
+      border: 1px solid #DDD;
+      padding: 4px 10px;
+      &.disabled {
+        color: #424242;
+        pointer-events: none;
+        background-color: #E0E0E0;
+      }
+    }
+    .quantity-input {
+      text-align: center;
+      width: 60px;
+      font-weight: bold;
+    }
+  }
+}

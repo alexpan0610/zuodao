@@ -1,3 +1,20 @@
 <div class="order">
-  
+  <div class="order-number">
+    <%= order.number %>
+  </div>
+  <div class="receiver-name">
+    <%= order.receiving_info.name %>
+  </div>
+  <div class="receiver-cellphone">
+    <%= order.receiving_info.cellphone %>
+  </div>
+  <div class="receiver-address">
+    <%= order.receiving_info.address %>
+  </div>
+  <div class="created-time">
+    <%= render_create_time(order) %>
+  </div>
+  <div class="status">
+    <%= render_order_status(order) %>
+  </div>
 </div>
