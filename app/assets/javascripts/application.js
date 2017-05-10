@@ -29,24 +29,24 @@ $(document).on('turbolinks:load', function() {
   /*只能输入数字*/
   $('.quantity-input').on('input', function(event) {
     var max = parseToInt($('.product-quantity').html());
-    var value = parseToInt($(this).val());
-    if (value <= 1) {
+    var num = parseToInt($(this).val());
+    if (num <= 1) {
       $(this).val('1');
       $("#quantity-minus").addClass('disabled');
     } else {
       $("#quantity-minus").removeClass('disabled');
     }
     // 限制输入数量不大于库存
-    if (value >= max) {
+    if (num >= max) {
       $(this).val(max);
       $("#quantity-plus").addClass('disabled');
     } else {
-      $(this).val(value);
+      $(this).val(num);
       $("#quantity-plus").removeClass('disabled');
     }
   }).on('blur', function(event) {
     var value = $(this).val();
-    if ( value == '' || value == 0) {
+    if ( value == '' || value == '0') {
       $(this).val('1');
     }
   });
@@ -55,10 +55,10 @@ $(document).on('turbolinks:load', function() {
   $("#quantity-plus").click(function(event) {
     event.preventDefault();
     var max = parseToInt($('.product-quantity').html());
-    var value = parseInt($(".quantity-input").val()) + 1;
+    var num = parseInt($(".quantity-input").val()) + 1;
     $(".quantity-input").val(num);
     $("#quantity-minus").removeClass("disabled");
-    if (value > max) {
+    if (num >= max) {
       $(this).val(max);
       $("#quantity-plus").addClass('disabled');
     }

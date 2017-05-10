@@ -2,4 +2,7 @@ $('.cart-btn-delete').bind('ajax:success', function(e, data) {
   $('.cart-nav').html('<%= escape_javascript render(partial: "common/cart") %>')
   $('.cart-content').html('<%= escape_javascript render(partial: "carts/cart_items") %>')
   $('.product-quantity').html(' 库存 : <%= @product.quantity %>')
+  if(<%= @product.quantity %> > 1 ){
+    $('#quantity-plus').removeClass("disabled");
+  }
 });

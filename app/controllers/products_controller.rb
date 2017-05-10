@@ -23,18 +23,30 @@ class ProductsController < ApplicationController
   def add_to_cart
     @product = Product.find(params[:id])
     @quantity = params[:quantity].present? ? params[:quantity].to_i : 1
+    # 验证加入购物车的商品数量是否超过库存
+    if @quantity > @product.quantity
+      @quantity = @product.quantity
+      update_cart
+      flash[:warning] = "您加入购物车的商品数量超过库存，实际加入购物车的商品数量为#{@quantity}件。"
+      redirect_to product_path(@product)
+    else
+      update_cart
+      respond_to do |format|
+        format.js   { render layout: false }
+      end
+    end
+  end
+
+  private
+
+  def update_cart
     # 如果已在购物车中，增加数量，否则加入购物车
     if current_cart.products.include?(@product)
       current_cart.increase_product_quantity(@product, @quantity)
     else
       current_cart.add_product_to_cart(@product, @quantity)
     end
-    respond_to do |format|
-      format.js   { render layout: false }
-    end
   end
-
-  private
 
   def validate_search_key
     @query = params[:query].gsub(/\|\'|\/|\?/, "") if params[:query].present?
