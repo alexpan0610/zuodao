@@ -1,6 +1,6 @@
 class Account::ReceivingInfosController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_receiving_info_by_id, only: [:edit, :update, :destroy]
+  before_action :find_receiving_info_by_id, only: [:edit, :update, :destroy, :set_default, :apply_use]
 
   def index
     @receiving_infos = current_user.receiving_infos
@@ -31,6 +31,14 @@ class Account::ReceivingInfosController < ApplicationController
   def destroy
     @receiving_info.destroy
     redirect_to account_receiving_infos_path, alert: "收货地址已删除！"
+  end
+
+  def set_default
+    current_user.default_receiving_info = @receiving_info
+    @receiving_infos = current_user.receiving_infos
+    respond_to do |format|
+      format.js   { render layout: false }
+    end
   end
 
   private

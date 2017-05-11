@@ -6,7 +6,8 @@ class CartsController < ApplicationController
   end
 
   def checkout
-    if params[:delete_selected_items].present?
+    case params[:submit]
+    when "delete_selected_items"
       unless params[:selections].present?
         flash[:warning] = "请至少选中一件商品"
         redirect_to carts_path
@@ -17,16 +18,17 @@ class CartsController < ApplicationController
         flash[:alert] = "已删除选中的商品"
         redirect_to carts_path
       end
-    elsif params[:checkout].present?
-      @cart_items = []
+    when "checkout"
       unless params[:selections].present?
         flash[:warning] = "请至少选中一件商品"
         redirect_to carts_path
       else
+        @cart_items = []
         params[:selections].each do |selection|
           @cart_items << CartItem.find(selection)
         end
         @order = Order.new
+        @receiving_infos = current_user.receiving_infos
       end
     end
   end

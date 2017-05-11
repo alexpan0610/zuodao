@@ -1,7 +1,7 @@
 <div class="product-header">
   <div class="container">
     <div class="row">
-      <%= form_for products_path , method: :get, class: "search-form" do |f| %>
+      <%= form_for "", url: products_path , method: :get, class: "search-form" do |f| %>
         <div class="col-md-10">
             <div class="input-group search-box" >
               <%= f.text_field "", name: "query", value: params[:query], class: "form-control", placeholder: "颠覆认知的课程正在等你..." %>

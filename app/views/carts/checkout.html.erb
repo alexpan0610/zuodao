@@ -1,5 +1,28 @@
-<div class="checkout">
+<div class="checkout col-md-10 col-md-offset-1">
   <div class="page-header">
     <h4>结算</h4>
   </div>
+  <%= form_for [:account, @order] do |f| %>
+    <div class="checkout-receiving-info">
+      <h4>收货信息</h4>
+      <hr/>
+      <% if current_user.default_receiving_info.present? %>
+        <%= link_to(fa_icon("address-card", text: "请选择收货地址"), class: "btn btn-default") %>
+      <% else %>
+        <% default = current_user.default_receiving_info %>
+        <%= link_to(default.label, edit_account_receiving_info_path(default), class: "btn btn-defalut") %>
+        <%= link_to("更换收货地址", account_receiving_infos_path(type: "select")) %>
+      <% end %>
+    </div>
+    <div class="checkout-pay-method">
+
+    </div>
+    <div class="checkout-details">
+      <%= @cart_items %>
+    </div>
+    <div class="checkout-summry">
+
+    </div>
+    <%= f.button "提交订单", type: "submit", class: "btn btn-danger pull-right" %>
+  <% end %>
 </div>

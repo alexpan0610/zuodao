@@ -17,4 +17,8 @@ class ReceivingInfo < ApplicationRecord
   validates :name, presence: true
   validates :address, presence: true
   validates :cellphone, presence: true
+
+  def default?
+    self == self.user.default_receiving_info
+  end
 end

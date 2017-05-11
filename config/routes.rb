@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   namespace :account do
     resources :orders
-    resources :receiving_infos
+    resources :receiving_infos do
+      member do
+        post :set_default
+      end
+    end
   end
 
   namespace :admin do
@@ -24,6 +28,7 @@ Rails.application.routes.draw do
       post :checkout
     end
   end
+
   resources :cart_items do
     member do
       post :increase
