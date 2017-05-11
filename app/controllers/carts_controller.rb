@@ -7,11 +7,16 @@ class CartsController < ApplicationController
 
   def checkout
     if params[:delete_selected_items].present?
-      params[:selections].each do |selection|
-        CartItem.find(selection).destroy
+      unless params[:selections].present?
+        flash[:warning] = "请至少选中一件商品"
+        redirect_to carts_path
+      else
+        params[:selections].each do |selection|
+          CartItem.find(selection).destroy
+        end
+        flash[:alert] = "已删除选中的商品"
+        redirect_to carts_path
       end
-      flash[:alert] = "已删除选中的商品"
-      redirect_to carts_path
     elsif params[:checkout].present?
       @cart_items = []
       unless params[:selections].present?

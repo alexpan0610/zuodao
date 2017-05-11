@@ -1,4 +1,5 @@
 <% f = @form %>
+<input type="hidden" name="cart-items-count" value="<%= current_cart.cart_items_count %>" id="cart-items-count">
 <% @cart_items.each_with_index do |item, index| %>
   <tr class="cart-item">
     <td>

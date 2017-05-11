@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20170507055914) do
   end
 
   create_table "receiving_infos", force: :cascade do |t|
+    t.string   "label"
     t.string   "name"
     t.string   "cellphone"
     t.string   "address"

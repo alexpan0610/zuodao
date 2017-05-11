@@ -12,6 +12,10 @@ class Cart < ApplicationRecord
   has_many :cart_items
   has_many :products, through: :cart_items, source: :product
 
+  def empty?
+    cart_items_count == 0
+  end
+
   def get_items
     @cart_items = cart_items.includes(:product)
   end

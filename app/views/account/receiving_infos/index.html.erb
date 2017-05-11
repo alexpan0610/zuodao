@@ -7,7 +7,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th>#</th>
+        <th>标签</th>
         <th>收货人</th>
         <th>手机号</th>
         <th>详细地址</th>
@@ -15,9 +15,9 @@
       </tr>
     </thead>
     <tbody>
-      <% @receiving_infos.each_with_index do |receiving_info, index| %>
+      <% @receiving_infos.each do |receiving_info| %>
         <tr>
-          <td><%= index + 1 %></td>
+          <td><label class="label label-danger"><%= receiving_info.label %></label></td>
           <td><%= receiving_info.name %></td>
           <td><%= receiving_info.cellphone %></td>
           <td><%= receiving_info.address %></td>

@@ -1,6 +1,7 @@
 class CreateReceivingInfos < ActiveRecord::Migration[5.0]
   def change
     create_table :receiving_infos do |t|
+      t.string :label
       t.string :name
       t.string :cellphone
       t.string :address

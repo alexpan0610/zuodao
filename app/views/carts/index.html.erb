@@ -4,7 +4,6 @@
       <h4>购物车</h4>
     </div>
     <%= form_for current_cart, url: checkout_cart_path(current_cart), method: :post do |f|%>
-    <input type="hidden" name="cart-items-count" value="<%= current_cart.cart_items_count %>" id="cart-items-count">
     <div class="panel-body">
       <table class="table">
         <thead>
