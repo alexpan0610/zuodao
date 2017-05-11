@@ -16,10 +16,6 @@ class Cart < ApplicationRecord
     @cart_items = cart_items.includes(:product)
   end
 
-  def clean!
-    cart_items.destroy_all
-  end
-
   def add_product_to_cart(product, quantity)
     @cart_item = cart_items.build
     change_quantity(product, quantity)
