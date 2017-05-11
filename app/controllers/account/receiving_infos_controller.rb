@@ -14,7 +14,7 @@ class Account::ReceivingInfosController < ApplicationController
     @receiving_info = ReceivingInfo.new(receiving_info_params)
     @receiving_info.user = current_user
     if @receiving_info.save
-      redirect_to account_receiving_infos_path
+      save()
     else
       render :new
     end
@@ -22,7 +22,7 @@ class Account::ReceivingInfosController < ApplicationController
 
   def update
     if @receiving_info.update(receiving_info_params)
-      redirect_to account_receiving_infos_path, notice: "收货地址已成功修改！"
+      save()
     else
       render :edit
     end
@@ -42,6 +42,16 @@ class Account::ReceivingInfosController < ApplicationController
   end
 
   private
+
+  def save
+    if params[:commit].include?("设为默认")
+      current_user.default_receiving_info = @receiving_info
+    end
+    if params[:action] == "update"
+      flash[:notice] = "收货地址已成功修改！"
+    end
+    redirect_to account_receiving_infos_path
+  end
 
   def find_receiving_info_by_id
     @receiving_info = ReceivingInfo.find(params[:id])

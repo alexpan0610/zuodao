@@ -14,6 +14,7 @@
 class ReceivingInfo < ApplicationRecord
   belongs_to :user
 
+  validates :label, presence: true
   validates :name, presence: true
   validates :address, presence: true
   validates :cellphone, presence: true
