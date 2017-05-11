@@ -19,6 +19,7 @@
 //= require turbolinks
 
 $(document).on('turbolinks:load', function() {
+  // 菜单自动打开
   $('.dropdown').hover(function() {
       $(this).addClass('open');
     },
@@ -26,7 +27,7 @@ $(document).on('turbolinks:load', function() {
       $(this).removeClass('open');
     });
 
-  /*只能输入数字*/
+  /*商品数量输入控制*/
   $('#quantity-input').on('input', function(event) {
     var max = parseToInt($('.product-quantity').html());
     var num = parseToInt($(this).val());
@@ -56,11 +57,12 @@ $(document).on('turbolinks:load', function() {
     event.preventDefault();
     var max = parseToInt($('.product-quantity').html());
     var num = parseInt($("#quantity-input").val()) + 1;
-    $("#quantity-input").val(num);
     $("#quantity-minus").removeClass("disabled");
     if (num >= max) {
-      $(this).val(max);
-      $("#quantity-plus").addClass('disabled');
+      $("#quantity-input").val(max);
+      $(this).addClass('disabled');
+    } else {
+      $("#quantity-input").val(num);
     }
   });
 
@@ -70,6 +72,7 @@ $(document).on('turbolinks:load', function() {
     var num = parseInt($("#quantity-input").val());
     if (num > 1) {
       $("#quantity-input").val(num -= 1);
+      $("#quantity-plus").removeClass("disabled");
     }
     if (num <= 1) {
       $("#quantity-minus").addClass("disabled");
@@ -77,7 +80,7 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
-// 移除字符输入
+// 内容转为数字
 function parseToInt(value) {
   while (value.match(/[^\d]/)) {
     value = value.replace(/[^\d]/, '');

@@ -44,7 +44,7 @@
         padding: 4px 10px;
         &.disabled {
           color: #424242;
-          pointer-events: none;
+          cursor: not-allowed;
           background-color: #E0E0E0;
         }
       }

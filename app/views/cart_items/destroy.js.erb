@@ -5,5 +5,6 @@ $('.cart-btn-delete').bind('ajax:success', function(e, data) {
   if(<%= @product.quantity %> > 1 ){
     $('#quantity-plus').removeClass("disabled");
     $('#add-to-cart').removeClass("disabled");
+    $('#add-to-cart').removeAttr("disabled");
   }
 });

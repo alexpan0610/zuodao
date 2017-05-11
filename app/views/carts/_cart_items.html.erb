@@ -3,19 +3,21 @@
     <td>
       <input type="checkbox" name="selects[]" value="<%= index %>">
     </td>
-    <td width="100">
+    <td>
       <%= link_to product_path(item.product) do %>
-        <%= render_product_image(item.product, "product-img") %>
+        <%= render_product_image(item.product, "thumbnail") %>
       <% end %>
     </td>
     <td><%= item.product.title %></td>
-    <td><%= render_text(item.product.description, length: 20) %></td>
+    <td><%= render_text(item.product.description) %></td>
     <td><%= render_price(item.product.price) %></td>
     <td>
       <div class="quantity">
-        <%= link_to(fa_icon("minus"), decrease_cart_item_path(item, index: index), method: :post, remote: true, id: "quantity-minus-#{index}", class: "quantity-minus") %>
-        <input type="text" name="quantities[]" value="<%= item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input">
-        <%= link_to(fa_icon("plus"), increase_cart_item_path(item, index: index), method: :post, remote: true, id: "quantity-plus-#{index}", class: "quantity-plus") %>
+        <%= link_to(fa_icon("minus"), decrease_cart_item_path(item, index: index), method: :post, remote: true,
+        id: "quantity-minus-#{index}", disabled: (item.quantity <= 1), class: "quantity-minus #{item.quantity <= 1 ? 'disabled' : ''}") %>
+        <input type="text" name="quantities[]" value="<%= item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input" disabled>
+        <%= link_to(fa_icon("plus"), increase_cart_item_path(item, index: index), method: :post, remote: true,
+        id: "quantity-plus-#{index}", disabeld: (item.product.quantity <= 0), class: "quantity-plus #{item.product.quantity <= 0 ? 'disabled' : ''}") %>
       </div>
     </td>
     <td>

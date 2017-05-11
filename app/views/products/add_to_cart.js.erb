@@ -4,5 +4,6 @@ $("#quantity-minus").addClass("disabled");
 $('#quantity-input').val('1')
 if(<%= @product.quantity %> < 1 ){
   $('#quantity-plus').addClass("disabled");
+  $('#add-to-cart').attr("disabled");
   $('#add-to-cart').addClass("disabled");
 }

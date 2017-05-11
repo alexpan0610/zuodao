@@ -8,15 +8,19 @@ class CartItemsController < ApplicationController
   end
 
   def increase
-    change_quantity(1)
+    # 检查库存
+    if @cart_item.product.quantity > 0
+      change_quantity(1)
+    end
     respond_to do |format|
       format.js   { render layout: false }
     end
 	end
 
 	def decrease
+    # 购物车中的商品数量最少为1件
 		if @cart_item.quantity > 1
-			change_quantity( -1)
+			change_quantity(-1)
 		end
     respond_to do |format|
       format.js   { render layout: false }

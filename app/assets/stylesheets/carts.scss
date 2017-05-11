@@ -44,6 +44,10 @@
 
 // 购物车页是
 .carts {
+  .thumbnail {
+    width: 100px;
+    height: 100px;
+  }
   // 增减数量
   .quantity {
     .quantity-minus,
@@ -53,11 +57,12 @@
       padding: 4px 10px;
       &.disabled {
         color: #424242;
-        pointer-events: none;
+        cursor: not-allowed;
         background-color: #E0E0E0;
       }
     }
     .quantity-input {
+      cursor: not-allowed;
       text-align: center;
       width: 60px;
       font-weight: bold;
