@@ -25,7 +25,8 @@ Rails.application.routes.draw do
 
   resources :carts do
     member do
-      post :checkout
+      post :operations
+      get :checkout
     end
   end
 

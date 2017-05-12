@@ -2,7 +2,7 @@
   <div class="page-header">
     <h4>结算</h4>
   </div>
-  <%= form_for [:account, @order] do |f| %>
+  <%= simple_form_for [:account, @order] do |f| %>
     <div class="checkout-receiving-info">
       <h4>收货信息</h4>
       <hr/>
@@ -23,6 +23,6 @@
     <div class="checkout-summry">
 
     </div>
-    <%= f.button "提交订单", type: :submit, class: "btn btn-danger pull-right" %>
+    <%= f.button :submit, value: "提交订单", class: "btn btn-danger pull-right" %>
   <% end %>
 </div>

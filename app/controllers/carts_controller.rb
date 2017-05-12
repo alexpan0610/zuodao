@@ -6,41 +6,48 @@ class CartsController < ApplicationController
     @selections = []
   end
 
-  def checkout
+  def operations
     if params[:delete_item].present?
       delete_item
-      respond_to :js
     elsif params[:delete_items].present?
       delete_items
     elsif params[:checkout].present?
       do_checkout
-      render :checkout
     end
+  end
+
+  def checkout
+    @cart_items = []
+    params[:selections].each do |selection|
+      @cart_items << CartItem.find(selection)
+    end
+    @order = Order.new
+    @receiving_infos = current_user.receiving_infos
   end
 
   private
 
   def delete_item
     @selections = params[:selections].present? ? params[:selections].to_a : []
-    puts "selections : #{@selections}"
     @cart_item = CartItem.find(params[:delete_item])
     change_quantity(-@cart_item.quantity)
     @cart_item.destroy
     @selections.delete(params[:delete_item])
-    puts "selections : #{@selections}"
+    respond_to do |format|
+      format.js { render "carts/delete_item"}
+    end
   end
 
   def delete_items
     unless params[:selections].present?
       flash[:warning] = "请至少选中一件商品"
-      redirect_to carts_path
     else
       params[:selections].each do |selection|
         CartItem.find(selection).destroy
       end
       flash[:alert] = "已删除选中的商品"
-      redirect_to carts_path
     end
+    redirect_to carts_path
   end
 
   def do_checkout
@@ -48,12 +55,7 @@ class CartsController < ApplicationController
       flash[:warning] = "请至少选中一件商品"
       redirect_to carts_path
     else
-      @cart_items = []
-      params[:selections].each do |selection|
-        @cart_items << CartItem.find(selection)
-      end
-      @order = Order.new
-      @receiving_infos = current_user.receiving_infos
+      redirect_to checkout_cart_path(selections: params[:selections])
     end
   end
 end

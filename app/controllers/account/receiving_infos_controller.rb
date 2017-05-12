@@ -1,6 +1,6 @@
 class Account::ReceivingInfosController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_receiving_info_by_id, only: [:edit, :update, :destroy, :set_default, :apply_use]
+  before_action :find_receiving_info_by_id, only: [:edit, :update, :destroy, :set_default]
 
   def index
     @receiving_infos = current_user.receiving_infos
@@ -36,7 +36,6 @@ class Account::ReceivingInfosController < ApplicationController
   def set_default
     current_user.default_receiving_info = @receiving_info
     @receiving_infos = current_user.receiving_infos
-    respond_to :js
   end
 
   private

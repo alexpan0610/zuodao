@@ -1,4 +1,4 @@
-<%= form_for current_cart, url: checkout_cart_path(current_cart), method: :post, remote: true do |f|%>
+<%= form_for current_cart, url: operations_cart_path(current_cart), method: :post, remote: true do |f|%>
   <input type="hidden" name="cart-items-count" value="<%= current_cart.cart_items_count %>" id="cart-items-count">
   <div class="panel-body">
     <table class="table">
@@ -41,7 +41,7 @@
             </td>
             <td>￥<b id="cart-item-subtotal-<%= index %>"><%= render_price(item.quantity * item.product.price) %></b></td>
             <td>
-              <%= f.button '删除', type: :submit, name: "delete_item", value: item.id,
+              <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, remote: true,
                class: "btn btn-default btn-sm cart-btn-delete", data: { confirm: "确定删除商品#{item.product.title}?" } %>
             </td>
           </tr>
