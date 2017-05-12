@@ -28,6 +28,7 @@ class User < ApplicationRecord
   has_many :receiving_infos
   has_one :setting
   has_one :default_receiving_info, through: :setting, source: :receiving_info
+  has_one :cart
 
 
   validates :email, presence: true

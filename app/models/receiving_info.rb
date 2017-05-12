@@ -3,6 +3,7 @@
 # Table name: receiving_infos
 #
 #  id         :integer          not null, primary key
+#  label      :string
 #  name       :string
 #  cellphone  :string
 #  address    :string

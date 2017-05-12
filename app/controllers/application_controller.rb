@@ -10,7 +10,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_cart
-    @current_cart ||= get_cart
+    if current_user
+      @current_cart ||= get_user_cart
+    else
+      @current_cart ||= get_session_cart
+    end
   end
 
   private
@@ -27,12 +31,25 @@ class ApplicationController < ActionController::Base
     @categories = Category.all
   end
 
-  def get_cart
+  def get_session_cart
     cart = Cart.find_by(id: session[:cart_id])
     if cart.blank?
       cart = Cart.create
     end
     session[:cart_id] = cart.id
+    return cart
+  end
+
+  def get_user_cart
+    cart = current_user.cart
+    if cart.blank?
+      cart = Cart.create
+      current_user.cart = cart
+    end
+    session_cart = get_session_cart
+    unless session_cart.empty?
+      cart.merge(session_cart)
+    end
     return cart
   end
 

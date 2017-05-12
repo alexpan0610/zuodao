@@ -14,6 +14,7 @@ class CartsController < ApplicationController
       delete_items
     elsif params[:checkout].present?
       do_checkout
+      render :checkout
     end
   end
 

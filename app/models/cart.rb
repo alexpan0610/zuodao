@@ -3,12 +3,14 @@
 # Table name: carts
 #
 #  id               :integer          not null, primary key
+#  user_id          :integer
 #  cart_items_count :integer          default("0")
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
 
 class Cart < ApplicationRecord
+  belongs_to :user
   has_many :cart_items
   has_many :products, through: :cart_items, source: :product
 
@@ -16,18 +18,22 @@ class Cart < ApplicationRecord
     cart_items_count == 0
   end
 
+  def merge(cart)
+    cart.cart_items.each do |item|
+      add(item.product, item.quantity)
+    end
+  end
+
   def get_items
     @cart_items = cart_items.includes(:product)
   end
 
-  def add_product_to_cart(product, quantity)
-    @cart_item = cart_items.build
-    change_quantity(product, quantity)
-    @cart_item.save
-  end
-
-  def increase_product_quantity(product, quantity)
-    @cart_item = cart_items.find_by(product_id: product.id)
+  def add(product, quantity)
+    if products.include?(product)
+      @cart_item = cart_items.find_by(product_id: product.id)
+    else
+      @cart_item = cart_items.build
+    end
     change_quantity(product, quantity)
     @cart_item.save
   end
