@@ -33,10 +33,8 @@ class Cart < ApplicationRecord
   end
 
   def change_quantity(product, quantity)
-    puts "change_quantity product:#{product}, quantity:#{quantity}"
     @cart_item.product = product
     @cart_item.quantity += quantity
-    puts "cart_item.quantity:#{@cart_item.quantity}"
     product.quantity -= quantity
     product.save
   end

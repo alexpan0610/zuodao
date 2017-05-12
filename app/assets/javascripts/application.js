@@ -79,13 +79,8 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-  /*购物车全选*/
-  $(".cart-select-all").change(function(e) {
-    cartSelectAll(this.checked);
-  });
-
-  /*监听购物车物品选择*/
-  listenCartItemSelections();
+  /*监听购物车勾选框*/
+  listenSelections();
 });
 
 // 内容转为数字
@@ -96,10 +91,22 @@ function parseToInt(value) {
   return parseInt(value == '' ? 0 : value);
 }
 
+// 初始化购物车物品选中状态
+function setSelections(selections) {
+  var cartItemsCount = parseInt($("#cart-items-count").val());
+  if (cartItemsCount != 0 && selections.length == cartItemsCount) {
+    cartSelectAll(true);
+  } else {
+    for (i = 0; i < cartItemsCount; i++) {
+      var itemId = $("#cart-item-select-" + i).val();
+      $("#cart-item-select-" + i).prop("checked", $.inArray(itemId, selections) > -1);
+    }
+  }
+}
+
 // 全选购物车商品
 function cartSelectAll(checked) {
-  $("#cart-select-all-top").prop("checked", checked);
-  $("#cart-select-all-bottom").prop("checked", checked);
+  $(".cart-select-all").prop("checked", checked);
   var cartItemsCount = parseInt($("#cart-items-count").val());
   for (i = 0; i < cartItemsCount; i++) {
     $("#cart-item-select-" + i).prop("checked", checked);
@@ -110,8 +117,12 @@ function cartSelectAll(checked) {
   calculateTotalPrice();
 }
 
-// 监听购物车物品选择
-function listenCartItemSelections() {
+// 监听购物车勾选框
+function listenSelections() {
+  /*全选*/
+  $(".cart-select-all").change(function(e) {
+    cartSelectAll(this.checked);
+  });
   var cartItemsCount = parseInt($("#cart-items-count").val());
   for (i = 0; i < cartItemsCount; i++) {
     new cartItemSelectionListener(i);
@@ -128,13 +139,7 @@ function cartItemSelectionListener(index) {
       if ($("#cart-item-select-" + i).is(":checked")) selectedCount++;
     }
     // 商品全部被勾选
-    if (cartItemsCount == selectedCount) {
-      $("#cart-select-all-top").prop("checked", true);
-      $("#cart-select-all-bottom").prop("checked", true);
-    } else {
-      $("#cart-select-all-top").prop("checked", false);
-      $("#cart-select-all-bottom").prop("checked", false);
-    }
+    $(".cart-select-all").prop("checked", cartItemsCount == selectedCount);
     // 更新选中商品数量
     $("#items-count").html(selectedCount);
     // 重新计算总价

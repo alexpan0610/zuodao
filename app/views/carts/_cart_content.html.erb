@@ -1,0 +1,71 @@
+<%= form_for current_cart, url: checkout_cart_path(current_cart), method: :post, remote: true do |f|%>
+  <input type="hidden" name="cart-items-count" value="<%= current_cart.cart_items_count %>" id="cart-items-count">
+  <div class="panel-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" name="select-all" class="cart-select-all"/> 全选
+          </th>
+          <th>图片</th>
+          <th>名称</th>
+          <th>描述</th>
+          <th>单价</th>
+          <th>数量</th>
+          <th>小计</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each_with_index do |item, index| %>
+          <tr class="cart-item">
+            <td>
+              <input type="checkbox" name="selections[]" value="<%= item.id %>" id="cart-item-select-<%= index %>"/>
+            </td>
+            <td>
+              <%= link_to product_path(item.product) do %>
+                <%= render_product_image(item.product, "thumbnail") %>
+              <% end %>
+            </td>
+            <td><%= item.product.title %></td>
+            <td><%= render_text(item.product.description) %></td>
+            <td>￥<b><%= render_price(item.product.price) %></b></td>
+            <td>
+              <div class="quantity">
+                <%= link_to(fa_icon("minus"), decrease_cart_item_path(item, index: index), method: :post, remote: true,
+                id: "quantity-minus-#{index}", disabled: (item.quantity <= 1), class: "quantity-minus #{item.quantity <= 1 ? 'disabled' : ''}") %>
+                <input type="text" name="quantities[]" value="<%= item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input" disabled>
+                <%= link_to(fa_icon("plus"), increase_cart_item_path(item, index: index), method: :post, remote: true,
+                id: "quantity-plus-#{index}", disabeld: (item.product.quantity <= 0), class: "quantity-plus #{item.product.quantity <= 0 ? 'disabled' : ''}") %>
+              </div>
+            </td>
+            <td>￥<b id="cart-item-subtotal-<%= index %>"><%= render_price(item.quantity * item.product.price) %></b></td>
+            <td>
+              <%= f.button '删除', type: :submit, name: "delete_item", value: item.id,
+               class: "btn btn-default btn-sm cart-btn-delete", data: { confirm: "确定删除商品#{item.product.title}?" } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel-footer">
+    <input type="checkbox" name="select-all" class="cart-select-all"/> 全选
+    <%= f.button "删除选中的商品", type: :submit, value: true, name: "delete_items", class: "btn-delete-selected btn btn-default" %>
+    <div class="items-count">
+      已选择 <b id="items-count">0</b> 件商品
+    </div>
+    <div class="total-price">
+      <h4>
+        <small>总价：</small>
+        ¥
+        <span id="total-price">
+          <%= render_price(0) %>
+        </span>
+      </h4>
+    </div>
+    <%= f.button type: :submit, name: "checkout", value: true, class: "btn-checkout btn btn-danger" do %>
+      <%= fa_icon("credit-card", text: "去结算") %>
+    <% end %>
+  </div>
+<% end %>

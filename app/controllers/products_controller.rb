@@ -31,9 +31,7 @@ class ProductsController < ApplicationController
       redirect_to product_path(@product)
     else
       update_cart
-      respond_to do |format|
-        format.js   { render layout: false }
-      end
+      respond_to :js
     end
   end
 

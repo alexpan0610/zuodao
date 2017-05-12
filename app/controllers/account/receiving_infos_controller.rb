@@ -36,9 +36,7 @@ class Account::ReceivingInfosController < ApplicationController
   def set_default
     current_user.default_receiving_info = @receiving_info
     @receiving_infos = current_user.receiving_infos
-    respond_to do |format|
-      format.js   { render layout: false }
-    end
+    respond_to :js
   end
 
   private
