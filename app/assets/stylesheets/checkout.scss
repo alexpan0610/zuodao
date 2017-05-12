@@ -1,0 +1,34 @@
+// 结算页
+.checkout {
+  margin: 20px;
+  // 收货地址列表
+  .addresses {
+    .address-label {
+      min-width: 100px;
+    }
+  }
+  // 支付方式
+  .payment-method {
+
+  }
+  // 购物清单
+  .details {
+    // 商品
+    .item {
+      // 商品缩略图
+      .thumbnail {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+  // 合计
+  .summary {
+    text-align: right;
+    h4 {
+      font-size: 1.6em;
+      display: inline-block;
+      margin-right: 20px;
+    }
+  }
+}

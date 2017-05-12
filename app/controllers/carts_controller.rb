@@ -17,9 +17,9 @@ class CartsController < ApplicationController
   end
 
   def checkout
-    @cart_items = []
+    @items = []
     params[:selections].each do |selection|
-      @cart_items << CartItem.find(selection)
+      @items << CartItem.find(selection)
     end
     @order = Order.new
     @addresses = current_user.addresses

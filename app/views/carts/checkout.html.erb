@@ -3,40 +3,83 @@
     <h2>结算</h2>
   </div>
   <p>填写并核对订单信息</p>
-  <%= simple_form_for [:account, @order] do |f| %>
+  <%= form_for [:account, @order] do |f| %>
   <div class="panel panel-default">
     <div class="panel-body">
-      <div class="checkout-address">
+      <div class="addresses">
         <h4>收货信息</h4>
         <input type="hidden" name="selected_address" value="<%= current_user.default_address.nil? ? '' : current_user.default_address.id %>" id="selected-address"/>
         <input type="hidden" value="<%= current_user.addresses.count %>" id="addresses-count"/>
-        <div class="address-list">
-          <table class="table">
-            <% @addresses.each_with_index do |address, index| %>
-            <tr>
-              <td>
-                <div class="address-label">
-                  <a href="" class="btn btn-<%= address.default? ? 'danger' : 'default' %>" id="address-<%= index %>">
-                    <%= address.label %>
-                  </a>
-                  <input type="hidden" value="<%= address.id %>" id="address-id-<%= index %>"/>
-                </div>
-              </td>
-              <td><%= address.name %></td>
-              <td><%= address.address %></td>
-              <td><%= address.cellphone %></td>
-            </tr>
-            <% end %>
-          </table>
+        <table class="table">
+          <% @addresses.each_with_index do |address, index| %>
+          <tr>
+            <td>
+              <a href="" class="btn btn-<%= address.default? ? 'danger' : 'default' %> address-label" id="address-<%= index %>">
+                <%= address.label %>
+              </a>
+              <input type="hidden" value="<%= address.id %>" id="address-id-<%= index %>"/>
+            </td>
+            <td><%= address.name %></td>
+            <td width="40%"><%= address.address %></td>
+            <td><%= address.cellphone %></td>
+          </tr>
+          <% end %>
+        </table>
+        <hr/>
+      </div>
+      <div class="payment-method">
+        <div class="page-header">
+          <h4>付款信息</h4>
         </div>
+        <input type="hidden" name="pay_method" value="not_selected" id="payment-method"/>
+        <%= link_to("微信支付", "javascript:;", class: "wechat btn btn-default") %>
+        <%= link_to("支付宝", "javascript:;", class: "alipay btn btn-default") %>
+        <hr/>
       </div>
-      <div class="checkout-pay-method"></div>
-      <div class="checkout-details">
-        <%= @cart_items %>
+      <div class="details">
+        <div class="page-header">
+          <h4>购物清单
+            <small>共购买 <b class="text-danger"><%= @items.count %></b> 件商品</small>
+          </h4>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>图片</th>
+              <th>名称</th>
+              <th>描述</th>
+              <th>单价</th>
+              <th>数量</th>
+              <th>小计</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @items.each do |item| %>
+              <tr class="item">
+                <td>
+                  <%= link_to product_path(item.product) do %>
+                    <%= render_product_image(item.product, "thumbnail") %>
+                  <% end %>
+                </td>
+                <td><%= item.product.title %></td>
+                <td><%= render_text(item.product.description) %></td>
+                <td>￥<b><%= render_price(item.product.price) %></b></td>
+                <td><b><%= item.quantity %></b></td>
+                <td class="text-danger">￥<b><%= render_price(item.quantity * item.product.price) %></b></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
-      <div class="checkout-summry"></div>
+      <hr/>
+    </div>
+    <div class="summary panel-footer">
+      <h4 class="text-danger">
+        <small>合计：</small>
+        ￥<%= calculate_total_price(@items) %>
+      </h4>
+      <%= f.button "提交订单", type: :submit, class: "btn btn-danger btn-lg" %>
     </div>
   </div>
-  <%= f.button :submit, value: "提交订单", class: "btn btn-danger pull-right" %>
   <% end %>
 </div>

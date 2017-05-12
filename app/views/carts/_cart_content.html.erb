@@ -39,7 +39,7 @@
                 id: "quantity-plus-#{index}", disabeld: (item.product.quantity <= 0), class: "quantity-plus #{item.product.quantity <= 0 ? 'disabled' : ''}") %>
               </div>
             </td>
-            <td>￥<b id="cart-item-subtotal-<%= index %>"><%= render_price(item.quantity * item.product.price) %></b></td>
+            <td class="text-danger">￥<b id="cart-item-subtotal-<%= index %>"><%= render_price(item.quantity * item.product.price) %></b></td>
             <td>
               <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, remote: true,
                class: "btn btn-default btn-sm cart-btn-delete", data: { confirm: "确定删除商品#{item.product.title}?" } %>

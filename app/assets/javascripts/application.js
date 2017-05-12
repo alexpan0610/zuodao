@@ -84,6 +84,9 @@ $(document).on('turbolinks:load', function() {
 
   /*监听结算地址选择*/
   listenCheckoutAddressSelection();
+
+  /*监听支付选项*/
+  listenPaymentMethodSelection();
 });
 
 // 内容转为数字
@@ -174,11 +177,30 @@ function addressSelectionListener(total, index) {
   var index = index;
   $("#address-" + index).click(function(e) {
     for (i = 0; i < total; i++) {
-      $("#address-" + i).addClass("btn-default");
-      $("#address-" + i).removeClass("btn-danger");
+      setSelected($("#address-" + i), false);
     }
-    $(this).addClass("btn-danger");
+    setSelected($(this), true);
     $("#selected-address").val($("#address-id-" + index).val());
     e.preventDefault();
   });
+}
+
+// 支付选项监听
+function listenPaymentMethodSelection() {
+  var wechat = $(".wechat");
+  var alipay = $(".alipay");
+  wechat.click(function(e) {
+    setSelected(wechat, true);
+    setSelected(alipay, false);
+  });
+  alipay.click(function(e) {
+    setSelected(alipay, true);
+    setSelected(wechat, false);
+  });
+}
+
+// 改变按钮选中状态
+function setSelected(button, selected) {
+  button.addClass(selected ? "btn-danger" : "btn-default");
+  button.removeClass(selected ? "btn-default" : "btn-danger");
 }
