@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.delete_all
-ReceivingInfo.delete_all
+Address.delete_all
 Product.delete_all
 Category.delete_all
 CartItem.delete_all
@@ -23,7 +23,7 @@ is_admin: true
 
 LABELS = ["公司","家","宿舍"]
 3.times do |time|
-  ReceivingInfo.create!(
+  Address.create!(
   label: LABELS[time],
   name: "潘鹏",
   cellphone: "15652598157",

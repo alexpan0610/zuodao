@@ -18,10 +18,14 @@ class Cart < ApplicationRecord
     cart_items_count == 0
   end
 
-  def merge(cart)
+  def merge!(cart)
     cart.cart_items.each do |item|
       add(item.product, item.quantity)
     end
+  end
+
+  def clean!
+    cart_items.destroy_all
   end
 
   def get_items

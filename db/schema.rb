@@ -12,6 +12,17 @@
 
 ActiveRecord::Schema.define(version: 20170511130229) do
 
+  create_table "addresses", force: :cascade do |t|
+    t.string   "label"
+    t.string   "name"
+    t.string   "cellphone"
+    t.string   "address"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
     t.integer  "product_id"
@@ -76,23 +87,12 @@ ActiveRecord::Schema.define(version: 20170511130229) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  create_table "receiving_infos", force: :cascade do |t|
-    t.string   "label"
-    t.string   "name"
-    t.string   "cellphone"
-    t.string   "address"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_receiving_infos_on_user_id"
-  end
-
   create_table "settings", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "receiving_info_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.index ["receiving_info_id"], name: "index_settings_on_receiving_info_id"
+    t.integer  "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_settings_on_address_id"
     t.index ["user_id"], name: "index_settings_on_user_id"
   end
 

@@ -42,7 +42,7 @@
             <ul class="dropdown-menu">
               <li><%= link_to(fa_icon("list-ul", text: " 我的订单"), account_orders_path) %></li>
               <li class="divider"></li>
-              <li><%= link_to(fa_icon("address-card", text: " 收货地址"), account_receiving_infos_path) %></li>
+              <li><%= link_to(fa_icon("address-card", text: " 收货地址"), account_addresses_path) %></li>
               <% if current_user.admin? %>
                 <li class="divider"></li>
                 <li><%= link_to(fa_icon("lock", text: " 后台管理"), admin_products_path) %></li>

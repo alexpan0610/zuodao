@@ -1,0 +1,18 @@
+<tr>
+  <td>
+    <h4>
+      <label class="label label-<%= address.default? ? 'success' : 'default'%>"><%= address.label %></label>
+    </h4>
+  </td>
+  <td><%= address.name %></td>
+  <td><%= address.cellphone %></td>
+  <td><%= address.address %></td>
+  <td>
+    <% unless address.default? %>
+      <%= link_to '设为默认', set_default_account_address_path(address), method: :post, remote: true, class: "btn btn-success btn-xs" %>
+    <% end %>
+    <%= link_to '编辑', edit_account_address_path(address), class: "btn btn-default btn-sm" %>
+    <%= link_to '删除', account_address_path(address),class: "btn btn-danger btn-sm",
+    method: :delete, data: { confirm: "您确定删除#{address.name}这条收货信息吗？" } %>
+  </td>
+</tr>

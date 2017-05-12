@@ -3,13 +3,13 @@
     <%= order.number %>
   </div>
   <div class="receiver-name">
-    <%= order.receiving_info.name %>
+    <%= order.address.name %>
   </div>
   <div class="receiver-cellphone">
-    <%= order.receiving_info.cellphone %>
+    <%= order.address.cellphone %>
   </div>
   <div class="receiver-address">
-    <%= order.receiving_info.address %>
+    <%= order.address.address %>
   </div>
   <div class="created-time">
     <%= render_create_time(order) %>

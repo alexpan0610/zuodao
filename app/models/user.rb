@@ -25,10 +25,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :orders
-  has_many :receiving_infos
-  has_one :setting
-  has_one :default_receiving_info, through: :setting, source: :receiving_info
+  has_many :addresses
+  
   has_one :cart
+  has_one :setting
+  has_one :default_address, through: :setting, source: :address
 
 
   validates :email, presence: true

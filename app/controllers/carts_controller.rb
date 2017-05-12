@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :aunthenticate_user!, only: [:do_checkout]
+  before_action :authenticate_user!, only: [:checkout]
 
   def index
     @cart_items = current_cart.get_items
@@ -22,7 +22,7 @@ class CartsController < ApplicationController
       @cart_items << CartItem.find(selection)
     end
     @order = Order.new
-    @receiving_infos = current_user.receiving_infos
+    @addresses = current_user.addresses
   end
 
   private

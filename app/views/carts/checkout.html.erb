@@ -1,28 +1,42 @@
-<div class="checkout col-md-10 col-md-offset-1">
+<div class="checkout">
   <div class="page-header">
-    <h4>结算</h4>
+    <h2>结算</h2>
   </div>
+  <p>填写并核对订单信息</p>
   <%= simple_form_for [:account, @order] do |f| %>
-    <div class="checkout-receiving-info">
-      <h4>收货信息</h4>
-      <hr/>
-      <% if current_user.default_receiving_info.present? %>
-        <%= link_to(fa_icon("address-card", text: "请选择收货地址"), class: "btn btn-default") %>
-      <% else %>
-        <% default = current_user.default_receiving_info %>
-        <%= link_to(default.label, edit_account_receiving_info_path(default), class: "btn btn-defalut") %>
-        <%= link_to("更换收货地址", account_receiving_infos_path(type: "select")) %>
-      <% end %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="checkout-address">
+        <h4>收货信息</h4>
+        <input type="hidden" name="selected_address" value="<%= current_user.default_address.nil? ? '' : current_user.default_address.id %>" id="selected-address"/>
+        <input type="hidden" value="<%= current_user.addresses.count %>" id="addresses-count"/>
+        <div class="address-list">
+          <table class="table">
+            <% @addresses.each_with_index do |address, index| %>
+            <tr>
+              <td>
+                <div class="address-label">
+                  <a href="" class="btn btn-<%= address.default? ? 'danger' : 'default' %>" id="address-<%= index %>">
+                    <%= address.label %>
+                  </a>
+                  <input type="hidden" value="<%= address.id %>" id="address-id-<%= index %>"/>
+                </div>
+              </td>
+              <td><%= address.name %></td>
+              <td><%= address.address %></td>
+              <td><%= address.cellphone %></td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+      <div class="checkout-pay-method"></div>
+      <div class="checkout-details">
+        <%= @cart_items %>
+      </div>
+      <div class="checkout-summry"></div>
     </div>
-    <div class="checkout-pay-method">
-
-    </div>
-    <div class="checkout-details">
-      <%= @cart_items %>
-    </div>
-    <div class="checkout-summry">
-
-    </div>
-    <%= f.button :submit, value: "提交订单", class: "btn btn-danger pull-right" %>
+  </div>
+  <%= f.button :submit, value: "提交订单", class: "btn btn-danger pull-right" %>
   <% end %>
 </div>

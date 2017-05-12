@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :account do
     resources :orders
-    resources :receiving_infos do
+    resources :addresses do
       member do
         post :set_default
       end

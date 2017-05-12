@@ -28,7 +28,7 @@ $(document).on('turbolinks:load', function() {
     });
 
   /*商品数量输入控制*/
-  $('#quantity-input').on('input', function(event) {
+  $('#quantity-input').on('input', function(e) {
     var max = parseToInt($('.product-quantity').html());
     var num = parseToInt($(this).val());
     if (num <= 1) {
@@ -45,7 +45,7 @@ $(document).on('turbolinks:load', function() {
       $(this).val(num);
       $("#quantity-plus").removeClass('disabled');
     }
-  }).on('blur', function(event) {
+  }).on('blur', function(e) {
     var value = $(this).val();
     if (value == '' || value == '0') {
       $(this).val('1');
@@ -53,8 +53,7 @@ $(document).on('turbolinks:load', function() {
   });
 
   /*增加数量*/
-  $("#quantity-plus").click(function(event) {
-    event.preventDefault();
+  $("#quantity-plus").click(function(e) {
     var max = parseToInt($('.product-quantity').html());
     var num = parseInt($("#quantity-input").val()) + 1;
     $("#quantity-minus").removeClass("disabled");
@@ -64,11 +63,11 @@ $(document).on('turbolinks:load', function() {
     } else {
       $("#quantity-input").val(num);
     }
+    e.preventDefault();
   });
 
   /*减少数量*/
-  $("#quantity-minus").click(function(event) {
-    event.preventDefault();
+  $("#quantity-minus").click(function(e) {
     var num = parseInt($("#quantity-input").val());
     if (num > 1) {
       $("#quantity-input").val(num -= 1);
@@ -77,10 +76,14 @@ $(document).on('turbolinks:load', function() {
     if (num <= 1) {
       $("#quantity-minus").addClass("disabled");
     }
+    e.preventDefault();
   });
 
   /*监听购物车勾选框*/
-  listenSelections();
+  listenCartItemsSelections();
+
+  /*监听结算地址选择*/
+  listenCheckoutAddressSelection();
 });
 
 // 内容转为数字
@@ -118,30 +121,29 @@ function cartSelectAll(checked) {
 }
 
 // 监听购物车勾选框
-function listenSelections() {
+function listenCartItemsSelections() {
   /*全选*/
   $(".cart-select-all").change(function(e) {
     cartSelectAll(this.checked);
   });
-  var cartItemsCount = parseInt($("#cart-items-count").val());
-  for (i = 0; i < cartItemsCount; i++) {
-    new cartItemSelectionListener(i);
+  var total = parseInt($("#cart-items-count").val());
+  for (i = 0; i < total; i++) {
+    new cartItemSelectionListener(total, i);
   }
 }
 
 // 购物车物品选择监听器
-function cartItemSelectionListener(index) {
+function cartItemSelectionListener(total, index) {
   var index = index;
-  var cartItemsCount = parseInt($("#cart-items-count").val());
-  $("#cart-item-select-" + index).change(function(e){
-    var selectedCount = 0;
-    for (i = 0; i < cartItemsCount; i ++){
-      if ($("#cart-item-select-" + i).is(":checked")) selectedCount++;
+  $("#cart-item-select-" + index).change(function(e) {
+    var count = 0;
+    for (i = 0; i < total; i++) {
+      if ($("#cart-item-select-" + i).is(":checked")) count++;
     }
     // 商品全部被勾选
-    $(".cart-select-all").prop("checked", cartItemsCount == selectedCount);
+    $(".cart-select-all").prop("checked", total == count);
     // 更新选中商品数量
-    $("#items-count").html(selectedCount);
+    $("#items-count").html(count);
     // 重新计算总价
     calculateTotalPrice();
   });
@@ -151,10 +153,32 @@ function cartItemSelectionListener(index) {
 function calculateTotalPrice() {
   var totalPrice = 0.0;
   var cartItemsCount = parseInt($("#cart-items-count").val());
-  for (i = 0; i < cartItemsCount; i ++){
+  for (i = 0; i < cartItemsCount; i++) {
     if ($("#cart-item-select-" + i).is(":checked")) {
       totalPrice += parseFloat($("#cart-item-subtotal-" + i).html());
     }
   }
   $("#total-price").html(totalPrice.toFixed(2));
+}
+
+// 监听结算收货地址选择
+function listenCheckoutAddressSelection() {
+  var addressesCount = parseInt($("#addresses-count").val());
+  for (i = 0; i < addressesCount; i++) {
+    new addressSelectionListener(addressesCount, i);
+  }
+}
+
+// 地址选择监听
+function addressSelectionListener(total, index) {
+  var index = index;
+  $("#address-" + index).click(function(e) {
+    for (i = 0; i < total; i++) {
+      $("#address-" + i).addClass("btn-default");
+      $("#address-" + i).removeClass("btn-danger");
+    }
+    $(this).addClass("btn-danger");
+    $("#selected-address").val($("#address-id-" + index).val());
+    e.preventDefault();
+  });
 }

@@ -48,7 +48,8 @@ class ApplicationController < ActionController::Base
     end
     session_cart = get_session_cart
     unless session_cart.empty?
-      cart.merge(session_cart)
+      cart.merge!(session_cart)
+      session_cart.clean!
     end
     return cart
   end

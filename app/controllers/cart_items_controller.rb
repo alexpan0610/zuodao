@@ -1,5 +1,5 @@
 class CartItemsController < ApplicationController
-  before_action :find_cart_item, only: [:update, :increase, :decrease]
+  before_action :find_cart_item, only: [:update, :increase, :decrease, :destroy]
   respond_to :js, only: [:decrease, :increase]
 
   def update
@@ -21,6 +21,14 @@ class CartItemsController < ApplicationController
 		end
 	end
 
+  def destroy
+    change_quantity(-@cart_item.quantity)
+    @cart_item.destroy
+    respond_to do |format|
+      format.js { render "carts/delete_item"}
+    end
+  end
+  
   private
 
   def find_cart_item
