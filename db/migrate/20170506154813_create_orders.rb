@@ -9,6 +9,7 @@ class CreateOrders < ActiveRecord::Migration[5.0]
       t.string :cellphone
       t.string :address
       t.belongs_to :user
+      t.index  :number, unique: true
       t.index  :aasm_state
 
       t.timestamps

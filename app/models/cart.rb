@@ -38,24 +38,28 @@ class Cart < ApplicationRecord
     else
       @cart_item = cart_items.build
     end
-    change_quantity(product, quantity)
-    @cart_item.save
+    change_quantity!(product, quantity)
   end
 
-  def change_quantity(product, quantity)
+  def change_quantity!(product, quantity)
     @cart_item.product = product
     @cart_item.quantity += quantity
     product.quantity -= quantity
     product.save
+    @cart_item.save
   end
 
   def total_price
-    sum = 0.0
-    cart_items.each do |cart_item|
-      if cart_item.product.price.present?
-        sum += cart_item.quantity * cart_item.product.price
+    calculate_total_price(cart_items)
+  end
+
+  def calculate_total_price(items)
+    total = 0.0
+    items.each do |item|
+      if item.product.price.present?
+        total += item.quantity * item.product.price
       end
     end
-    sum
+    total.round(4)
   end
 end

@@ -2,11 +2,11 @@
 #
 # Table name: settings
 #
-#  id                :integer          not null, primary key
-#  user_id           :integer
+#  id         :integer          not null, primary key
+#  user_id    :integer
 #  address_id :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 class Setting < ApplicationRecord

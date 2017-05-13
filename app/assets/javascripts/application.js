@@ -201,10 +201,12 @@ function listenPaymentMethodSelection() {
   wechat.click(function(e) {
     setSelected(wechat, true);
     setSelected(alipay, false);
+    $("#payment-method").val("wechat");
   });
   alipay.click(function(e) {
     setSelected(alipay, true);
     setSelected(wechat, false);
+    $("#payment-method").val("alipay");
   });
 }
 

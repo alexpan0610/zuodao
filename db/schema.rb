@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170511130229) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.index ["aasm_state"], name: "index_orders_on_aasm_state"
+    t.index ["number"], name: "index_orders_on_number", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
