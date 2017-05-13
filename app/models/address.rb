@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: addresss
+# Table name: addresses
 #
 #  id         :integer          not null, primary key
 #  label      :string

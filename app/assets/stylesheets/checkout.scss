@@ -3,6 +3,7 @@
   margin: 20px;
   // 收货地址列表
   .addresses {
+    // 地址标签
     .address-label {
       min-width: 100px;
     }
@@ -25,7 +26,9 @@
   // 合计
   .summary {
     text-align: right;
+    // 金额
     h4 {
+      font-weight: bold;
       font-size: 1.6em;
       display: inline-block;
       margin-right: 20px;

@@ -172,15 +172,24 @@ function listenCheckoutAddressSelection() {
   }
 }
 
-// 地址选择监听
+// 地址选择监听器
 function addressSelectionListener(total, index) {
   var index = index;
   $("#address-" + index).click(function(e) {
+    var selected = $("#address-id-" + index).val();
     for (i = 0; i < total; i++) {
+      // 所有地址设为未选中
       setSelected($("#address-" + i), false);
+      // 给设为默认按钮夹带参数
+      var btnSetDefault = $("#checkout-btn-set-default-" + i);
+      var href = btnSetDefault.attr("href");
+      href = href.substring(0, href.indexOf("set_default")) + "set_default?selected=" + selected;
+      btnSetDefault.attr("href", href);
     }
+    // 设置被选中地址
+    $("#selected-address").val(selected);
+    // 将点击的地址设为选中
     setSelected($(this), true);
-    $("#selected-address").val($("#address-id-" + index).val());
     e.preventDefault();
   });
 }

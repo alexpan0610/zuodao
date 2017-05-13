@@ -1,1 +1,3 @@
-$('#addresss-list').html('<%= escape_javascript render partial: "address", collection: @addresses, as: :address %>');
+$('#addresses-list').html('<%= escape_javascript render partial: "address", collection: @addresses, as: :address %>');
+$('#checkout-addresses').html('<%= escape_javascript render partial: "carts/checkout_addresses" %>');
+listenCheckoutAddressSelection();

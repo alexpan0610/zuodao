@@ -6,26 +6,8 @@
   <%= form_for [:account, @order] do |f| %>
   <div class="panel panel-default">
     <div class="panel-body">
-      <div class="addresses">
-        <h4>收货信息</h4>
-        <input type="hidden" name="selected_address" value="<%= current_user.default_address.nil? ? '' : current_user.default_address.id %>" id="selected-address"/>
-        <input type="hidden" value="<%= current_user.addresses.count %>" id="addresses-count"/>
-        <table class="table">
-          <% @addresses.each_with_index do |address, index| %>
-          <tr>
-            <td>
-              <a href="" class="btn btn-<%= address.default? ? 'danger' : 'default' %> address-label" id="address-<%= index %>">
-                <%= address.label %>
-              </a>
-              <input type="hidden" value="<%= address.id %>" id="address-id-<%= index %>"/>
-            </td>
-            <td><%= address.name %></td>
-            <td width="40%"><%= address.address %></td>
-            <td><%= address.cellphone %></td>
-          </tr>
-          <% end %>
-        </table>
-        <hr/>
+      <div class="addresses" id="checkout-addresses">
+        <%= render partial: "checkout_addresses" %>
       </div>
       <div class="payment-method">
         <div class="page-header">

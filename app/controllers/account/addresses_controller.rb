@@ -30,12 +30,13 @@ class Account::AddressesController < ApplicationController
 
   def destroy
     @address.destroy
-    redirect_to account_addresss_path, alert: "收货地址已删除！"
+    redirect_to account_addresses_path, alert: "收货地址已删除！"
   end
 
   def set_default
     current_user.default_address = @address
-    @addresss = current_user.addresss
+    @addresses = current_user.addresses
+    @selected = params[:selected].present? ? Address.find(params[:selected]) : nil
   end
 
   private
@@ -47,7 +48,7 @@ class Account::AddressesController < ApplicationController
     if params[:action] == "update"
       flash[:notice] = "收货地址已成功修改！"
     end
-    redirect_to account_addresss_path
+    redirect_to account_addresses_path
   end
 
   def find_address_by_id
