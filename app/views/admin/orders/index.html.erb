@@ -20,6 +20,7 @@
         <th>邮箱</th>
         <th>金额</th>
         <th>下单时间</th>
+        <th>状态</th>
         <th>查看详情</th>
       </tr>
     </thead>
@@ -29,8 +30,9 @@
           <td><%= index + 1 %></td>
           <td><%= order.name %></td>
           <td><%= order.user.email %></td>
-          <td><%= order.total %></td>
+          <td><%= order.total_price %></td>
           <td><%= render_create_time(order)%> </td>
+          <td><%= render_order_status(order)%> </td>
           <td>
             <%= link_to("查看详情", admin_order_path(order), class: "btn btn-default btn-sm") %>
           </td>

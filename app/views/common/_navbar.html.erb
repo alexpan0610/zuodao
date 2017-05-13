@@ -45,7 +45,7 @@
               <li><%= link_to(fa_icon("address-card", text: " 收货地址"), account_addresses_path) %></li>
               <% if current_user.admin? %>
                 <li class="divider"></li>
-                <li><%= link_to(fa_icon("lock", text: " 后台管理"), admin_products_path) %></li>
+                <li><%= link_to(fa_icon("lock", text: " 后台管理"), admin_orders_path) %></li>
               <% end %>
               <li class="divider"></li>
               <li><%= link_to(fa_icon("sign-out", text: " 退出"), destroy_user_session_path, method: :delete) %></li>

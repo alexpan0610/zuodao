@@ -1,34 +1,39 @@
-<div class="panel panel-default ">
+<div class="admin-order-details panel panel-default">
   <div class="panel-heading">
-    <h4>订单明细</h4>
+    <h4>
+      订单明细
+      <small><%= render_order_status(@order) %></small>
+    </h4>
   </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th width="80%">商品明细</th>
-        <th>单价</th>
-        <th>数量</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @product_lists.each_with_index do |product_list, index| %>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= index + 1 %></td>
-          <td>
-            <%= product_list.product_name %>
-            <% if product_list.product.category.name == "名片" %>
-              <%= product_list.customization.name %>
-            <% end %>
-          </td>
-          <td><%= product_list.product_price %></td>
-          <td><%= product_list.quantity %></td>
+          <th>名称</th>
+          <th>描述</th>
+          <th>单价</th>
+          <th>数量</th>
+          <th>小计</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="panel-footer">
-    <%= render "state_option", order: @order %>
-    <div class="pt5 pb5">总计 ¥ <%= @order.total %> 元</div>
+      </thead>
+      <tbody>
+        <% @order_details.each do |order_detail| %>
+          <tr class="order-detail">
+            <td><%= order_detail.title %></td>
+            <td><%= render_text(order_detail.description) %></td>
+            <td>￥<b><%= render_price(order_detail.price) %></b></td>
+            <td><b><%= order_detail.quantity %></b></td>
+            <td class="text-danger">￥<b><%= render_price(order_detail.quantity * order_detail.price) %></b></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <legend></legend>
+    <div class="total-price pull-right">
+      <h4 class="text-danger">
+        <small>合计：</small>
+        ￥<%= @order.total_price %>
+      </h4>
+    </div>
   </div>
 </div>

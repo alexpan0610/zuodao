@@ -12,11 +12,13 @@
  *
  *= require_tree .
  *= require font-awesome
+ *= require material_icons
  *= require_self
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "material";
 @import "font-awesome";
 
 .navbar-default {
@@ -60,19 +62,19 @@ body {
   margin: 0;
   position: relative;
   min-height: 100%;
-  padding-bottom: 96px;
+  padding-bottom: 104px;
 }
 
 footer {
   position: absolute;
   width: 100%;
   bottom: 0;
-  height: 96px;
-  margin-top: -96px;
+  height: 104px;
+  margin-top: -104px;
   font-size: 1.1em;
   color: #555;
   background-color: #F8F8F8;
-  padding: 10px 0;
+  padding: 6px 0;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 
   a {

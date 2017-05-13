@@ -39,6 +39,8 @@ gem 'ransack'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem 'font-awesome-rails'
+gem 'material_design_lite-rails', '~> 1.3'
+gem 'material_icons'
 gem "faker"
 gem "annotate"
 gem 'aasm'
