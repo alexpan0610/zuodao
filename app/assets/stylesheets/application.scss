@@ -12,13 +12,10 @@
  *
  *= require_tree .
  *= require font-awesome
- *= require material_icons
  *= require_self
  */
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "material";
+@import "materialize";
 @import "font-awesome";
 
 .navbar-default {

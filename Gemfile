@@ -29,20 +29,19 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'bootstrap-sass'
+gem 'materialize-sass'
 gem 'devise'
 gem 'will_paginate'
-gem 'will_paginate-bootstrap'
+gem 'will_paginate-materialize'
 gem 'jquery-turbolinks'
 gem 'simple_form'
 gem 'ransack'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem 'font-awesome-rails'
-gem 'material_design_lite-rails', '~> 1.3'
 gem 'material_icons'
-gem "faker"
-gem "annotate"
+gem 'faker'
+gem 'annotate'
 gem 'aasm'
 
 group :development, :test do

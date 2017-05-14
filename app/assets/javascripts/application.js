@@ -13,11 +13,9 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require bootstrap
-//= require material
+//= require materialize-sprockets
 //= require turbolinks
 //= require_tree .
-//= require turbolinks
 
 $(document).on('turbolinks:load', function() {
   // 菜单自动打开

@@ -11,9 +11,9 @@ class ApplicationController < ActionController::Base
 
   def current_cart
     if current_user
-      @current_cart ||= get_user_cart
+      @current_cart ||= find_user_cart
     else
-      @current_cart ||= get_session_cart
+      @current_cart ||= find_session_cart
     end
   end
 
@@ -31,27 +31,28 @@ class ApplicationController < ActionController::Base
     @categories = Category.all
   end
 
-  def get_session_cart
+  def find_session_cart
     cart = Cart.find_by(id: session[:cart_id])
     if cart.blank?
       cart = Cart.create
     end
     session[:cart_id] = cart.id
-    return cart
+    cart
   end
 
-  def get_user_cart
+  def find_user_cart
     cart = current_user.cart
     if cart.blank?
       cart = Cart.create
       current_user.cart = cart
     end
-    session_cart = get_session_cart
+    session_cart = find_session_cart
+    # 将临时购物车中的商品加入用户的购物车
     unless session_cart.empty?
       cart.merge!(session_cart)
       session_cart.clean!
     end
-    return cart
+    cart
   end
 
   def back(path)

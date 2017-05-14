@@ -1,5 +1,5 @@
 class Admin::OrdersController <  Admin::AdminController
-  before_action :find_order, only: [:show, :ship, :shipped, :cancel, :return]
+  before_action :find_order_by_id, only: [:show, :ship, :shipped, :cancel, :return]
 
   def index
     if params[:start_date].present?
@@ -16,31 +16,27 @@ class Admin::OrdersController <  Admin::AdminController
     @order_details = @order.order_details
   end
 
+  # 取消订单
+  def cancel
+    @order.cancel!
+    redirect_back
+  end
+
+  # 发货
   def ship
     @order.ship!
-    OrderMailer.notify_ship(@order).deliver!
-    redirect_to :back
+    redirect_back
   end
 
-  def shipped
-    @order.deliver!
-    redirect_to :back
-  end
-
-  def cancel
-    @order.cancell_order!
-    OrderMailer.notify_cancel(@order).deliver!
-    redirect_to :back
-  end
-
-  def return
-    @order.return_good!
-    redirect_to :back
+  # 确认退货
+  def confirm_goods_returned
+    @order.confirm_goods_returned!
+    redirect_back
   end
 
   private
 
-  def find_order
+  def find_order_by_id
     @order = Order.find(params[:id])
   end
 end

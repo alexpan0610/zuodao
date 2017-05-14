@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :account do
-    resources :orders
+    resources :orders do
+      member do
+        get :pay
+        post :make_payment
+      end
+    end
     resources :addresses do
       member do
         post :set_default

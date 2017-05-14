@@ -1,6 +1,6 @@
 <h4>收货信息</h4>
 <% selected = @selected.present? ? @selected : current_user.default_address %>
-<input type="hidden" name="selected_address" value="<%= selected.nil? ? '' : selected.id %>" id="selected-address"/>
+<input type="hidden" name="selected_address" value="<%= selected.nil? ? 'none' : selected.id %>" id="selected-address"/>
 <input type="hidden" value="<%= current_user.addresses.count %>" id="addresses-count"/>
 <table class="table">
   <% @addresses.each_with_index do |address, index| %>
