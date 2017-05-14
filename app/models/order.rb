@@ -16,7 +16,6 @@
 #
 
 class Order < ApplicationRecord
-  before_create :generate_number
   belongs_to :user
   has_many :order_details, dependent: :destroy
 
@@ -25,10 +24,6 @@ class Order < ApplicationRecord
   validates :cellphone, presence: true
 
   scope :recent, -> {order("created_at DESC")}
-
-  def generate_number
-    self.number = Date.today.strftime("%Y%m%d") + "%.4d" % self.id
-  end
 
   include AASM
     aasm do

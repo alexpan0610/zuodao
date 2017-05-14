@@ -40,13 +40,15 @@ class Account::OrdersController < ApplicationController
 
   # 生成订单
   def create_order
-    @order = Order.new(@address.attributes.except!("label"))
+    @order = Order.new(@address.attributes.except!("id", "label"))
     @order.payment_method = @payment
     @order.total_price = current_cart.calculate_total_price(@items)
     @order.user = current_user
     unless @order.save
       error(:alert, "生成订单出错！")
     end
+    # 生成订单号
+    @order.update(number: generate_order_number)
   end
 
   # 生成购物清单
@@ -68,5 +70,11 @@ class Account::OrdersController < ApplicationController
   def error(level, msg)
     flash[level] = msg
     redirect_to checkout_cart_path(current_cart, selections: params[:items])
+  end
+
+  # 生成订单号
+  def generate_order_number
+    # 下单时间 + 订单编号
+    Date.today.strftime("%Y%m%d") + "%.4d" % @order.id
   end
 end
