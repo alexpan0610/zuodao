@@ -1,7 +1,7 @@
 <script src="../assets/javascripts/material-kit.js"></script>
 
 
-  <nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+  <nav class="navbar navbar-info navbar-transparent navbar-fixed-top navbar-color-on-scroll">
   <div class="container">
 
     <div class="navbar-header">
@@ -17,7 +17,9 @@
     <div class="collapse navbar-collapse" id="navigation-example">
 
       <ul class="nav navbar-nav navbar-left">
+
         <li class="dropdown">
+
           <a href="<%= products_path %>" class="dropdown-toggle">Products</a>
           <ul class="dropdown-menu">
             <% @categories.each_with_index do |category, index| %>
@@ -31,26 +33,27 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+
         <li class="dropdown cart-nav" id="auto-dropdown">
           <%= render "common/cart" %>
         </li>
         <% unless current_user %>
         <li>
           <%= link_to new_user_registration_path do %>
-          <i class="fa fa-user" aria-hidden="true"></i>
+          <i class="material-icons" aria-hidden="true">assignment_ind</i>
           注册
           <% end %>
         </li>
         <li>
           <%= link_to new_user_session_path do %>
-          <i class="fa fa-sign-in" aria-hidden="true"></i>
+          <i class="material-icons" aria-hidden="true">account_circle</i>
           登录
           <% end %>
         </li>
       <% else %>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-user" aria-hidden="true"></i>
+            <i class="material-icons" aria-hidden="true">account_circle</i>
             <%= current_user.email %>
             <b class="caret"></b>
           </a>

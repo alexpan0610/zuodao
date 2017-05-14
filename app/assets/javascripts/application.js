@@ -18,6 +18,7 @@
 //= require_tree .
 //= require turbolinks
 
+
 $(document).on('turbolinks:load', function() {
   // 菜单自动打开
   $('.dropdown').hover(function() {
