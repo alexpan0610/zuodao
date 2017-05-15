@@ -1,46 +1,48 @@
-<div class="panel panel-default admin-orders">
-  <div class="panel-heading">
-    <h4>订单列表</h4>
-    <div class="search">
-      <%= form_for admin_orders_path, method: :get do %>
-        <span>开始:</span>
-        <%= date_field_tag :start_date, params[:start_date].to_s[0,10] %>
-        <span>结束:</span>
-        <%= date_field_tag :end_date, params[:end_date].to_s[0,10] %>
-        <%= button_tag fa_icon('search', text: "查询"), type: :submit, name: "", class: "btn btn-default btn-sm" %>
-      <% end %>
+<div class="content main admin-orders">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>订单列表</h4>
+      <div class="search">
+        <%= form_for admin_orders_path, method: :get do %>
+          <span>开始:</span>
+          <%= date_field_tag :start_date, params[:start_date].to_s[0,10] %>
+          <span>结束:</span>
+          <%= date_field_tag :end_date, params[:end_date].to_s[0,10] %>
+          <%= button_tag fa_icon('search', text: "查询"), type: :submit, name: "", class: "btn btn-default btn-sm" %>
+        <% end %>
+      </div>
+      <br/>
     </div>
-    <br/>
-  </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>订购者</th>
-        <th>邮箱</th>
-        <th>金额</th>
-        <th>下单时间</th>
-        <th>状态</th>
-        <th>查看详情</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each_with_index do |order, index| %>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= index + 1 %></td>
-          <td><%= order.name %></td>
-          <td><%= order.user.email %></td>
-          <td><%= order.total_price %></td>
-          <td><%= render_create_time(order)%> </td>
-          <td><%= render_order_status(order)%> </td>
-          <td>
-            <%= link_to("查看详情", admin_order_path(order), class: "btn btn-default btn-sm") %>
-          </td>
+          <th>#</th>
+          <th>订购者</th>
+          <th>邮箱</th>
+          <th>金额</th>
+          <th>下单时间</th>
+          <th>状态</th>
+          <th>查看详情</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="panel-footer text-center">
-    <%= will_paginate @orders %>
+      </thead>
+      <tbody>
+        <% @orders.each_with_index do |order, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= order.name %></td>
+            <td><%= order.user.email %></td>
+            <td><%= order.total_price %></td>
+            <td><%= render_create_time(order)%> </td>
+            <td><%= render_order_status(order)%> </td>
+            <td>
+              <%= link_to("查看详情", admin_order_path(order), class: "btn btn-default btn-sm") %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="panel-footer text-center">
+      <%= will_paginate @orders %>
+    </div>
   </div>
 </div>

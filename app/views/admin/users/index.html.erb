@@ -1,31 +1,33 @@
-<div class="panel panel-default admin-users">
-  <div class="panel-heading">
-    <h4>用户列表
-      <%= link_to fa_icon("plus", text: "新增"), new_admin_user_path, class: "btn btn-default pull-right" %>
-    </h4>
-  </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>E-mail</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each_with_index do |user, index| %>
+<div class="content main admin-users">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>用户列表
+        <%= link_to fa_icon("plus", text: "新增"), new_admin_user_path, class: "btn btn-default pull-right" %>
+      </h4>
+    </div>
+    <table class="table">
+      <thead>
         <tr>
-          <td><%= index + 1 %></td>
-          <td><%= user.email %></td>
-          <td>
-            <%= link_to '编辑', edit_admin_user_path(user), class: "btn btn-default btn-sm" %>
-            <%= link_to '删除', admin_user_path(user),class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
+          <th>#</th>
+          <th>E-mail</th>
+          <th>操作</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="panel-footer text-center">
-    <%= will_paginate @users %>
+      </thead>
+      <tbody>
+        <% @users.each_with_index do |user, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to '编辑', edit_admin_user_path(user), class: "btn btn-default btn-sm" %>
+              <%= link_to '删除', admin_user_path(user),class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="panel-footer text-center">
+      <%= will_paginate @users %>
+    </div>
   </div>
 </div>

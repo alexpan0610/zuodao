@@ -1,19 +1,21 @@
-<div class="pay container">
-  <div class="row text-center">
-    <div class="page-header">
-      <h4>
-        <% if @order.payment_method == "wechat" %>
-        微信支付
-        <% elsif @order.payment_method == "alipay" %>
-        支付宝
-        <% end %>
-      </h4>
-    </div>
-    <div class="qrcode">
-      <%= image_tag("qrcode.png") %>
-    </div>
-    <div class="btn-finish">
-      <%= link_to "完成支付", products_path, class: "mdl-button mdl-js-button mdl-button--raised", data: { alert: "付款成功！返回首页~" } %>
+<div class="content main">
+  <div class="pay container">
+    <div class="row text-center">
+      <div class="page-header">
+        <h4>
+          <% if @order.payment_method == "wechat" %>
+          微信支付
+          <% elsif @order.payment_method == "alipay" %>
+          支付宝
+          <% end %>
+        </h4>
+      </div>
+      <div class="qrcode">
+        <%= image_tag("qrcode.png") %>
+      </div>
+      <div class="btn-finish">
+        <%= link_to "完成支付", products_path, class: "mdl-button mdl-js-button mdl-button--raised", data: { alert: "付款成功！返回首页~" } %>
+      </div>
     </div>
   </div>
 </div>

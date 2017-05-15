@@ -1,19 +1,20 @@
-<div class="container product-detail">
-  <div class="row">
-    <div class="col-md-6">
-      <%= render_product_detail_image(@product) %>
-    </div>
-    <div class="col-md-6 product-info">
-      <h2 class="product-title"> <%= @product.title %> </h2>
-      <div style="height:100px;">
-        <p class="product-description">
-          <%= @product.description %>
-        </p>
+<div class="content main product-detail">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <%= render_product_detail_image(@product) %>
       </div>
-      <h4 class="product-price"><small>￥</small> <%= render_price(@product.price) %></h4>
-      <div class="product-quantity"> 库存 : <%= @product.quantity %></div>
-      <br/>
-      <%= simple_form_for @product, id: "add-to-cart", method: :post, remote: true, url: add_to_cart_product_path(@product) do |f| %>
+      <div class="col-md-6 product-info">
+        <h2 class="product-title"> <%= @product.title %> </h2>
+        <div style="height:100px;">
+          <p class="product-description">
+            <%= @product.description %>
+          </p>
+        </div>
+        <h4 class="product-price"><small>￥</small> <%= render_price(@product.price) %></h4>
+        <div class="product-quantity"> 库存 : <%= @product.quantity %></div>
+        <br/>
+        <%= simple_form_for @product, id: "add-to-cart", method: :post, remote: true, url: add_to_cart_product_path(@product) do |f| %>
         <div class="quantity">
           <%= link_to(fa_icon("minus"), "", id: "quantity-minus", class: "quantity-minus disabled") %>
           <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input" %>
@@ -22,10 +23,11 @@
         <div class="pull-right">
           <%= f.button :button, type: :submit, id: "add-to-cart", disabled: @product.quantity == 0,
           class: "btn btn-primary btn-lg btn-danger #{@product.quantity == 0 ? 'disabled' : ''}" do %>
-            <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
+          <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
           <% end %>
         </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

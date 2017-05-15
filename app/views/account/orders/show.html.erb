@@ -1,34 +1,36 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4>订单详情</h4>
-  </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th width="80%">商品明细</th>
-        <th>单价</th>
-        <th>数量</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @product_lists.each_with_index do |product_list, index| %>
+<div class="content main">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>订单详情</h4>
+    </div>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= index + 1 %></td>
-          <td>
-            <%= product_list.product_name %>
-            <% if product_list.product.category.name == "名片" %>
-              <%= product_list.customization.name %>
-            <% end %>
-          </td>
-          <td><%= product_list.product_price %></td>
-          <td><%= product_list.quantity %></td>
+          <th>#</th>
+          <th width="80%">商品明细</th>
+          <th>单价</th>
+          <th>数量</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="panel-footer">
-    <%= render "state_option", order: @order %>
-    <div class="pt5 pb5">总计 ¥ <%= @order.total %> 元</div>
+      </thead>
+      <tbody>
+        <% @product_lists.each_with_index do |product_list, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td>
+              <%= product_list.product_name %>
+              <% if product_list.product.category.name == "名片" %>
+                <%= product_list.customization.name %>
+              <% end %>
+            </td>
+            <td><%= product_list.product_price %></td>
+            <td><%= product_list.quantity %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="panel-footer">
+      <%= render "state_option", order: @order %>
+      <div class="pt5 pb5">总计 ¥ <%= @order.total %> 元</div>
+    </div>
   </div>
 </div>
