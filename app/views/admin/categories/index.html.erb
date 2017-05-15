@@ -1,20 +1,21 @@
 <div class="content main admin-categories">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4>商品分类
-        <%= link_to fa_icon("plus", text: "新增"), new_admin_category_path, class: "btn btn-default pull-right" %>
-      </h4>
+  <div class="container-fluid">
+    <div class="page-header">
+      <h3>商品分类
+        <%= link_to fa_icon("plus", text: "新增"), new_admin_category_path, class: "btn btn-success pull-right" %>
+      </h3>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th width="80%">名称</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @categories.each_with_index do |category, index| %>
+    <div class="panel panel-default">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th width="60%">名称</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @categories.each_with_index do |category, index| %>
           <tr>
             <td><%= index + 1 %></td>
             <td><%= category.name %></td>
@@ -23,8 +24,9 @@
               <%= link_to '删除', admin_category_path(category),class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

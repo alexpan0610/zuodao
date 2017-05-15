@@ -12,7 +12,7 @@
     </div>
     <%= render partial: "order", collection: @orders, as: :order %>
     <div class="pagination text-center">
-      <%= will_paginate @orders %>
+      <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
     </div>
   </div>
 </div>

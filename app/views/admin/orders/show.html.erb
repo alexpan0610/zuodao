@@ -1,42 +1,48 @@
 <div class="content main admin-order-details">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4>
+  <div class="container-fluid">
+    <div class="page-header">
+      <h3>
         订单明细
         <small><%= render_order_status(@order) %></small>
-      </h4>
+      </h3>
     </div>
-    <div class="panel-body">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>名称</th>
-            <th>描述</th>
-            <th>单价</th>
-            <th>数量</th>
-            <th>小计</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @order_details.each_with_index do |order_detail, index| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名称</th>
+              <th>描述</th>
+              <th>单价</th>
+              <th>数量</th>
+              <th>小计</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @order_details.each_with_index do |order_detail, index| %>
             <tr class="order-detail">
               <td><%= index + 1 %></td>
               <td><%= order_detail.title %></td>
               <td><%= render_text(order_detail.description) %></td>
-              <td>￥<b><%= render_price(order_detail.price) %></b></td>
-              <td><b><%= order_detail.quantity %></b></td>
-              <td class="text-danger">￥<b><%= render_price(order_detail.quantity * order_detail.price) %></b></td>
+              <td>￥<b><%= render_price(order_detail.price) %></b>
+              </td>
+              <td>
+                <b><%= order_detail.quantity %></b>
+              </td>
+              <td class="text-danger">￥<b><%= render_price(order_detail.quantity * order_detail.price) %></b>
+              </td>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <legend></legend>
-      <div class="total-price pull-right">
-        <h4 class="text-danger">
-          <small>合计：</small>
-          ￥<%= @order.total_price %>
-        </h4>
+            <% end %>
+          </tbody>
+        </table>
+        <legend></legend>
+        <div class="total-price pull-right">
+          <h4 class="text-danger">
+            <small>合计：</small>
+            ￥<%= @order.total_price %>
+          </h4>
+        </div>
       </div>
     </div>
   </div>

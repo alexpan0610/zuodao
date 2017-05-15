@@ -9,10 +9,10 @@
   </head>
 
   <body>
-    <%= render "common/admin_navbar" %>
-    <div class="admin-content">
-      <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid">
+      <div class="row">
+        <%= render "common/admin_navbar" %>
+        <div class="admin-content">
           <%= render "common/flashes" %>
           <%= yield %>
         </div>
