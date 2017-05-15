@@ -53,23 +53,24 @@ footer {
   width: 100%;
   bottom: 0;
   height: 140px;
-  font-size: 1.1em;
-  color: #555;
+  font-size: 0.9em;
+  color: #8f8f8f;
+  letter-spacing: 1.5px;
   background-color: #F8F8F8;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 
   a {
-    color: #555;
+    color: #6499d0;
   }
 
   a:focus,
   a:hover {
     text-decoration: none;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    color:#4a81ba;
   }
 
   .footer_icon li {
-    color: #fff;
+    color: #6499d0;
     display: inline;
     margin-left: 0.8em;
     margin-right: 0.8em;
