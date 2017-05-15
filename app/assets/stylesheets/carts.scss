@@ -3,37 +3,61 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // 导航条上的购物车
-.cart-nav {
-  .cart-empty {
-    padding: 5px 10px;
+.navbar-transparent {
+  .cart-nav {
+    .badge {
+      color: #fff;
+      border: 1px solid #fff;
+      background-color: transparent;
+    }
   }
+}
+
+.cart-nav {
+  .badge {
+    border: 1px solid #fff;
+    background-color: #fff;
+  }
+
+  .cart-empty {
+    color: #333;
+    min-width: 200px;
+  }
+
   .cart-item {
     margin: 0 10px;
     min-width: 300px;
+
     .media-body p {
       font-size: 0.8em;
       font-weight: 400;
     }
   }
+
   .cart-img {
     width: 80px;
     height: 80px;
     border: 1px solid #DDD;
   }
+
   .media-right {
     min-width: 50px;
+
     p {
       float: right;
     }
+
     .cart-btn-delete {
       color: #B22222;
       float: right;
     }
   }
+
   .cart-bottom {
     padding: 0 10px;
     font-size: 0.9em;
     font-weight: 400;
+
     .btn-to-cart {
       padding: 3px 6px;
       font-size: 0.8em;
@@ -41,7 +65,6 @@
     }
   }
 }
-
 // 购物车页
 .carts {
   .thumbnail {
@@ -55,12 +78,14 @@
       color: #000;
       border: 1px solid #DDD;
       padding: 4px 10px;
+
       &.disabled {
         color: #424242;
         cursor: not-allowed;
         background-color: #E0E0E0;
       }
     }
+
     .quantity-input {
       cursor: not-allowed;
       text-align: center;

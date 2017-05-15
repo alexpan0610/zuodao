@@ -15,21 +15,19 @@
  *= require material_icons
  *= require_self
  */
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "material-kit";
-@import "font-awesome";
+@import "font-awesome"; // footer置底代码
 
-// footer置底代码
 html {
   height: 100%;
   box-sizing: border-box;
 }
 
 *,
-*:before,
-*:after {
+*:after,
+*:before {
   box-sizing: inherit;
 }
 
@@ -37,46 +35,49 @@ body {
   margin: 0;
   position: relative;
   min-height: 100%;
-  padding-bottom: 110px;
+  padding-bottom: 170px;
 }
-
 //---------Footer---------
+
 footer {
   position: absolute;
   width: 100%;
   bottom: 0;
-  height: 110px;
-  margin-top: -110px;
+  height: 140px;
   font-size: 1.1em;
   color: #555;
   background-color: #F8F8F8;
-  padding: 0 0 10px;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 
   a {
     color: #555;
   }
-  a:hover,
-  a:focus {
-    text-decoration:none;
+
+  a:focus,
+  a:hover {
+    text-decoration: none;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
   }
 
-  .footer_icon a {
-    color:#555;
-    font-size: 1.5em;
-    text-decoration:none;
-  }
-
-  .footer_icon a:focus,
-  .footer_icon a:hover {
-    font-size: 1.5em;
-    text-decoration:none;
-  }
-
   .footer_icon li {
-    display:inline;
-    margin-left: 0.6em;
-    margin-right: 0.6em;
+    color: #fff;
+    display: inline;
+    margin-left: 0.8em;
+    margin-right: 0.8em;
+
+    .btn-github {
+      background-color: #333;
+      box-shadow: 0 2px 2px 0 rgba(51,51,51,.14), 0 3px 1px -2px rgba(51,51,51,.2), 0 1px 5px 0 rgba(51,51,51,.12);
+    }
+
+    .btn-facebook {
+      background-color: #3b5998;
+      box-shadow: 0 2px 2px 0 rgba(59,89,152,.14), 0 3px 1px -2px rgba(59,89,152,.2), 0 1px 5px 0 rgba(59,89,152,.12);
+    }
+
+    .btn-linkedin {
+      background-color: #0976b4;
+      box-shadow: 0 2px 2px 0 rgba(9,118,180,.14), 0 3px 1px -2px rgba(9,118,180,.2), 0 1px 5px 0 rgba(9,118,180,.12);
+    }
   }
 }
