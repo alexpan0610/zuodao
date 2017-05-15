@@ -12,39 +12,16 @@
  *
  *= require_tree .
  *= require font-awesome
+ *= require material_icons
  *= require_self
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "material-kit";
 @import "font-awesome";
 
-.navbar-default {
-  .navbar-brand {
-    color: #555;
-    font-size: 1.5em;
-    letter-spacing: 0.1em;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-  }
-  .navbar-brand:focus,
-  .navbar-brand:hover {
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-  }
-  .navbar-collapse > ul > li {
-    a {
-      color: #555;
-      font-size: 1.1em;
-      letter-spacing: 0.1em;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    }
-    a:focus,
-    a:hover {
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-    }
-  }
-}
-
-//---------Footer---------
+// footer置底代码
 html {
   height: 100%;
   box-sizing: border-box;
@@ -60,19 +37,20 @@ body {
   margin: 0;
   position: relative;
   min-height: 100%;
-  padding-bottom: 104px;
+  padding-bottom: 110px;
 }
 
+//---------Footer---------
 footer {
   position: absolute;
   width: 100%;
   bottom: 0;
-  height: 104px;
-  margin-top: -104px;
+  height: 110px;
+  margin-top: -110px;
   font-size: 1.1em;
   color: #555;
   background-color: #F8F8F8;
-  padding: 6px 0;
+  padding: 0 0 10px;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 
   a {
