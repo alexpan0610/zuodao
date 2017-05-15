@@ -9,6 +9,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <th>#</th>
           <th>名称</th>
           <th>描述</th>
           <th>单价</th>
@@ -17,8 +18,9 @@
         </tr>
       </thead>
       <tbody>
-        <% @order_details.each do |order_detail| %>
+        <% @order_details.each_with_index do |order_detail, index| %>
           <tr class="order-detail">
+            <td><%= index + 1 %></td>
             <td><%= order_detail.title %></td>
             <td><%= render_text(order_detail.description) %></td>
             <td>￥<b><%= render_price(order_detail.price) %></b></td>

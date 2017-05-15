@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'materialize-sass'
+gem 'bootstrap-sass'
 gem 'devise'
 gem 'will_paginate'
 gem 'will_paginate-materialize'
@@ -39,7 +39,6 @@ gem 'ransack'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem 'font-awesome-rails'
-gem 'material_icons'
 gem 'faker'
 gem 'annotate'
 gem 'aasm'
