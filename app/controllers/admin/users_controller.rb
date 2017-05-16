@@ -20,7 +20,7 @@ class Admin::UsersController < Admin::AdminController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_users_path, notice: "用户#{@user.title}更新成功！"
+      redirect_to admin_users_path, notice: "用户#{@user.email}更新成功！"
     else
       render :edit
     end

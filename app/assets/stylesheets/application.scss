@@ -20,6 +20,11 @@
 @import "material-kit";
 @import "font-awesome";
 
+.alert {
+  margin-top: -30px;
+  margin-bottom: -101px;
+}
+
 // footer置底代码
 html {
   height: 100%;
@@ -37,11 +42,12 @@ body {
   position: relative;
   min-height: 100%;
   padding-bottom: 140px;
+  background-color:#deeff5;
 }
 
 // 内容区
-.content {
-  margin: 71px 30px 0px;
+.my-content {
+  margin: 101px 30px 0px;
   min-height: 740px;
   border-radius: 6px;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
@@ -53,28 +59,29 @@ footer {
   width: 100%;
   bottom: 0;
   height: 140px;
-  font-size: 1.1em;
-  color: #555;
+  font-size: 0.9em;
+  color: #8f8f8f;
+  letter-spacing: 1.5px;
   background-color: #F8F8F8;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 
   a {
-    color: #555;
+    color: #6499d0;
   }
 
   a:focus,
   a:hover {
     text-decoration: none;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    color:#4a81ba;
   }
 
   .footer_icon li {
-    color: #fff;
+    color: #6499d0;
     display: inline;
     margin-left: 0.8em;
     margin-right: 0.8em;
 
-    .btn-github {
+    .btn-weixin {
       background-color: #333;
       box-shadow: 0 2px 2px 0 rgba(51,51,51,.14), 0 3px 1px -2px rgba(51,51,51,.2), 0 1px 5px 0 rgba(51,51,51,.12);
     }
