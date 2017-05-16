@@ -33,7 +33,7 @@
   top: 71px;
   bottom: 0;
   left: 0;
-  z-index: 12;
+  z-index: 1;
   box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
@@ -41,7 +41,7 @@
 .sidebar .sidebar-wrapper {
   background-color: #fff;
   position: relative;
-  height: calc(100vh - 75px);
+  height: calc(100vh);
   overflow: auto;
   width: 260px;
   z-index: 4;
@@ -158,23 +158,6 @@
   line-height: 30px;
 }
 
-.off-canvas-sidebar .logo-tim,
-.sidebar .logo-tim {
-  border-radius: 50%;
-  border: 1px solid #333;
-  display: block;
-  height: 61px;
-  width: 61px;
-  float: left;
-  overflow: hidden;
-}
-
-.off-canvas-sidebar .logo-tim img,
-.sidebar .logo-tim img {
-  width: 60px;
-  height: 60px;
-}
-
 .off-canvas-sidebar:after,
 .off-canvas-sidebar:before,
 .sidebar:after,
@@ -245,6 +228,7 @@
 .off-canvas-sidebar .nav > li > a:focus {
   background: rgba(200, 200, 200, 0.2);
 }
+
 @media(min-width:768px) {
   .navbar-header {
     .navbar-brand {
@@ -257,50 +241,10 @@
       margin-right: 20px;
     }
   }
-
-  .side-nav {
-    position: fixed;
-    top: 71px;
-    width: 225px;
-    margin-left: -255px;
-    border: none;
-    border-radius: 0;
-    overflow-y: auto;
-    bottom: 0;
-    overflow-x: hidden;
-    padding-bottom: 40px;
-  }
-
-  .side-nav > li > a {
-    width: 225px;
-  }
-
-  .side-nav li a:focus,
-  .side-nav li a:hover {
-    outline: none;
-    background-color: #FFF !important;
-  }
-}
-
-.side-nav > li > ul {
-  padding: 0;
-}
-
-.side-nav > li > ul > li > a {
-  display: block;
-  padding: 10px 15px 10px 38px;
-  text-decoration: none;
-  color: #999;
-}
-
-.side-nav > li > ul > li > a:hover {
-  color: #fff;
-}
-/* 内容区 */
-@media(min-width:768px) {
+  // 内容区
   .admin-content {
     position: relative;
-    margin-left: 260px;
-    height: 100vh;
+    z-index: 1;
+    margin: 101px 0 -101px 260px;
   }
 }
