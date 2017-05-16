@@ -1,20 +1,54 @@
-
-  <div id="productPage" class="parallax parallax-product parallax-" data-no-turbolink style="background: url('https://s3.amazonaws.com/creativetim_bucket/products/46/mk_pro_cover.jpg?1466002372')no-repeat;background-size: cover;margin-top:70px; ">
+<div itemscope itemtype="http://schema.org/Product">
+  <div id="productPage" class="parallax parallax-product parallax-" data-no-turbolink style="background: url('http://ooz9ucbbf.bkt.clouddn.com/product%20background.jpg')no-repeat;background-size: cover; ">
 
     <div class="container">
-      <div class="row">
+      <div class="row" style="margin-top: 200px;margin-bottom:200px">
         <div class="col-sm-6 col-md-6">
-          <div class="product-image">
-            <a href="http://demos.creative-tim.com/material-kit-pro/presentation.html" target="_blank">
-              <img src="https://s3.amazonaws.com/creativetim_bucket/products/46/original/opt_mkp_thumbnail.jpg?1466002372" alt="Material Kit Pro Image"/>
-            </a>
+
+          <!-- Carousel Card -->
+          <div class="card card-raised card-carousel">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+              <div class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                  <div class="item active">
+
+                    <img src="http://media-channel.nationalgeographic.com/media/uploads/photos/content/video/2016/09/30/776629827588_Digimedia_Mars_Big%20Thinker_09_HTSOM_04_Building%20Shelter_SEQ_v9a_DELIVERY_TXTD.00_00_13_08.Still001.jpg" alt="Awesome Image">
+                  </div>
+                  <div class="item">
+                    <img src="http://www.summitpost.org/images/original/739666.jpg" alt="Awesome Image">
+                  </div>
+                  <div class="item">
+                    <img src="http://media-channel.nationalgeographic.com/media/uploads/photos/content/video/2016/09/30/776629827588_Digimedia_Mars_Big%20Thinker_09_HTSOM_04_Building%20Shelter_SEQ_v9a_DELIVERY_TXTD.00_00_13_08.Still001.jpg" alt="Awesome Image">
+                  </div>
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                  <i class="material-icons">keyboard_arrow_left</i>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </a>
+              </div>
+            </div>
           </div>
+          <!-- End Carousel Card -->
+
         </div>
         <div class="col-sm-6 col-md-5 col-md-offset-1">
           <div class="pay-area">
 
             <div class="text-center">
-              <h1 itemprop="name" class="product-name">Material Kit Pro</h1>
+              <h1 itemprop="name" class="product-name">认知学习法</h1>
               <h6 class="tagline">Premium Bootstrap UI Kit</h6>
 
               <div class="rating-stars">
@@ -94,44 +128,44 @@
 
     </div>
   </div>
+</div>
 
-
-  <div class="my-content main product-detail">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <%= render_product_detail_image(@product) %>
+<div class="main main-raised product-detail">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <%= render_product_detail_image(@product) %>
+      </div>
+      <div class="col-md-6 product-info">
+        <h2 class="product-title">
+          <%= @product.title %>
+        </h2>
+        <div style="height:100px;">
+          <p class="product-description">
+            <%= @product.description %>
+          </p>
         </div>
-        <div class="col-md-6 product-info">
-          <h2 class="product-title">
-            <%= @product.title %>
-          </h2>
-          <div style="height:100px;">
-            <p class="product-description">
-              <%= @product.description %>
-            </p>
-          </div>
-          <h4 class="product-price">
-            <small>￥</small>
-            <%= render_price(@product.price) %></h4>
-          <div class="product-quantity">
-            库存 :
-            <%= @product.quantity %></div>
-          <br/>
-          <%= simple_form_for @product, id: "add-to-cart", method: :post, remote: true, url: add_to_cart_product_path(@product) do |f| %>
-          <div class="quantity">
-            <%= link_to(fa_icon("minus"), "", id: "quantity-minus", class: "quantity-minus disabled") %>
-            <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input" %>
-            <%= link_to(fa_icon("plus"), "", id: "quantity-plus", class: "quantity-plus #{@product.quantity <= 1 ? 'disabled' : ''}") %>
-          </div>
-          <div class="pull-right">
-            <%= f.button :button, type: :submit, id: "add-to-cart", disabled: @product.quantity == 0,
+        <h4 class="product-price">
+          <small>￥</small>
+          <%= render_price(@product.price) %></h4>
+        <div class="product-quantity">
+          库存 :
+          <%= @product.quantity %></div>
+        <br/>
+        <%= simple_form_for @product, id: "add-to-cart", method: :post, remote: true, url: add_to_cart_product_path(@product) do |f| %>
+        <div class="quantity">
+          <%= link_to(fa_icon("minus"), "", id: "quantity-minus", class: "quantity-minus disabled") %>
+          <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input" %>
+          <%= link_to(fa_icon("plus"), "", id: "quantity-plus", class: "quantity-plus #{@product.quantity <= 1 ? 'disabled' : ''}") %>
+        </div>
+        <div class="pull-right">
+          <%= f.button :button, type: :submit, id: "add-to-cart", disabled: @product.quantity == 0,
           class: "btn btn-raised btn-primary btn-lg btn-danger #{@product.quantity == 0 ? 'disabled' : ''}" do %>
-            <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
-            <% end %>
-          </div>
+          <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
           <% end %>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
