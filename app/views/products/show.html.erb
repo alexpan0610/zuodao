@@ -22,7 +22,7 @@
         </div>
         <div class="pull-right">
           <%= f.button :button, type: :submit, id: "add-to-cart", disabled: @product.quantity == 0,
-          class: "btn btn-primary btn-lg btn-danger #{@product.quantity == 0 ? 'disabled' : ''}" do %>
+          class: "btn btn-raised btn-primary btn-lg btn-danger #{@product.quantity == 0 ? 'disabled' : ''}" do %>
           <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
           <% end %>
         </div>

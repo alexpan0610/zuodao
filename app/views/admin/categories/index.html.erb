@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="page-header">
       <h3>商品分类
-        <%= link_to fa_icon("plus", text: "新增"), new_admin_category_path, class: "btn btn-success pull-right" %>
+        <%= link_to fa_icon("plus", text: "新增"), new_admin_category_path, class: "btn btn-raised btn-success pull-right" %>
       </h3>
     </div>
     <div class="panel panel-default">
@@ -20,8 +20,8 @@
             <td><%= index + 1 %></td>
             <td><%= category.name %></td>
             <td>
-              <%= link_to '编辑', edit_admin_category_path(category), class: "btn btn-default btn-sm" %>
-              <%= link_to '删除', admin_category_path(category),class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to '编辑', edit_admin_category_path(category), class: "btn btn-raised btn-white btn-sm" %>
+              <%= link_to '删除', admin_category_path(category),class: "btn btn-raised btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
           <% end %>

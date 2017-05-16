@@ -38,7 +38,7 @@ class Admin::UsersController < Admin::AdminController
   private
 
   def find_user_by_id
-    @user = user.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def user_params

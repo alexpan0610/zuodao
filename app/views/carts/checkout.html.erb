@@ -15,8 +15,8 @@
             <h4>付款信息</h4>
           </div>
           <input type="hidden" name="payment_method" value="none" id="payment-method"/>
-          <%= link_to("微信支付", "javascript:;", class: "wechat btn btn-default") %>
-          <%= link_to("支付宝", "javascript:;", class: "alipay btn btn-default") %>
+          <%= link_to("微信支付", "javascript:;", class: "wechat btn btn-raised btn-white") %>
+          <%= link_to("支付宝", "javascript:;", class: "alipay btn btn-raised btn-white") %>
           <hr/>
         </div>
         <div class="details">
@@ -62,7 +62,7 @@
           <small>合计：</small>
           ￥<%= calculate_total_price(@items) %>
         </h4>
-        <%= f.button "提交订单", type: :submit, class: "btn btn-danger btn-lg" %>
+        <%= f.button "提交订单", type: :submit, class: "btn btn-raised btn-danger btn-lg" %>
       </div>
     </div>
     <% end %>

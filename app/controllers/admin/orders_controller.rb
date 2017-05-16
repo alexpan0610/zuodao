@@ -3,8 +3,8 @@ class Admin::OrdersController <  Admin::AdminController
 
   def index
     if params[:start_date].present?
-      start_date = Date.parse(params[:start_date])
-      end_date = params[:end_date].present? ? Date.parse(params[:end_date]) : Date.today
+      start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
+      end_date = params[:end_date].present? ? Date.strptime(params[:end_date], "%m/%d/%Y") : Date.today
       @orders = Order.where(created_at: start_date.beginning_of_day..end_date.end_of_day)
     else
       @orders = Order.includes(:user).recent

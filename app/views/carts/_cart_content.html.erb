@@ -42,7 +42,7 @@
             <td class="text-danger">￥<b id="cart-item-subtotal-<%= index %>"><%= render_price(item.quantity * item.product.price) %></b></td>
             <td>
               <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, remote: true,
-               class: "btn btn-default btn-sm cart-btn-delete", data: { confirm: "确定删除商品#{item.product.title}?" } %>
+               class: "btn btn-raised btn-white btn-sm cart-btn-delete", data: { confirm: "确定删除商品#{item.product.title}?" } %>
             </td>
           </tr>
         <% end %>
@@ -51,7 +51,7 @@
   </div>
   <div class="panel-footer">
     <input type="checkbox" class="cart-select-all"/> 全选
-    <%= f.button "删除选中的商品", type: :submit, value: true, name: "delete_items", class: "btn-delete-selected btn btn-default" %>
+    <%= f.button "删除选中的商品", type: :submit, value: true, name: "delete_items", class: "btn-delete-selected btn btn-raised btn-white" %>
     <div class="items-count">
       已选择 <b id="items-count">0</b> 件商品
     </div>
@@ -64,7 +64,7 @@
         </span>
       </h4>
     </div>
-    <%= f.button type: :submit, name: "checkout", value: true, class: "btn-checkout btn btn-danger" do %>
+    <%= f.button type: :submit, name: "checkout", value: true, class: "btn-checkout btn btn-raised btn-danger" do %>
       <%= fa_icon("credit-card", text: "去结算") %>
     <% end %>
   </div>

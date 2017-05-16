@@ -29,25 +29,25 @@
     <div class="sidebar" data-color="purple">
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="<%= params[:controller]=='admin/orders' ? 'active' : '' %>">
+          <li class="<%= render_active "orders" %>">
             <%= link_to(admin_orders_path) do %>
               <i class="material-icons">dashboard</i>
               <p>订单列表</p>
             <% end %>
           </li>
-          <li class="<%= params[:controller]=='admin/categories' ? 'active' : '' %>">
+          <li class="<%= render_active "categories" %>">
             <%= link_to(admin_categories_path) do %>
               <i class="material-icons">view_column</i>
               <p>商品分类</p>
             <% end %>
           </li>
-          <li class="<%= params[:controller]=='admin/products' ? 'active' : '' %>">
+          <li class="<%= render_active "products" %>">
             <%= link_to(admin_products_path) do %>
               <i class="material-icons">view_list</i>
               <p>商品列表</p>
             <% end %>
           </li>
-          <li class="<%= params[:controller]=='admin/users' ? 'active' : '' %>">
+          <li class="<%= render_active "users" %>">
             <%= link_to(admin_users_path) do %>
               <i class="material-icons">person</i>
               <p>用户列表</p>

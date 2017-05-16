@@ -38,7 +38,7 @@
       <div class="cart-bottom">
         <b><%= current_cart.cart_items_count %></b>件商品
         共计：<b>¥ <%= render_price(current_cart.total_price) %></b>
-        <%= link_to("去购物车", carts_path, class: "btn btn-danger btn-xs pull-right btn-to-cart") %>
+        <%= link_to("去购物车", carts_path, class: "btn btn-raised btn-danger btn-xs pull-right btn-to-cart") %>
       </div>
     </li>
   <% else %>

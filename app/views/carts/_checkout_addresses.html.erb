@@ -6,7 +6,7 @@
   <% @addresses.each_with_index do |address, index| %>
   <tr>
     <td>
-      <a href="" class="btn btn-<%= address == selected ? 'danger' : 'default' %> address-label" id="address-<%= index %>">
+      <a href="" class="btn btn-raised btn-<%= address == selected ? 'danger' : 'default' %> address-label" id="address-<%= index %>">
         <%= address.label %>
       </a>
       <input type="hidden" value="<%= address.id %>" id="address-id-<%= index %>"/>

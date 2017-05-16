@@ -215,6 +215,6 @@ function listenPaymentMethodSelection() {
 
 // 改变按钮选中状态
 function setSelected(button, selected) {
-  button.addClass(selected ? "btn-danger" : "btn-default");
-  button.removeClass(selected ? "btn-default" : "btn-danger");
+  button.addClass(selected ? "btn-danger" : "btn-white");
+  button.removeClass(selected ? "btn-white" : "btn-danger");
 }
