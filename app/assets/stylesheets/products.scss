@@ -129,7 +129,7 @@
 }
 
 .product-page .tagline {
-  color: #FFFFFF;
+  color: #d3e8ff;
   text-transform: uppercase;
   font-size: 13px;
   font-weight: 600;
@@ -182,6 +182,16 @@
   font-size: 50px;
   font-weight: 300;
   letter-spacing: 2px;
+}
+
+.product-page .pay-area .product-price {
+  font-size: 2.5em;
+  color: #d13636;
+  font-weight: bold;
+  small {
+    color: #d13636;
+    font-weight: bold;
+  }
 }
 
 .product-page .pay-area .choose-license,.product-page .pay-area .tab-content {
