@@ -94,4 +94,27 @@
       font-weight: bold;
     }
   }
+  // 购物车底部
+  .panel-footer {
+    p {
+      width: 100%;
+      position: relative;
+    }
+    b {
+      margin: 0 5px;
+    }
+    button {
+      margin-left: 10px;
+    }
+    // 总价
+    .total-price {
+      font-size: 15px;
+      position: absolute;
+      top: 15px;
+      right: 0;
+      .text-danger {
+        font-size: 22px;
+      }
+    }
+  }
 }

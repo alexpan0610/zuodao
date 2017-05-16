@@ -1,0 +1,30 @@
+<tr class="cart-item">
+  <td>
+    <input type="checkbox" name="selections[]" value="<%= item.id %>" id="cart-item-select-<%= index %>"/>
+  </td>
+  <td>
+    <%= link_to product_path(item.product) do %>
+    <%= render_product_image(item.product, "thumbnail") %>
+    <% end %>
+  </td>
+  <td><%= item.product.title %></td>
+  <td><%= render_text(item.product.description) %></td>
+  <td>￥<b><%= render_price(item.product.price) %></b>
+  </td>
+  <td>
+    <div class="quantity">
+      <%= link_to(fa_icon("minus"), decrease_cart_item_path(item, index: index), method: :post, remote: true,
+        id: "quantity-minus-#{index}", disabled: (item.quantity <= 1), class: "quantity-minus #{item.quantity <= 1 ? 'disabled' : ''}") %>
+      <input type="text" name="quantities[]" value="<%= item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input" disabled>
+      <%= link_to(fa_icon("plus"), increase_cart_item_path(item, index: index), method: :post, remote: true, id: "quantity-plus-#{index}", disabeld: (item.product.quantity <= 0), class: "quantity-plus #{item.product.quantity <= 0 ? 'disabled' : ''}") %>
+    </div>
+  </td>
+  <td class="text-danger">￥<b id="cart-item-subtotal-<%= index %>"><%= render_price(item.quantity * item.product.price) %></b>
+  </td>
+  <td>
+    <button class="btn btn-raised btn-round btn-danger btn-sm" data-toggle="modal" data-target="#confirm-dialog" onclick='confirmRemoveCartItem("<%= item.id %>", "确认将商品 <%= item.product.title %> 移出购物车吗？")'>
+      <i class="fa fa-times"></i>
+    </button>
+    <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, remote: true, class: "invisible", id: "cart-delete-btn-#{item.id}" %>
+  </td>
+</tr>
