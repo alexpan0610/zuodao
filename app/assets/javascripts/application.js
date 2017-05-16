@@ -221,3 +221,23 @@ function setSelected(button, selected) {
   button.addClass(selected ? "btn-danger" : "btn-white");
   button.removeClass(selected ? "btn-white" : "btn-danger");
 }
+
+// 确认删除
+function confirmDelete(path, message) {
+  var dialog = $("#confirm-dialog");
+  dialog.find(".btn-confirm").attr("href", path);
+  if(message !== undefined) {
+    dialog.find(".modal-body").html(message);
+  }
+}
+
+// 移除购物车商品
+function confirmRemoveCartItem(id, message) {
+  var dialog = $("#confirm-dialog");
+  if(message !== undefined) {
+    dialog.find(".modal-body").html(message);
+  }
+  dialog.find(".btn-confirm").click(function() {
+    $("#cart-delete-btn-" + id).click();
+  });
+}

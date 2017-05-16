@@ -34,7 +34,7 @@
               <td><%= product.quantity %></td>
               <td>
                 <%= link_to fa_icon("edit"), edit_admin_product_path(product), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
-                <%= link_to fa_icon("times"), admin_product_path(product), rel: "tooltip", title: "删除", class: "btn btn-raised btn-danger btn-sm", method: :delete, data: { confirm: "确定删除产品#{product.title}" } %>
+                <%= render partial: "common/delete_btn", locals: { path: admin_product_path(product), message: "确定删除商品“#{product.title}”吗？" } %>
               </td>
               <td><%= render_create_time(product) %></td>
             </tr>
@@ -47,3 +47,4 @@
     </div>
   </div>
 </div>
+<%= render "common/delete_confirm" %>

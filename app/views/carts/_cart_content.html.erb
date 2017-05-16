@@ -41,8 +41,11 @@
             </td>
             <td class="text-danger">￥<b id="cart-item-subtotal-<%= index %>"><%= render_price(item.quantity * item.product.price) %></b></td>
             <td>
-              <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, remote: true,
-               class: "btn btn-raised btn-white btn-sm cart-btn-delete", data: { confirm: "确定删除商品#{item.product.title}?" } %>
+              <button class="btn btn-raised btn-round btn-danger btn-sm" data-toggle="modal" data-target="#confirm-dialog"
+              onclick='confirmRemoveCartItem("<%= item.id %>", "确认将商品 <%= item.product.title %> 移出购物车吗？")' >
+                <i class="fa fa-times"></i>
+              </button>
+              <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, remote: true, class: "invisible", id: "cart-delete-btn-#{item.id}" %>
             </td>
           </tr>
         <% end %>
