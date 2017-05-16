@@ -41,7 +41,6 @@
       .quantity-minus,
       .quantity-plus {
         color: #000;
-        border: 1px solid #DDD;
         padding: 4px 10px;
         &.disabled {
           color: #424242;
@@ -49,17 +48,13 @@
           background-color: #E0E0E0;
         }
       }
-      .quantity-input {
-        text-align: center;
-        width: 60px;
-        font-weight: bold;
-      }
+
     }
   }
 }
 
 
-//---for product detail page
+//---Liuchuan do for product detail page
 
 .product-page .product-image {
   box-shadow: 0 29px 32px -20px rgba(0,0,0,0.5);
@@ -136,6 +131,14 @@
   margin-bottom: 20px;
   margin-top: 0
 }
+
+.product-page .quantity-input {
+  text-align: center;
+  width: 60px;
+  color: #b1b1b1;
+  font-weight: bold;
+  border-radius: 5px
+} //库存数量框
 
 .product-page h5.tagline {
   font-size: 16px
