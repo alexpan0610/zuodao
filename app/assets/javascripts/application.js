@@ -90,6 +90,9 @@ $(document).on('turbolinks:load', function() {
 
   /*监听支付选项*/
   listenPaymentMethodSelection();
+
+  // 加载日期选择器
+  $('.datepicker').datepicker();
 });
 
 // 内容转为数字
