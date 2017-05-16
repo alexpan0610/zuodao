@@ -55,14 +55,12 @@
                 <div class="tab-content">
 
                   <div class="tab-pane active">
-
                     <a class="btn btn-new btn-neutral btn-fill btn-wd btn-round btn-danger">
                       立刻下单
                     </a>
-
                     <%= f.button :button, type: :submit, id: "add-to-cart", disabled: @product.quantity == 0,
                   class: "btn btn-new btn-wd btn-neutral btn-round btn-warning #{@product.quantity == 0 ? 'disabled' : ''}" do %>
-                    <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
+                    <%= mi.add_shopping_cart %>加入购物车
                     <% end %>
                   </div>
                   <% end %>
