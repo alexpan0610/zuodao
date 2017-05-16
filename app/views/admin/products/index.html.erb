@@ -33,9 +33,8 @@
               <td><%= render_price(product.price) %></td>
               <td><%= product.quantity %></td>
               <td>
-                <%= link_to("编辑", edit_admin_product_path(product), class: "btn btn-raised btn-white btn-xs") %>
-                <%= link_to("删除", admin_product_path(product), class: "btn btn-raised btn-danger btn-xs",
-                 method: :delete, data: {confirm: "确定删除产品#{product.title}"}) %>
+                <%= link_to fa_icon("edit"), edit_admin_product_path(product), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
+                <%= link_to fa_icon("times"), admin_product_path(product), rel: "tooltip", title: "删除", class: "btn btn-raised btn-danger btn-sm", method: :delete, data: { confirm: "确定删除产品#{product.title}" } %>
               </td>
               <td><%= render_create_time(product) %></td>
             </tr>

@@ -16,4 +16,16 @@ module ProductsHelper
     end
   end
 
+  def transparent_nav
+    case params[:controller]
+    when "welcome"
+      "navbar-transparent navbar-color-on-scroll"
+    when "products"
+      if params[:action] == "show"
+        "navbar-transparent navbar-color-on-scroll"
+      end
+    else
+      ""
+    end
+  end
 end
