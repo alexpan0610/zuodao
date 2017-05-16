@@ -19,19 +19,16 @@
 @import "bootstrap";
 @import "material-kit";
 @import "font-awesome";
-
 // 前端界面通知
 .my-alert {
   margin-top: 71px;
   margin-bottom: -71px;
 }
-
 // 管理界面通知
 .admin-alert {
   margin-top: -30px;
   margin-bottom: -30px;
 }
-
 // footer置底代码
 html {
   height: 100%;
@@ -49,17 +46,15 @@ body {
   position: relative;
   min-height: 100%;
   padding-bottom: 140px;
-  background-color:#deeff5;
+  background-color: #deeff5;
 }
-
 // 内容区
 .my-content {
-  margin: 101px 30px 0px;
+  margin: 101px 30px 0;
   min-height: 740px;
   border-radius: 6px;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
-
 //---------Footer---------
 footer {
   position: absolute;
@@ -79,7 +74,7 @@ footer {
   a:hover {
     text-decoration: none;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    color:#4a81ba;
+    color: #4a81ba;
   }
 
   .footer_icon li {
@@ -90,17 +85,18 @@ footer {
 
     .btn-weixin {
       background-color: #333;
-      box-shadow: 0 2px 2px 0 rgba(51,51,51,.14), 0 3px 1px -2px rgba(51,51,51,.2), 0 1px 5px 0 rgba(51,51,51,.12);
+    }
+
+    .btn-weibo {
+      background-color: #CD201F;
     }
 
     .btn-facebook {
       background-color: #3b5998;
-      box-shadow: 0 2px 2px 0 rgba(59,89,152,.14), 0 3px 1px -2px rgba(59,89,152,.2), 0 1px 5px 0 rgba(59,89,152,.12);
     }
 
     .btn-linkedin {
       background-color: #0976b4;
-      box-shadow: 0 2px 2px 0 rgba(9,118,180,.14), 0 3px 1px -2px rgba(9,118,180,.2), 0 1px 5px 0 rgba(9,118,180,.12);
     }
   }
 }

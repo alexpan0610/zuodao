@@ -4,12 +4,14 @@
   </td>
   <td><%= address.name %></td>
   <td><%= address.cellphone %></td>
-  <td><%= address.address %></td>
+  <td width="40%"><%= address.address %></td>
   <td>
     <% unless address.default? %>
       <%= link_to '设为默认', set_default_account_address_path(address), method: :post, remote: true, class: "btn btn-raised btn-success btn-sm" %>
     <% end %>
     <%= link_to fa_icon("edit"), edit_account_address_path(address), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
-    <%= link_to fa_icon("times"), account_address_path(address), rel: "tooltip", title: "删除", class: "btn btn-raised btn-danger btn-sm", method: :delete, data: { confirm: "您确定删除#{address.name}这条收货信息吗？" } %>
+    <button class="btn btn-raised btn-danger btn-sm" data-toggle="modal" data-target="#confirm-modal" id="btn-delete-<%= address.id %>" value="<%= account_address_path(address) %>">
+      <i class="fa fa-times"></i>
+    </button>
   </td>
 </tr>
