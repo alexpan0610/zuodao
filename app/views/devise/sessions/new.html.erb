@@ -1,5 +1,4 @@
-<div class="main my-content" style="background-image: url('app/assets/images/city.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
-
+<div class="main my-content">
   <div class="section section-full-screen section-signup">
     <div class="container">
       <div class="row">
@@ -21,34 +20,30 @@
                 </div>
               </div>
               <p class="text-divider">邮箱登录</p>
-
               <div class="content">
-
                 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
                 <div class="input-group">
                   <span class="input-group-addon">
                     <i class="material-icons">email</i>
                   </span>
-
-                  <%= f.input :email, label: false, placeholder: "E-mail", required: false, autofocus: true, class: "form-control" %>
-
-                </div>
-
-                <div class="input-group ">
-                  <span class="input-group-addon">
-                    <i class="material-icons">lock_outline</i>
-                  </span>
-
-                  <%= f.input :password, label: false, placeholder: "登录密码", required: false, class: "form-control" %>
-
+                  <div class="form-group label-floating">
+                    <label class="control-label">E-mail</label>
+                    <%= f.text_field :email, type: :email, required: true, autofocus: true, class: "form-control" %>
+                  </div>
                 </div>
 
                 <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="material-icons">lock_outline</i>
+                  </span>
+                  <div class="form-group label-floating">
+                    <label class="control-label">登录密码</label>
+                    <%= f.text_field :password, type: :password, required: true, class: "form-control" %>
+                  </div>
+                </div>
 
+                <div class="input-group">
                   <%= f.input :remember_me, label: false, inline_label: "记住我", as: :boolean if devise_mapping.rememberable? %>
-
-                  <!-- <input type="password" placeholder="Password..." class="form-control" /> -->
                 </div>
 
                 <div class="footer text-center">
