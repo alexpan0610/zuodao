@@ -9,9 +9,6 @@ class Admin::CategoriesController < Admin::AdminController
     @category = Category.new
   end
 
-  def edit
-  end
-
   def create
     @category = Category.new(category_params)
     if @category.save

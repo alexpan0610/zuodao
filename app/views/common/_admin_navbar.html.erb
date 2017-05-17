@@ -10,7 +10,6 @@
     <a class="navbar-brand" href="<%= admin_orders_path %>">JDstore 后台</a>
   </div>
 
-  <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
@@ -26,28 +25,37 @@
         </ul>
       </li>
     </ul>
-    <ul class="nav navbar-nav side-nav">
-      <li class="<%= params[:controller]=='admin/orders' ? 'active' : '' %>">
-        <%= link_to(admin_orders_path) do %>
-          <i class="fa fa-fw fa-address-card"></i> 订单列表
-        <% end %>
-      </li>
-      <li class="<%= params[:controller]=='admin/categories' ? 'active' : '' %>">
-        <%= link_to(admin_categories_path) do %>
-          <i class="fa fa-fw fa-columns"></i> 商品分类
-        <% end %>
-      </li>
-      <li class="<%= params[:controller]=='admin/products' ? 'active' : '' %>">
-        <%= link_to(admin_products_path) do %>
-          <i class="fa fa-fw fa-table"></i> 商品列表
-        <% end %>
-      </li>
-      <li class="<%= params[:controller]=='admin/users' ? 'active' : '' %>">
-        <%= link_to(admin_users_path) do %>
-          <i class="fa fa-fw fa-users"></i> 用户列表
-        <% end %>
-      </li>
-    </ul>
+    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <div class="sidebar" data-color="purple">
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="<%= render_active "orders" %>">
+            <%= link_to(admin_orders_path) do %>
+              <i class="material-icons">dashboard</i>
+              <p>订单列表</p>
+            <% end %>
+          </li>
+          <li class="<%= render_active "categories" %>">
+            <%= link_to(admin_categories_path) do %>
+              <i class="material-icons">view_column</i>
+              <p>商品分类</p>
+            <% end %>
+          </li>
+          <li class="<%= render_active "products" %>">
+            <%= link_to(admin_products_path) do %>
+              <i class="material-icons">view_list</i>
+              <p>商品列表</p>
+            <% end %>
+          </li>
+          <li class="<%= render_active "users" %>">
+            <%= link_to(admin_users_path) do %>
+              <i class="material-icons">person</i>
+              <p>用户列表</p>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
   <!-- /.navbar-collapse -->
 </nav>

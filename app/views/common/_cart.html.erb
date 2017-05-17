@@ -1,4 +1,9 @@
-<a href="<%= carts_path %>" class="dropdown-toggle">Cart<span class="badge"><%= current_cart.cart_items_count %></span></a>
+<a href="<%= carts_path %>" class="dropdown-toggle">
+  <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+  <span class="badge text-info">
+    <%= current_cart.cart_items_count %>
+  </span>
+</a>
 <ul class="dropdown-menu cart-nav-content">
   <% @cart_items = current_cart.get_items %>
   <% if @cart_items.present? %>
@@ -33,10 +38,14 @@
       <div class="cart-bottom">
         <b><%= current_cart.cart_items_count %></b>件商品
         共计：<b>¥ <%= render_price(current_cart.total_price) %></b>
-        <%= link_to("去购物车", carts_path, class: "btn btn-danger btn-xs pull-right btn-to-cart") %>
+        <%= link_to("去购物车", carts_path, class: "btn btn-raised btn-danger btn-xs pull-right btn-to-cart") %>
       </div>
     </li>
   <% else %>
-    <li class="cart-empty"><%= fa_icon("shopping-cart") %> <b>购物车空空如也！~</b></li>
+    <li class="cart-empty">
+      <h6>
+        <%= fa_icon("shopping-cart fa-lg", text: "购物车空空如也！~") %>
+      </h6>
+    </li>
   <% end %>
 </ul>

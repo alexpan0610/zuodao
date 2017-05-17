@@ -1,8 +1,9 @@
 # == Schema Information
 #
-# Table name: receiving_infos
+# Table name: addresses
 #
 #  id         :integer          not null, primary key
+#  label      :string
 #  name       :string
 #  cellphone  :string
 #  address    :string
@@ -11,10 +12,15 @@
 #  updated_at :datetime         not null
 #
 
-class ReceivingInfo < ApplicationRecord
+class Address < ApplicationRecord
   belongs_to :user
 
+  validates :label, presence: true
   validates :name, presence: true
   validates :address, presence: true
   validates :cellphone, presence: true
+
+  def default?
+    self == self.user.default_address
+  end
 end

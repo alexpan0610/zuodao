@@ -1,8 +1,18 @@
 <% if flash.any? %>
   <% user_facing_flashes.each do |key, value| %>
-    <div class="alert alert-dismissable alert-<%= flash_class(key) %>">
-      <button class="close" data-dismiss="alert"><i class="fa fa-times" aria-hidden="true"></i></button>
-      <%= value %>
+    <div class="alert alert-<%= flash_class(key) %> <%= params[:controller].include?("admin") ? "admin-alert" : "my-alert" %>">
+      <div class="container-fluid">
+        <div class="alert-icon">
+          <%= render_alert_icon(key) %>
+        </div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="material-icons">clear</i>
+          </span>
+        </button>
+        <b><%= key %>:</b>
+        <%= value %>
+      </div>
     </div>
   <% end %>
 <% end %>

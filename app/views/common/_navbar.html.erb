@@ -1,56 +1,86 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-info navbar-fixed-top <%= transparent_nav %>">
   <div class="container">
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <a class="navbar-brand" href="/">JDstore</a>
     </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+
+    <div class="collapse navbar-collapse" id="navigation-example">
+      <ul class="nav navbar-nav navbar-left">
         <li class="dropdown">
           <a href="<%= products_path %>" class="dropdown-toggle">Products</a>
           <ul class="dropdown-menu">
             <% @categories.each_with_index do |category, index| %>
-              <% if index != 0 %>
-                <li class="divider"></li>
-              <% end %>
-              <li><%= link_to(category.name, products_path(category: category.id)) %></li>
+            <% if index != 0 %>
+            <li class="divider"></li>
+            <% end %>
+            <li><%= link_to(category.name, products_path(category: category.id)) %></li>
             <% end %>
           </ul>
         </li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown cart-nav" id="auto-dropdown">
           <%= render "common/cart" %>
         </li>
         <% unless current_user %>
-          <li>
-            <%= link_to new_user_registration_path do %>
-              <i class="fa fa-user" aria-hidden="true"></i> 注册
+        <li>
+          <%= link_to new_user_registration_path do %>
+          <i class="material-icons" aria-hidden="true">assignment_ind</i>
+          注册
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_session_path do %>
+          <i class="material-icons" aria-hidden="true">account_circle</i>
+          登录
+          <% end %>
+        </li>
+      <% else %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <%= current_user.email %>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to(fa_icon("list-ul", text: " 我的订单"), account_orders_path) %></li>
+            <li class="divider"></li>
+            <li><%= link_to(fa_icon("address-card", text: " 收货地址"), account_addresses_path) %></li>
+            <% if current_user.admin? %>
+            <li class="divider"></li>
+            <li><%= link_to(fa_icon("lock", text: " 后台管理"), admin_orders_path) %></li>
             <% end %>
-          </li>
-          <li>
-            <%= link_to new_user_session_path do %>
-              <i class="fa fa-sign-in" aria-hidden="true"></i> 登录
-            <% end %>
-          </li>
-        <% else %>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-user" aria-hidden="true"></i>
-              <%= current_user.email %>
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to(fa_icon("list-ul", text: " 我的订单"), account_orders_path) %></li>
-              <li class="divider"></li>
-              <li><%= link_to(fa_icon("address-card", text: " 收货地址"), account_receiving_infos_path) %></li>
-              <% if current_user.admin? %>
-                <li class="divider"></li>
-                <li><%= link_to(fa_icon("lock", text: " 后台管理"), admin_products_path) %></li>
-              <% end %>
-              <li class="divider"></li>
-              <li><%= link_to(fa_icon("sign-out", text: " 退出"), destroy_user_session_path, method: :delete) %></li>
-            </ul>
-          </li>
+            <li class="divider"></li>
+            <li><%= link_to(fa_icon("sign-out", text: " 退出"), destroy_user_session_path, method: :delete) %></li>
+          </ul>
+        </li>
+
+        <!-- 社会化分享，待做-->
+
+        <!-- <li>
+          <a href="https://twitter.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+            <i class="fa fa-twitter"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.facebook.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+            <i class="fa fa-facebook-square"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.instagram.com/CreativeTimOfficial" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+            <i class="fa fa-instagram"></i>
+          </a>
+        </li> -->
         <% end %>
       </ul>
     </div>

@@ -2,8 +2,17 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :account do
-    resources :orders
-    resources :receiving_infos
+    resources :orders do
+      member do
+        get :pay
+        post :make_payment
+      end
+    end
+    resources :addresses do
+      member do
+        post :set_default
+      end
+    end
   end
 
   namespace :admin do
@@ -21,9 +30,11 @@ Rails.application.routes.draw do
 
   resources :carts do
     member do
-      post :checkout
+      post :operations
+      get :checkout
     end
   end
+
   resources :cart_items do
     member do
       post :increase

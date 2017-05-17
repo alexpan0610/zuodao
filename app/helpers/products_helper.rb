@@ -15,5 +15,4 @@ module ProductsHelper
       image_tag("http://ww2.sinaimg.cn/large/006tNc79gy1ffcsd4b3ugj307n07ndfv.jpg", class: "product-img")
     end
   end
-
 end

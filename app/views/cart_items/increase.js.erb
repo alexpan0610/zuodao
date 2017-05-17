@@ -2,7 +2,7 @@ var btnPlus = $('#quantity-plus-<%= params[:index] %>');
 var btnMinus = $('#quantity-minus-<%= params[:index] %>');
 $('#quantity-input-<%= params[:index] %>').val('<%= @cart_item.quantity %>');
 $('#cart-item-quantity-<%= params[:index] %>').html('× <%= @cart_item.quantity %>');
-$('#cart-item-subtotal-<%= params[:index] %>').html('<%= @cart_item.quantity * @cart_item.product.price %>');
+$('#cart-item-subtotal-<%= params[:index] %>').html('<%= render_price(@cart_item.quantity * @cart_item.product.price) %>');
 calculateTotalPrice();
 if (<%= @cart_item.product.quantity <= 0 %>) {
   btnPlus.attr("disabled");

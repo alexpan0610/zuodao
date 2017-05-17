@@ -1,31 +1,36 @@
-<div class="panel panel-default admin-users">
-  <div class="panel-heading">
-    <h4>用户列表
-      <%= link_to fa_icon("plus", text: "新增"), new_admin_user_path, class: "btn btn-default pull-right" %>
-    </h4>
-  </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>E-mail</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each_with_index do |user, index| %>
-        <tr>
-          <td><%= index + 1 %></td>
-          <td><%= user.email %></td>
-          <td>
-            <%= link_to '编辑', edit_admin_user_path(user), class: "btn btn-default btn-sm" %>
-            <%= link_to '删除', admin_user_path(user),class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="panel-footer text-center">
-    <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+<div class="my-content main admin-users">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h3>用户列表
+        <%= link_to fa_icon("plus", text: "新增"), new_admin_user_path, class: "btn btn-raised btn-success pull-right" %>
+      </h3>
+    </div>
+    <div class="panel panel-default">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>E-mail</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each_with_index do |user, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to fa_icon("edit"), edit_admin_user_path(user), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
+              <%= render partial: "common/delete_btn", locals: { path: admin_user_path(user), message: "确定删除用户“#{user.email}”吗？" } %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+    </div>
   </div>
 </div>
+<%= render "common/delete_confirm" %>

@@ -31,28 +31,32 @@ class Order < ApplicationRecord
     state :paid
     state :shipping
     state :shipped
+    state :applying_for_return
     state :cancelled
-    state :returend
-
+    state :returned
 
     event :make_payment do
       transitions from: :placed, to: :paid
     end
 
-    event :ship do
-      transitions from: :paid,         to: :shipping
-    end
-
-    event :deliver do
-      transitions from: :shipping,     to: :shipped
-    end
-
-    event :return_good do
-      transitions from: :shipped,      to: :returend
-    end
-
-    event :cancel_order do
+    event :cancel do
       transitions from: [:placed, :paid], to: :cancelled
+    end
+
+    event :ship do
+      transitions from: :paid, to: :shipping
+    end
+
+    event :confirm_receipt do
+      transitions from: :shipping, to: :shipped
+    end
+
+    event :apply_for_return do
+      transitions from: [:shipping, :shipped], to: :applying_for_return
+    end
+
+    event :confirm_goods_returned do
+      transitions from: :applying_for_return, to: :returned
     end
   end
 end

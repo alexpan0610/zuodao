@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170507055914) do
+ActiveRecord::Schema.define(version: 20170511130229) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "label"
+    t.string   "name"
+    t.string   "cellphone"
+    t.string   "address"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -23,9 +34,11 @@ ActiveRecord::Schema.define(version: 20170507055914) do
   end
 
   create_table "carts", force: :cascade do |t|
+    t.integer  "user_id"
     t.integer  "cart_items_count", default: 0
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -58,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170507055914) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.index ["aasm_state"], name: "index_orders_on_aasm_state"
+    t.index ["number"], name: "index_orders_on_number", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -74,15 +88,13 @@ ActiveRecord::Schema.define(version: 20170507055914) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  create_table "receiving_infos", force: :cascade do |t|
-    t.string   "label"
-    t.string   "name"
-    t.string   "cellphone"
-    t.string   "address"
+  create_table "settings", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_receiving_infos_on_user_id"
+    t.index ["address_id"], name: "index_settings_on_address_id"
+    t.index ["user_id"], name: "index_settings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
