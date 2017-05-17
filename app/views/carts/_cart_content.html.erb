@@ -1,48 +1,68 @@
 <%= form_for current_cart, url: operations_cart_path(current_cart), method: :post, remote: true do |f|%>
-  <input type="hidden" value="<%= current_cart.cart_items_count %>" id="cart-items-count">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>
-              <input type="checkbox" class="cart-select-all"/>
-              全选
-            </th>
-            <th>图片</th>
-            <th>名称</th>
-            <th>描述</th>
-            <th>单价</th>
-            <th>数量</th>
-            <th>小计</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @cart_items.each_with_index do |item, index| %>
-            <%= render partial: "cart_item", locals: { f: f, item: item, index: index } %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="panel-footer">
-      <p>
-        <input type="checkbox" class="cart-select-all"/><b>全选</b>
-        已选择<b id="items-count">0</b>件商品
-        <%= f.button "删除选中的商品", type: :submit, value: true, name: "delete_items", class: "btn btn-raised btn-white btn-sm" %>
-        <span class="total-price">
-          总价：
-          <span class="text-danger">¥</span>
-          <span class="text-danger" id="total-price">
-            <%= render_price(0) %>
-          </span>
-        </span>
-      </p>
-    </div>
+<input type="hidden" value="<%= current_cart.cart_items_count %>" id="cart-items-count">
+<div class="card-content">
+  <div class="table-responsive">
+    <table class="table table-shopping">
+      <thead>
+        <tr>
+          <th>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="cart-select-all"/>
+              </label>
+            </div>
+          </th>
+          <th class="text-center"></th>
+          <th width="25%">Product</th>
+          <th class="text-right">Price</th>
+          <th class="text-right">Qty</th>
+          <th class="text-right">Amount</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each_with_index do |item, index| %>
+        <%= render partial: "cart_item", locals: { f: f, item: item, index: index } %>
+        <% end %>
+        <!-- 删除选中商品和总价 -->
+        <tr>
+          <td>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="cart-select-all"/>
+              </label>
+            </div>
+          </td>
+          <td colspan="3">
+            <small>已选择<span class="text-info" id="items-count">0</span>件商品</small>
+            <button class="cart-btn-delete-all-fake btn btn-raised btn-white" data-toggle="modal" data-target="#confirm-dialog" onclick="confirmRemoveCartItems()">
+              删除选中的商品
+            </button>
+            <%= f.button "delete-all", type: :submit, value: true, name: "delete_items", class: "invisible", id: "cart-btn-delete-all" %>
+          </td>
+          <td class="td-total">
+            Total
+          </td>
+          <td colspan="1" class="td-price">
+            <small class="text-info">¥</small>
+            <span class="text-info" id="total-price">
+              <%= render_price(0) %>
+            </span>
+          </td>
+          <td></td>
+        </tr>
+        <!-- 结算按钮 -->
+        <tr>
+          <td colspan="5"></td>
+          <td colspan="2" class="text-center">
+            <%= f.button type: :submit, name: "checkout", value: true, class: "btn-checkout btn btn-raised btn-info btn-round" do %>
+            去结算
+            <i class="material-icons">keyboard_arrow_right</i>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <div class="pull-right">
-    <%= f.button type: :submit, name: "checkout", value: true, class: "btn-checkout btn btn-raised btn-danger" do %>
-      <%= fa_icon("credit-card", text: "去结算") %>
-    <% end %>
-  </div>
+</div>
 <% end %>

@@ -17,17 +17,24 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "material-kit";
 @import "font-awesome";
+@import "material-kit";
+@import "customize";
 // 前端界面通知
 .my-alert {
-  margin-top: 71px;
-  margin-bottom: -71px;
+  position: absolute;
+  z-index: 10;
+  top: 71px;
+  left: 0;
+  right: 0;
 }
 // 管理界面通知
 .admin-alert {
-  margin-top: -30px;
-  margin-bottom: -30px;
+  position: absolute;
+  z-index: 10;
+  top: -30px;
+  left: 0;
+  right: 0;
 }
 // footer置底代码
 html {

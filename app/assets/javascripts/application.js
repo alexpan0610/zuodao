@@ -106,14 +106,14 @@ function parseToInt(value) {
 // 初始化购物车物品选中状态
 function setSelections(selections) {
   var cartItemsCount = parseInt($("#cart-items-count").val());
-  if (cartItemsCount != 0 && selections.length == cartItemsCount) {
-    cartSelectAll(true);
-  } else {
-    for (i = 0; i < cartItemsCount; i++) {
-      var itemId = $("#cart-item-select-" + i).val();
-      $("#cart-item-select-" + i).prop("checked", $.inArray(itemId, selections) > -1);
-    }
+  var count = 0;
+  for (i = 0; i < cartItemsCount; i++) {
+    var checked = $.inArray($("#cart-item-select-" + i).val(), selections) > -1;
+    $("#cart-item-select-" + i).prop("checked", checked);
+    if (checked) count++;
   }
+  // 禁用/启用 删除选中商品按钮
+  disableDeleteAllButton(count == 0);
 }
 
 // 全选购物车商品
@@ -125,20 +125,25 @@ function cartSelectAll(checked) {
   }
   // 更新选中商品数量
   $("#items-count").html(checked ? cartItemsCount : 0);
+  // 禁用/启用 删除选中商品按钮
+  disableDeleteAllButton(!checked);
   // 重新计算总价
   calculateTotalPrice();
 }
 
 // 监听购物车勾选框
 function listenCartItemsSelections() {
-  /*全选*/
+  /*监听全选按钮*/
   $(".cart-select-all").change(function(e) {
     cartSelectAll(this.checked);
   });
+  // 监听每个商品勾选
   var total = parseInt($("#cart-items-count").val());
   for (i = 0; i < total; i++) {
     new cartItemSelectionListener(total, i);
   }
+  // 禁用删除选中商品按钮
+  disableDeleteAllButton(true);
 }
 
 // 购物车物品选择监听器
@@ -153,9 +158,20 @@ function cartItemSelectionListener(total, index) {
     $(".cart-select-all").prop("checked", total == count);
     // 更新选中商品数量
     $("#items-count").html(count);
+    // 禁用/启用 删除选中商品按钮
+    disableDeleteAllButton(count == 0);
     // 重新计算总价
     calculateTotalPrice();
   });
+}
+
+// 禁用删除选中商品按钮
+function disableDeleteAllButton(disable) {
+  if (disable) {
+    $(".cart-btn-delete-all-fake").addClass("disabled");
+  } else {
+    $(".cart-btn-delete-all-fake").removeClass("disabled");
+  }
 }
 
 // 计算总价
@@ -238,6 +254,15 @@ function confirmRemoveCartItem(id, message) {
     dialog.find(".modal-body").html(message);
   }
   dialog.find(".btn-confirm").click(function() {
-    $("#cart-delete-btn-" + id).click();
+    $("#cart-btn-delete-" + id).click();
+  });
+}
+
+// 移除购物车中选中的商品
+function confirmRemoveCartItems() {
+  var dialog = $("#confirm-dialog");
+  dialog.find(".modal-body").html("确定移除选中的商品？");
+  dialog.find(".btn-confirm").click(function() {
+    $("#cart-btn-delete-all").click();
   });
 }

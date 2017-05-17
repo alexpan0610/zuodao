@@ -1,7 +1,6 @@
 // Place all the styles related to the carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 // 导航条上的购物车
 .navbar-transparent {
   .cart-nav {
@@ -67,19 +66,35 @@
   }
 }
 // 购物车页
+
 .carts {
-  .thumbnail {
-    width: 100px;
-    height: 100px;
+  margin: 101px 30px 0;
+
+  .card {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+    .card-title {
+      font-weight: 300;
+      line-height: 1.5em;
+    }
+  }
+
+  .td-name a:focus,
+  .td-name a:hover {
+    color: #03a9f4 !important;
+    text-decoration: none;
+  }
+
+  // 选中商品的数量
+  #items-count {
+    margin: 0 5px;
+    font-size: 1.2em;
+    font-weight: bold;
   }
   // 增减数量
   .quantity {
     .quantity-minus,
     .quantity-plus {
-      color: #000;
-      border: 1px solid #DDD;
-      padding: 4px 10px;
-
       &.disabled {
         color: #424242;
         cursor: not-allowed;
@@ -88,33 +103,10 @@
     }
 
     .quantity-input {
+      border: 0;
       cursor: not-allowed;
-      text-align: center;
-      width: 60px;
-      font-weight: bold;
-    }
-  }
-  // 购物车底部
-  .panel-footer {
-    p {
-      width: 100%;
-      position: relative;
-    }
-    b {
-      margin: 0 5px;
-    }
-    button {
-      margin-left: 10px;
-    }
-    // 总价
-    .total-price {
-      font-size: 15px;
-      position: absolute;
-      top: 15px;
-      right: 0;
-      .text-danger {
-        font-size: 22px;
-      }
+      text-align: right;
+      max-width: 60px;
     }
   }
 }
