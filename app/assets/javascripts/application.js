@@ -30,9 +30,12 @@ $(document).on('turbolinks:load', function() {
       $(this).removeClass('open');
     });
 
+  // 收起通知
+  slideUpAlert();
+
   /*商品数量输入控制*/
   $('#quantity-input').on('input', function(e) {
-    var max = parseToInt($('.product-quantity').html());
+    var max = parseToInt($('#product-quantity').html());
     var num = parseToInt($(this).val());
     if (num <= 1) {
       $(this).val('1');
@@ -57,7 +60,7 @@ $(document).on('turbolinks:load', function() {
 
   /*增加数量*/
   $("#quantity-plus").click(function(e) {
-    var max = parseToInt($('.product-quantity').html());
+    var max = parseToInt($('#product-quantity').html());
     var num = parseInt($("#quantity-input").val()) + 1;
     $("#quantity-minus").removeClass("disabled");
     if (num >= max) {
@@ -242,7 +245,7 @@ function setSelected(button, selected) {
 function confirmDelete(path, message) {
   var dialog = $("#confirm-dialog");
   dialog.find(".btn-confirm").attr("href", path);
-  if(message !== undefined) {
+  if (message !== undefined) {
     dialog.find(".modal-body").html(message);
   }
 }
@@ -250,7 +253,7 @@ function confirmDelete(path, message) {
 // 移除购物车商品
 function confirmRemoveCartItem(id, message) {
   var dialog = $("#confirm-dialog");
-  if(message !== undefined) {
+  if (message !== undefined) {
     dialog.find(".modal-body").html(message);
   }
   dialog.find(".btn-confirm").click(function() {
@@ -264,5 +267,12 @@ function confirmRemoveCartItems() {
   dialog.find(".modal-body").html("确定移除选中的商品？");
   dialog.find(".btn-confirm").click(function() {
     $("#cart-btn-delete-all").click();
+  });
+}
+
+// 收起通知信息
+function slideUpAlert() {
+  $(".alert").delay(2000).slideUp(250, function() {
+    $(this).remove();
   });
 }
