@@ -1,29 +1,29 @@
 <body class="product-page">
- <div class="wrapper background-blue">
-  <div itemscope itemtype="http://schema.org/Product">
-    <div id="productPage" class="header" data-no-turbolink style="background: url('http://ooz9ucbbf.bkt.clouddn.com/product%20background.jpg')no-repeat;background-size: cover; ">
+  <div class="wrapper background-blue">
+    <div itemscope itemtype="http://schema.org/Product">
+      <div id="productPage" class="header" data-no-turbolink style="background: url('http://ooz9ucbbf.bkt.clouddn.com/product%20background.jpg')no-repeat;background-size: cover; ">
 
-      <div class="container">
-        <div class="row" style="margin-top: 100px;margin-bottom:200px">
-          <div class="col-sm-6 col-md-6">
-            <div class="product-image">
-              <a href="http://demos.creative-tim.com/material-kit-pro/presentation.html" target="_blank">
-                <img src="http://68.media.tumblr.com/40b4d52448eaea2a125a108b7670dbb4/tumblr_ns1ua2dmYM1t7cmmpo1_1280.png">
-              </a>
+        <div class="container">
+          <div class="row" style="margin-top: 100px;margin-bottom:200px">
+            <div class="col-sm-6 col-md-6">
+              <div class="product-image">
+                <a href="http://demos.creative-tim.com/material-kit-pro/presentation.html" target="_blank">
+                  <img src="http://68.media.tumblr.com/40b4d52448eaea2a125a108b7670dbb4/tumblr_ns1ua2dmYM1t7cmmpo1_1280.png">
+                </a>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-5 col-md-offset-1">
-            <div class="pay-area">
+            <div class="col-sm-6 col-md-5 col-md-offset-1">
+              <div class="pay-area">
 
-              <div class="text-center">
-                <h1 itemprop="name" class="product-name">
-                  <%= @product.title %>
-                </h1>
-                <h5 class="tagline">
-                  <%= @product.description %>
-                </h5>
+                <div class="text-center">
+                  <h1 itemprop="name" class="product-name">
+                    <%= @product.title %>
+                  </h1>
+                  <h5 class="tagline">
+                    <%= @product.description %>
+                  </h5>
 
-                <!--评分表单，暂时没用上
+                  <!--评分表单，暂时没用上
            <div class="rating-stars">
             <input type="number" class="rating" data-min="1" data-max="5" value="5" disabled="disabled">
             <div class="aggregate-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" data-no-turbolink>
@@ -34,84 +34,138 @@
                 Reviews)</a>
               </div> -->
 
-                <h4 class="product-price">
-                  <small>￥</small>
-                  <%= render_price(@product.price) %></h4>
+                  <h4 class="product-price">
+                    <small>￥</small>
+                    <%= render_price(@product.price) %></h4>
 
-                <div class="tagline">
-                  本期剩余名额 :
-                  <%= @product.quantity %>
+                  <div class="tagline">
+                    本期剩余名额 :
+                    <%= @product.quantity %>
 
-                </div>
-                <%= simple_form_for @product, id: "add-to-cart", method: :post, remote: true, url: add_to_cart_product_path(@product) do |f| %>
-                <div class="row">
-                  <%= link_to(mi.remove, "", id: "quantity-minus", class: "btn btn-white btn-xs btn-simple") %>
-                  <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input " %>
-                  <%= link_to(mi.add, "", id: "quantity-plus", class: "btn btn-white btn-xs btn-simple #{@product.quantity <= 1 ? 'disabled' : ''}") %>
-                </div>
-                <div class="tab-content">
-
-                  <div class="tab-pane active">
-
-                    <%= f.button :button, type: :submit, id: "add-to-cart", disabled: @product.quantity == 0,
-                  class: "btn btn-new btn-wd btn-neutral btn-round btn-warning #{@product.quantity == 0 ? 'disabled' : ''}" do %>
-                    <%= mi.add_shopping_cart %>加入购物车
-                    <% end %>
-                    <a class="btn btn-new btn-neutral btn-fill btn-wd btn-round btn-danger">
-                      立刻下单
-                    </a>
                   </div>
-                  <% end %>
+                  <%= simple_form_for @product, id: "add-to-cart", method: :post, remote: true, url: add_to_cart_product_path(@product) do |f| %>
+                  <div class="row">
+                    <%= link_to(mi.remove, "", id: "quantity-minus", class: "btn btn-white btn-xs btn-simple") %>
+                    <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input " %>
+                    <%= link_to(mi.add, "", id: "quantity-plus", class: "btn btn-white btn-xs btn-simple #{@product.quantity <= 1 ? 'disabled' : ''}") %>
+                  </div>
+                  <div class="tab-content">
+
+                    <div class="tab-pane active">
+
+                      <%= f.button :button, type: :submit, id: "add-to-cart", disabled: @product.quantity == 0,
+                  class: "btn btn-new btn-wd btn-neutral btn-round btn-warning #{@product.quantity == 0 ? 'disabled' : ''}" do %>
+                      <%= mi.add_shopping_cart %>加入购物车
+                      <% end %>
+                      <a class="btn btn-new btn-neutral btn-fill btn-wd btn-round btn-danger">
+                        立刻下单
+                      </a>
+                    </div>
+                    <% end %>
+                  </div>
                 </div>
               </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+<div class="profile-page">
+  <div class="wrapper">
+    <div class="main main-raised">
+      <div class="profile-content">
+        <div class="container">
+          <div class="section section-basic">
+
+            <div class="nav-align-center">
+
+              <ul class="nav nav-pills nav-pills-info" role="tablist">
+                <li>
+                  <a href="#intro" role="tab" data-toggle="tab">
+                    <i class="material-icons">dashboard</i>
+                    介绍
+                  </a>
+                </li>
+                <li class="active">
+                  <a href="#catalog" role="tab" data-toggle="tab">
+                    <i class="material-icons">schedule</i>
+                    目录
+                  </a>
+                </li>
+                <li>
+                  <a href="#teacher" role="tab" data-toggle="tab">
+                    <i class="material-icons">list</i>
+                    讲师
+                  </a>
+                </li>
+              </ul>
+
+              <div class="tab-content gallery">
+
+                <div class="tab-pane active" id="intro">
+                  <div class="section">
+                    <div class="container ">
+                      <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-left">
+                          <h2>Completed with examples</h2>
+                          <h4 style="letter-spacing:2px;line-height:26px">The kit comes with three pre-built pages to help you get started faster. You can change the text and images and you're good to go. More importantly, looking at them will give you a picture of what you can built with this powerful kit.</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane active" id="catalog">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <img src="" class="img-rounded"/>
+                      <img src="../assets/img/examples/chris0.jpg" class="img-rounded"/>
+                    </div>
+                    <div class="col-md-6">
+                      <img src="../assets/img/examples/chris3.jpg" class="img-rounded"/>
+                      <img src="../assets/img/examples/chris4.jpg" class="img-rounded"/>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane active" id="teacher">
+
+                  <div class="row">
+                    <div class="profile" style="margin-top: 100px;">
+                      <div class="avatar">
+                        <img src="http://ooz9ucbbf.bkt.clouddn.com/%E6%88%91%EF%BC%88%E6%AD%A3%E6%96%B9%E5%BD%A2%EF%BC%892.jpg" alt="Circle Image" class="img-circle img-responsive img-raised">
+                      </div>
+                      <div class="name">
+                        <h3 class="title">千古刘传</h3>
+                        <h6>Designer</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-left">
+
+                      <h5 style="letter-spacing:2px;line-height:26px">创业者，3年营销策划，脑洞文案。玩过乐队写过歌。跆拳道黑带一段|教练，健身成瘾者。追求认知升级，自创认知学习法。创业，为了财富自由。写字，为了思想自由。健身，为了身体自由。以上，写于离开疯人院前_(:3 」∠)_</h5>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
             </div>
 
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </div>
-
 </div>
-
-<div class="main main-raised">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <%= render_product_detail_image(@product) %>
-      </div>
-      <div class="col-md-6 product-info">
-        <h2 class="product-title">
-          <%= @product.title %>
-        </h2>
-        <div style="height:100px;">
-          <p class="product-description">
-            <%= @product.description %>
-          </p>
-        </div>
-        <h4 class="product-price">
-          <small>￥</small>
-          <%= render_price(@product.price) %></h4>
-        <div class="product-quantity">
-          库存 :
-          <%= @product.quantity %></div>
-        <br/>
-        <%= simple_form_for @product, id: "add-to-cart", method: :post, remote: true, url: add_to_cart_product_path(@product) do |f| %>
-        <div class="quantity">
-          <%= link_to(fa_icon("minus"), "", id: "quantity-minus", class: "quantity-minus disabled") %>
-          <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input" %>
-          <%= link_to(fa_icon("plus"), "", id: "quantity-plus", class: "quantity-plus #{@product.quantity <= 1 ? 'disabled' : ''}") %>
-        </div>
-        <div class="pull-right">
-          <%= f.button :button, type: :submit, id: "add-to-cart", disabled: @product.quantity == 0,
-          class: "btn btn-raised btn-primary btn-lg btn-danger #{@product.quantity == 0 ? 'disabled' : ''}" do %>
-          <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
-          <% end %>
-        </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  </div>
-</body>
+</div>
