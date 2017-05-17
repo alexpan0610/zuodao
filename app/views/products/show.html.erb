@@ -35,7 +35,7 @@
                     </span>
                   </div>
 
-                  <%= simple_form_for @product, id: "add-to-cart", method: :post, remote: true, url: add_to_cart_product_path(@product) do |f| %>
+                  <%= simple_form_for @product, method: :post, remote: true, url: operations_product_path(@product) do |f| %>
                     <div class="row">
                       <%= link_to(mi.remove, "", id: "quantity-minus", class: "quantity-minus btn btn-white btn-sm btn-simple disabled") %>
                       <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input" %>
@@ -43,10 +43,10 @@
                     </div>
                     <div class="tab-content">
                       <div class="tab-pane active">
-                        <button type="submit" name="commit" value="add_to_cart" class="btn btn-warning btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
+                        <button type="submit" name="commit" value="add_to_cart" id="add-to-cart" class="btn btn-warning btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
                           <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
                         </button>
-                        <button type="submit" name="commit" value="order_now" class="btn btn-danger btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
+                        <button type="submit" name="commit" value="order_now" id="order-now" class="btn btn-danger btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
                           立刻下单
                         </button>
                       </div>

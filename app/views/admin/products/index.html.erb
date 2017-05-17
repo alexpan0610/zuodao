@@ -1,7 +1,7 @@
 <div class="my-content main admin-products">
   <div class="container-fluid">
     <div class="page-header">
-      <h3>商品列表
+      <h3>课程列表
         <%= link_to(fa_icon("plus", text: "新增"), new_admin_product_path, class: "btn btn-raised btn-success pull-right") %>
       </h3>
     </div>
@@ -14,7 +14,7 @@
           <th>名称</th>
           <th>描述</th>
           <th>价格</th>
-          <th>库存</th>
+          <th>名额</th>
           <th>操作</th>
           <th>创建时间</th>
         </thead>
@@ -34,7 +34,7 @@
               <td><%= product.quantity %></td>
               <td>
                 <%= link_to fa_icon("edit"), edit_admin_product_path(product), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
-                <%= render partial: "common/delete_btn", locals: { path: admin_product_path(product), message: "确定删除商品“#{product.title}”吗？" } %>
+                <%= render partial: "common/delete_btn", locals: { path: admin_product_path(product), message: "确定删除课程“#{product.title}”吗？" } %>
               </td>
               <td><%= render_create_time(product) %></td>
             </tr>

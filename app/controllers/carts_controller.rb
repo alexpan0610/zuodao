@@ -19,7 +19,14 @@ class CartsController < ApplicationController
   def checkout
     @items = []
     params[:selections].each do |selection|
-      @items << CartItem.find(selection)
+      item = CartItem.find(selection)
+      # 验证订单课程数量是否超过名额
+      if item.quantity > item.product.quantity
+        item.quantity = item.product.quantity
+        item.save
+        flash[:warning] = "您下单的课程#{product.title}超出名额，实际提交的名额为#{item.quantity}人。"
+      end
+      @items << item
     end
     @order = Order.new
     @addresses = current_user.addresses
@@ -40,19 +47,19 @@ class CartsController < ApplicationController
 
   def delete_items
     unless params[:selections].present?
-      flash[:warning] = "请至少选中一件商品"
+      flash[:warning] = "请至少选中一门课程"
     else
       params[:selections].each do |selection|
         CartItem.find(selection).destroy
       end
-      flash[:alert] = "已删除选中的商品"
+      flash[:alert] = "已删除选中的课程"
     end
     redirect_to carts_path
   end
 
   def do_checkout
     unless params[:selections].present?
-      flash[:warning] = "请至少选中一件商品"
+      flash[:warning] = "请至少选中一门课程"
       redirect_to carts_path
     else
       redirect_to checkout_cart_path(selections: params[:selections])

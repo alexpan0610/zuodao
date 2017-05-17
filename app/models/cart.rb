@@ -47,6 +47,7 @@ class Cart < ApplicationRecord
     product.quantity -= quantity
     product.save
     @cart_item.save
+    return @cart_item
   end
 
   def total_price

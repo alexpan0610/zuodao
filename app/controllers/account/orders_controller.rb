@@ -145,7 +145,7 @@ class Account::OrdersController < ApplicationController
   # 处理订单生成异常
   def checkout_error(level, msg)
     flash[level] = msg
-    redirect_to checkout_cart_path(current_cart, selections: params[:items])
+    redirect_to checkout_cart_path(selections: params[:items])
   end
 
   # 处理用户操作异常

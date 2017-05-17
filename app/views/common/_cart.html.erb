@@ -36,7 +36,7 @@
     <li class="divider"></li>
     <li>
       <div class="cart-bottom">
-        <b><%= current_cart.cart_items_count %></b>件商品
+        <b><%= current_cart.cart_items_count %></b>门课程
         共计：<b>¥ <%= render_price(current_cart.total_price) %></b>
         <%= link_to("去购物车", carts_path, class: "btn btn-raised btn-danger btn-xs pull-right btn-to-cart") %>
       </div>

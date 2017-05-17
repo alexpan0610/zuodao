@@ -1,7 +1,7 @@
 // Place all the styles related to the products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-// 每个商品
+// 每个课程
 .product {
   img {
     width: 200px;
@@ -9,7 +9,7 @@
   }
 }
 
-// 商品详情
+// 课程详情
 .product-page {
   // 数量输入框
   .quantity-input {
@@ -26,7 +26,6 @@
 
     &.disabled {
       color: #424242;
-      cursor: not-allowed;
       background-color: #E0E0E0;
     }
   }
@@ -114,7 +113,7 @@
   font-weight: bold;
   border-radius: 5px;
 }
-//库存数量框
+//名额数量框
 
 .product-page h5.tagline {
   font-size: 16px;

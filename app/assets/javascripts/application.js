@@ -33,7 +33,7 @@ $(document).on('turbolinks:load', function() {
   // 收起通知
   slideUpAlert();
 
-  /*商品数量输入控制*/
+  /*课程数量输入控制*/
   $('#quantity-input').on('input', function(e) {
     var max = parseToInt($('#product-quantity').html());
     var num = parseToInt($(this).val());
@@ -43,7 +43,7 @@ $(document).on('turbolinks:load', function() {
     } else {
       $("#quantity-minus").removeClass('disabled');
     }
-    // 限制输入数量不大于库存
+    // 限制输入数量不大于名额
     if (num >= max) {
       $(this).val(max);
       $("#quantity-plus").addClass('disabled');
@@ -115,20 +115,20 @@ function setSelections(selections) {
     $("#cart-item-select-" + i).prop("checked", checked);
     if (checked) count++;
   }
-  // 禁用/启用 删除选中商品按钮
+  // 禁用/启用 删除选中课程按钮
   disableDeleteAllButton(count == 0);
 }
 
-// 全选购物车商品
+// 全选购物车课程
 function cartSelectAll(checked) {
   $(".cart-select-all").prop("checked", checked);
   var cartItemsCount = parseInt($("#cart-items-count").val());
   for (i = 0; i < cartItemsCount; i++) {
     $("#cart-item-select-" + i).prop("checked", checked);
   }
-  // 更新选中商品数量
+  // 更新选中课程数量
   $("#items-count").html(checked ? cartItemsCount : 0);
-  // 禁用/启用 删除选中商品按钮
+  // 禁用/启用 删除选中课程按钮
   disableDeleteAllButton(!checked);
   // 重新计算总价
   calculateTotalPrice();
@@ -140,12 +140,12 @@ function listenCartItemsSelections() {
   $(".cart-select-all").change(function(e) {
     cartSelectAll(this.checked);
   });
-  // 监听每个商品勾选
+  // 监听每个课程勾选
   var total = parseInt($("#cart-items-count").val());
   for (i = 0; i < total; i++) {
     new cartItemSelectionListener(total, i);
   }
-  // 禁用删除选中商品按钮
+  // 禁用删除选中课程按钮
   disableDeleteAllButton(true);
 }
 
@@ -157,18 +157,18 @@ function cartItemSelectionListener(total, index) {
     for (i = 0; i < total; i++) {
       if ($("#cart-item-select-" + i).is(":checked")) count++;
     }
-    // 商品全部被勾选
+    // 课程全部被勾选
     $(".cart-select-all").prop("checked", total == count);
-    // 更新选中商品数量
+    // 更新选中课程数量
     $("#items-count").html(count);
-    // 禁用/启用 删除选中商品按钮
+    // 禁用/启用 删除选中课程按钮
     disableDeleteAllButton(count == 0);
     // 重新计算总价
     calculateTotalPrice();
   });
 }
 
-// 禁用删除选中商品按钮
+// 禁用删除选中课程按钮
 function disableDeleteAllButton(disable) {
   if (disable) {
     $(".cart-btn-delete-all-fake").addClass("disabled");
@@ -250,7 +250,7 @@ function confirmDelete(path, message) {
   }
 }
 
-// 移除购物车商品
+// 移除购物车课程
 function confirmRemoveCartItem(id, message) {
   var dialog = $("#confirm-dialog");
   if (message !== undefined) {
@@ -261,10 +261,10 @@ function confirmRemoveCartItem(id, message) {
   });
 }
 
-// 移除购物车中选中的商品
+// 移除购物车中选中的课程
 function confirmRemoveCartItems() {
   var dialog = $("#confirm-dialog");
-  dialog.find(".modal-body").html("确定移除选中的商品？");
+  dialog.find(".modal-body").html("确定移除选中的课程？");
   dialog.find(".btn-confirm").click(function() {
     $("#cart-btn-delete-all").click();
   });

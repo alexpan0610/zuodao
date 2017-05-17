@@ -41,7 +41,7 @@
   </td>
   <td class="td-actions text-center">
     <button type="button" rel="tooltip" title="Remove item" class="btn btn-simple"
-    data-toggle="modal" data-target="#confirm-dialog" onclick='confirmRemoveCartItem("<%= item.id %>", "确认将商品 <%= item.product.title %> 移出购物车吗？")'>
+    data-toggle="modal" data-target="#confirm-dialog" onclick='confirmRemoveCartItem("<%= item.id %>", "确认将课程 <%= item.product.title %> 移出购物车吗？")'>
       <i class="material-icons">close</i>
     </button>
     <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, remote: true, class: "invisible", id: "cart-btn-delete-#{item.id}" %>
