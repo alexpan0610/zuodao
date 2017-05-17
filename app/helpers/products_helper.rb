@@ -15,17 +15,4 @@ module ProductsHelper
       image_tag("http://ww2.sinaimg.cn/large/006tNc79gy1ffcsd4b3ugj307n07ndfv.jpg", class: "product-img")
     end
   end
-
-  def transparent_nav
-    case params[:controller]
-    when "welcome"
-      "navbar-transparent navbar-color-on-scroll"
-    when "products"
-      if params[:action] == "show"
-        "navbar-transparent navbar-color-on-scroll"
-      end
-    else
-      ""
-    end
-  end
 end

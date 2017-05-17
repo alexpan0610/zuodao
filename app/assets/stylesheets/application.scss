@@ -20,6 +20,7 @@
 @import "font-awesome";
 @import "material-kit";
 @import "customize";
+
 // 前端界面通知
 .my-alert {
   position: absolute;
@@ -62,6 +63,7 @@ body {
   border-radius: 6px;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
+
 //---------Footer---------
 footer {
   position: absolute;
@@ -106,4 +108,23 @@ footer {
       background-color: #0976b4;
     }
   }
+}
+
+//---Pill控件修正
+.nav-pills > li > a {
+  line-height: 24px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 100px;
+  text-align: center;
+  color: #555555;
+  transition: all .3s;
+  text-align: -webkit-center;
+}
+.nav-pills > li i {
+  display: block;
+  font-size: 30px;
+  padding: 15px 0;
+  margin-bottom: 25px
 }
