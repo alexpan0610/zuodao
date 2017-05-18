@@ -14,7 +14,7 @@
         <%= image_tag("qrcode.png") %>
       </div>
       <div class="btn-finish">
-        <%= link_to "完成支付", products_path, class: "mdl-button mdl-js-button mdl-button--raised", data: { alert: "付款成功！返回首页~" } %>
+        <%= link_to "完成支付", make_payment_account_order_path(@order.number), method: :post, class: "btn btn-raised btn-info", data: { alert: "付款成功！返回首页~" } %>
       </div>
     </div>
   </div>

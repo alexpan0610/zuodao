@@ -21,7 +21,7 @@
     <%= render_price(item.product.price) %>
   </td>
   <td class="td-number quantity">
-    <input type="text" name="quantities[]" value="<%= item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input" disabled>
+    <input type="text" name="quantities[]" value="<%= item.quantity == 0 ? '已报满' : item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input" disabled>
     <div class="btn-group">
       <%= link_to decrease_cart_item_path(item, index: index), method: :post, remote: true,
       id: "quantity-minus-#{index}", disabled: (item.quantity <= 1), class: "btn btn-round btn-info btn-xs quantity-minus #{item.quantity <= 1 ? 'disabled' : ''}" do %>

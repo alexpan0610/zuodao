@@ -1,7 +1,7 @@
 class Account::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_order, only: :create
-  before_action :find_order_by_id, only: [:pay, :apply_cancel, :return_goods]
+  before_action :find_order_by_number, only: [:pay, :make_payment, :apply_cancel, :return_goods]
 
   def index
     @orders = current_user.orders.page(params[:page]).per_page(10)
@@ -18,7 +18,7 @@ class Account::OrdersController < ApplicationController
     # 生成购物清单
     create_order_details
     # 前往支付页
-    redirect_to pay_account_order_path(@order)
+    redirect_to pay_account_order_path(@order.number)
   end
 
   # 支付页
@@ -27,23 +27,29 @@ class Account::OrdersController < ApplicationController
 
   # 完成支付
   def make_payment
-    @order.make_payment
-    operation_error(:notice, "订单支付成功！")
+    # 订单已经支付
+    if @order.placed?
+      @order.make_payment!
+      flash[:notice] = "订单支付成功！"
+      redirect_to account_orders_path
+    else
+      operation_error(:warning, "订单#{@order.number}已经完成支付，不能重复支付！")
+    end
   end
 
   # 取消订单
-  def apply_cancel
-    if @order.placed || @order.paid
+  def apply_for_cancel
+    if @order.placed? || @order.paid?
       # 取消订单
       @order.cancel!
       operation_error(:notice, "订单#{@order.number}取消成功！")
-    elsif @order.cancelled
+    elsif @order.cancelled?
       # 订单已经取消
       operation_error(:warning, "订单#{@order.number}已经取消，不能重复取消！")
-    elsif @order.shipping || @order.shipped
+    elsif @order.shipping? || @order.shipped?
       # 订单已经出货
       operation_error(:warning, "您的订单#{@order.number}已经出货，请您申请退货！")
-    elsif @order.applying_for_return
+    elsif @order.applying_for_return?
       # 申请退货中
       operation_error(:warning, "您的订单#{@order.number}正在申请退货，不能取消！")
     else
@@ -54,17 +60,17 @@ class Account::OrdersController < ApplicationController
 
   # 确认收货
   def confirm_receipt
-    if @order.shipping
+    if @order.shipping?
       # 订单正在配送
       @order.confirm_receipt!
       operation_error(:notice, "您的订单#{@order.number}成功确认收货！")
-    elsif @order.cancelled
+    elsif @order.cancelled?
       # 订单已经取消
       operation_error(:warning, "您的订单#{@order.number}已经取消！")
-    elsif @order.shipped
+    elsif @order.shipped?
       # 订单已经确认收货
       operation_error(:warning, "您的订单#{@order.number}已经确认收货，不能重复确认收货！")
-    elsif @order.returned
+    elsif @order.returned?
       operation_error(:warning, "您的订单#{@order.number}已经退货！")
     else
       # 其他情况
@@ -74,14 +80,14 @@ class Account::OrdersController < ApplicationController
 
   # 申请退货
   def apply_for_return
-    if @order.shipping || @order.shipped
+    if @order.shipping? || @order.shipped?
       # 订单正在配送或送达
       @order.apply_for_return!
       operation_error(:notice, "订单#{@order.number}的退货申请已经提交！")
-    elsif @order.cancelled
+    elsif @order.cancelled?
       # 订单已经取消
       operation_error(:warning, "您的订单#{@order.number}已经取消！")
-    elsif @order.returned
+    elsif @order.returned?
       operation_error(:warning, "您的订单#{@order.number}已经退货！")
     else
       # 其他情况
@@ -116,8 +122,6 @@ class Account::OrdersController < ApplicationController
     unless @order.save
       checkout_error(:alert, "生成订单出错！")
     end
-    # 生成订单号
-    @order.update(number: generate_order_number)
   end
 
   # 生成购物清单
@@ -136,12 +140,6 @@ class Account::OrdersController < ApplicationController
     end
   end
 
-  # 生成订单号
-  def generate_order_number
-    # 下单时间 + 订单编号
-    Date.today.strftime("%Y%m%d") + "%.4d" % @order.id
-  end
-
   # 处理订单生成异常
   def checkout_error(level, msg)
     flash[level] = msg
@@ -151,10 +149,10 @@ class Account::OrdersController < ApplicationController
   # 处理用户操作异常
   def operation_error(level, msg)
     flash[level] = msg
-    redirect_back
+    redirect_back fallback_location: proc { account_orders_path }
   end
 
-  def find_order_by_id
-    @order = Order.find(params[:id])
+  def find_order_by_number
+    @order = Order.find_by_number(params[:id])
   end
 end

@@ -5,8 +5,6 @@ setSelections(<%= @selections.to_json.html_safe %>);
 listenCartItemsSelections();
 if (<%= @product.quantity %> > 1) {
   $('#quantity-plus').removeClass("disabled");
-  $('#add-to-cart').removeClass("disabled");
-  $('#add-to-cart').removeAttr("disabled");
-  $('#order-now').removeClass("disabled");
-  $('#order-now').removeAttr("disabled");
+  $('.btn-product-option').removeAttr("disabled");
+  $('.btn-product-option').removeClass("disabled");
 }

@@ -16,22 +16,22 @@ class Admin::OrdersController <  Admin::AdminController
     @order_details = @order.order_details
   end
 
-  # 取消订单
-  def cancel
+  # 确认取消订单
+  def confirm_cancel
     @order.cancel!
-    redirect_back
+    redirect_back fallback_location: proc { admin_orders_path }
   end
 
   # 发货
   def ship
     @order.ship!
-    redirect_back
+    redirect_back fallback_location: proc { admin_orders_path }
   end
 
   # 确认退货
   def confirm_goods_returned
     @order.confirm_goods_returned!
-    redirect_back
+    redirect_back fallback_location: proc { admin_orders_path }
   end
 
   private
