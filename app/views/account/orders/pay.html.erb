@@ -1,20 +1,23 @@
-<div class="my-content-raised main">
-  <div class="pay container">
-    <div class="row text-center">
-      <div class="page-header">
-        <h4>
-          <% if @order.payment_method == "wechat" %>
-          微信支付
-          <% elsif @order.payment_method == "alipay" %>
-          支付宝
-          <% end %>
-        </h4>
-      </div>
-      <div class="qrcode">
-        <%= image_tag("qrcode.png") %>
-      </div>
-      <div class="btn-finish">
-        <%= link_to "完成支付", make_payment_account_order_path(@order.number), method: :post, class: "btn btn-raised btn-info", data: { alert: "付款成功！返回首页~" } %>
+<div class="my-content pay">
+  <div class="container">
+    <div class="card text-center">
+      <div class="card-content">
+        <div class="page-header">
+          <h4>
+            <% if @order.payment_method == "wechat" %>
+            微信支付
+            <% elsif @order.payment_method == "alipay" %>
+            支付宝
+            <% end %>
+          </h4>
+        </div>
+        <div class="img-container">
+          <%= image_tag("qrcode.png", class: "thumbnail") %>
+        </div>
+        <hr/>
+        <div class="btn-finish">
+          <%= link_to "完成支付", make_payment_account_order_path(@order.number), method: :post, class: "btn btn-raised btn-info", data: { alert: "付款成功！返回首页~" } %>
+        </div>
       </div>
     </div>
   </div>
