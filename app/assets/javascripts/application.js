@@ -33,7 +33,19 @@ $(document).on('turbolinks:load', function() {
   // 收起通知
   slideUpAlert();
 
-  /*课程数量输入控制*/
+  //for progress-bar
+  $('[data-toggle="tooltip"]').tooltip({
+    trigger: 'manual'
+  }).tooltip('show');
+
+  // $( window ).scroll(function() {
+  // if($( window ).scrollTop() > 10){  // scroll down abit and get the action
+  $(".progress-bar").each(function() {
+    each_bar_width = $(this).attr('aria-valuenow');
+    $(this).width(each_bar_width + '%');
+  });
+
+  /*商品数量输入控制*/
   $('#quantity-input').on('input', function(e) {
     var max = parseToInt($('#product-quantity').html());
     var num = parseToInt($(this).val());
