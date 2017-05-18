@@ -4,48 +4,56 @@
     <%= current_cart.cart_items_count %>
   </span>
 </a>
-<ul class="dropdown-menu cart-nav-content">
-  <% @cart_items = current_cart.get_items %>
-  <% if @cart_items.present? %>
-    <% @cart_items.each_with_index do |item, index| %>
-      <% if index != 0 %>
-        <li class="divider"></li>
-      <% end %>
-      <li class="cart-item">
-        <div class="media">
-          <div class="media-left media-top">
-            <%= link_to(product_path(item.product)) do %>
-              <%= render_product_image(item.product, "cart-img") %>
-            <% end %>
-          </div>
-          <div class="media-body">
-            <h5 class="media-heading">
-              <%= item.product.title %>
-            </h5>
-            <p><%= render_text(item.product.description) %></p>
-          </div>
-          <div class="media-right">
-            <p id="cart-item-quantity-<%= index %>">× <%= item.quantity %></p>
-            <small>
-              <%= link_to("删除", cart_item_path(item), class: "cart-btn-delete", method: :delete, remote: true) %>
-            </small>
-          </div>
+<div class="dropdown-menu cart-nav-content">
+  <div class="card">
+    <div class="card-header card-header-icon" data-background-color="blue">
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+    </div>
+    <br/>
+    <div class="card-content">
+      <% @cart_items = current_cart.get_items %>
+      <% if @cart_items.present? %>
+        <div class="table-responsive">
+          <table class="table table-shopping">
+            <tbody>
+              <% @cart_items.each_with_index do |item, index| %>
+                <%= render partial: "common/cart_item", locals: { item: item, index: index } %>
+              <% end %>
+              <!-- 删除选中课程和总价 -->
+              <tr>
+                <td class="td-number">
+                  共<span class="text-info"> <%= current_cart.cart_items_count %> </span>门课程
+                </td>
+                <td class="td-total">
+                  Total
+                </td>
+                <td colspan="2" class="td-price text-right">
+                  <small class="text-info">¥</small>
+                  <span class="text-info">
+                    <%= render_price(current_cart.total_price) %>
+                  </span>
+                </td>
+              </tr>
+              <!-- 结算按钮 -->
+              <tr>
+                <td colspan="4" class="text-center">
+                  <%= link_to checkout_cart_path(current_cart, selections: @cart_items.ids.map(&:to_s)),
+                  class: "btn-checkout btn btn-raised btn-info btn-round btn-sm" do %>
+                    去结算
+                    <i class="material-icons">keyboard_arrow_right</i>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </li>
-    <% end %>
-    <li class="divider"></li>
-    <li>
-      <div class="cart-bottom">
-        <b><%= current_cart.cart_items_count %></b>门课程
-        共计：<b>¥ <%= render_price(current_cart.total_price) %></b>
-        <%= link_to("去购物车", carts_path, class: "btn btn-raised btn-danger btn-xs pull-right btn-to-cart") %>
+      <% else %>
+      <div class="cart-empty">
+        <h6>
+          <%= fa_icon("shopping-cart fa-lg", text: "购物车空空如也！~") %>
+        </h6>
       </div>
-    </li>
-  <% else %>
-    <li class="cart-empty">
-      <h6>
-        <%= fa_icon("shopping-cart fa-lg", text: "购物车空空如也！~") %>
-      </h6>
-    </li>
-  <% end %>
-</ul>
+      <% end %>
+    </div>
+  </div>
+</div>

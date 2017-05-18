@@ -1,0 +1,29 @@
+<tr>
+  <td>
+    <%= link_to product_path(item.product), class: "img-container" do %>
+      <%= render_product_image(item.product, "") %>
+    <% end %>
+  </td>
+  <td class="td-name">
+    <%= link_to(item.product.title, product_path(item.product)) %>
+    <br/>
+    <small><%= render_text(item.product.description) %></small>
+  </td>
+  <td class="td-number text-right">
+    <% if item.quantity == 0 %>
+    名额已满
+    <% else %>
+    <small>￥</small>
+    <%= render_price(item.product.price) %>
+    x
+    <%= item.quantity %>
+    <% end %>
+  </td>
+  <td>
+    <button type="button" rel="tooltip" title="Remove item" class="btn btn-simple"
+    data-toggle="modal" data-target="#confirm-dialog" onclick='confirmRemoveCartItem("<%= item.id %>", "确认将课程 <%= item.product.title %> 移出购物车吗？")'>
+      <i class="material-icons">close</i>
+    </button>
+    <%= link_to("删除", cart_item_path(item), class: "invisible", method: :delete, remote: true, id: "cart-btn-delete-#{item.id}") %>
+  </td>
+</tr>
