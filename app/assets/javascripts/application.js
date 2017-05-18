@@ -33,17 +33,8 @@ $(document).on('turbolinks:load', function() {
   // 收起通知
   slideUpAlert();
 
-  //for progress-bar
-  $('[data-toggle="tooltip"]').tooltip({
-    trigger: 'manual'
-  }).tooltip('show');
-
-  // $( window ).scroll(function() {
-  // if($( window ).scrollTop() > 10){  // scroll down abit and get the action
-  $(".progress-bar").each(function() {
-    each_bar_width = $(this).attr('aria-valuenow');
-    $(this).width(each_bar_width + '%');
-  });
+  // 监听进度区是否可见
+  listenVisibilityOfProgresses();
 
   /*商品数量输入控制*/
   $('#quantity-input').on('input', function(e) {
@@ -109,6 +100,36 @@ $(document).on('turbolinks:load', function() {
   // 加载日期选择器
   $('.datepicker').datepicker();
 });
+
+// 收起通知信息
+function slideUpAlert() {
+  $(".alert").delay(2000).slideUp(250, function() {
+    $(this).remove();
+  });
+}
+
+// 监听进度区是否可见
+function listenVisibilityOfProgresses() {
+  var eventFired = false;
+  $(window).scroll(function() {
+    var hT = $('#progresses').offset().top,
+      hH = $('#progresses').outerHeight(),
+      wH = $(window).height(),
+      wS = $(this).scrollTop();
+    if (!eventFired && wS > (hT + hH - wH)) {
+      // 当进度条可见时，播放动画
+      $('[data-toggle="tooltip"]').tooltip({
+        trigger: 'manual'
+      }).tooltip('show');
+
+      $(".progress-bar").each(function() {
+        each_bar_width = $(this).attr('aria-valuenow');
+        $(this).width(each_bar_width + '%');
+      });
+      eventFired = true;
+    }
+  });
+}
 
 // 内容转为数字
 function parseToInt(value) {
@@ -279,12 +300,5 @@ function confirmRemoveCartItems() {
   dialog.find(".modal-body").html("确定移除选中的课程？");
   dialog.find(".btn-confirm").click(function() {
     $("#cart-btn-delete-all").click();
-  });
-}
-
-// 收起通知信息
-function slideUpAlert() {
-  $(".alert").delay(2000).slideUp(250, function() {
-    $(this).remove();
   });
 }

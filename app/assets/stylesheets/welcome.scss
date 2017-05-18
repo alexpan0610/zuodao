@@ -2,12 +2,50 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.background-blue {
-  background-color: #deeff5 !important;
-}
+// landing-page
+.landing-page {
+  .background-blue {
+    background-color: #deeff5 !important;
+  }
 
-.description {
-  color: #636363;
-  line-height:35px;
-  letter-spacing:3px;
+  .description {
+    color: #636363;
+    line-height: 35px;
+    letter-spacing: 3px;
+  }
+
+  .tooltip {
+    position: relative;
+    float: right;
+  }
+
+  .tooltip > .tooltip-inner {
+    min-width: 40px;
+    padding: 5px 15px;
+    color: rgb(23,44,66);
+    font-weight: bold;
+    font-size: 13px;
+  }
+
+  .popOver + .tooltip > .tooltip-arrow {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #fff;
+  }
+
+  .progress {
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .progress-bar {
+    background: rgb(23,44,60);
+    -webkit-transition: width 1.5s ease-in-out;
+    transition: width 1.5s ease-in-out;
+  }
+
+  .features {
+    background-color:#f5f5f5;
+    padding-bottom: 80px;
+  }
 }
