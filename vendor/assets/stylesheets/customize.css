@@ -60,6 +60,12 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
   line-height: 1.5em;
 }
 
+.description {
+  color: #636363;
+  line-height:35px;
+  letter-spacing:3px;
+}
+
 /* card begin */
 .card {
   display: inline-block;
