@@ -4,7 +4,14 @@ class Account::OrdersController < ApplicationController
   before_action :find_order_by_number, only: [:show, :pay, :make_payment, :apply_for_cancel, :confirm_receipt, :apply_for_return]
 
   def index
-    @orders = current_user.orders.page(params[:page]).per_page(10)
+    if params[:start_date].present?
+      start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
+      end_date = params[:end_date].present? ? Date.strptime(params[:end_date], "%m/%d/%Y") : Date.today
+      @orders = current_user.orders.where(created_at: start_date.beginning_of_day..end_date.end_of_day)
+    else
+      @orders = current_user.orders.recent
+    end
+    @orders = @orders.page(params[:page]).per_page(10)
   end
 
   def show
@@ -114,7 +121,10 @@ class Account::OrdersController < ApplicationController
 
   # 生成订单
   def create_order
-    @order = Order.new(@address.attributes.except!("id", "label"))
+    @order = Order.new
+    @order.name = @address.name
+    @order.cellphone = @address.cellphone
+    @order.address = @address.address
     @order.payment_method = @payment
     @order.total_price = current_cart.calculate_total_price(@items)
     @order.user = current_user
@@ -128,9 +138,13 @@ class Account::OrdersController < ApplicationController
     @order_details = []
     @items.each do |item|
       # 生成订单详情
-      @order_detail = OrderDetail.new(item.product.attributes.except!("id", "is_hidden", "category_id"))
+      @order_detail = OrderDetail.new
+      @order_detail.images = item.product.images
+      @order_detail.title = item.product.title
+      @order_detail.description = item.product.description
+      @order_detail.price = item.product.price
       @order_detail.quantity = item.quantity
-      @order_detail.order = @order
+      @order.order_details << @order_detail
       unless @order_detail.save
         checkout_error(:alert, "生成购物清单出错！")
       end

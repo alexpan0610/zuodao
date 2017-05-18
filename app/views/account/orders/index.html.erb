@@ -7,7 +7,7 @@
       <h4 class="card-title">我的订单</h4>
       <div class="card-content">
         <div class="search">
-          <%= form_for admin_orders_path, method: :get do %>
+          <%= form_for account_orders_path, method: :get do %>
           <table>
             <tbody>
               <tr>
@@ -56,6 +56,10 @@
                     <br/>
                     <small>
                       <%= "等 " + order.order_details.count.to_s + " 门课程" %>
+                      <br/>
+                      <small>
+                        <%= render_create_time(order) %>
+                      </small>
                     </small>
                   </td>
                   <td class="td-number">

@@ -1,11 +1,12 @@
-<div class="my-content-raised main">
+<div class="my-content account-address">
   <div class="container">
     <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-      <div class="page-header">
-        <h3><%= title %></h3>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-body">
+      <div class="card">
+        <div class="card-header card-header-icon" data-background-color="blue">
+          <i class="material-icons">place</i>
+        </div>
+        <h4 class="card-title">收货信息</h4>
+        <div class="card-content">
           <%= simple_form_for [:account, @address] do |f| %>
             <div class="form-inputs">
               <%= f.input :label, label: "标签", placeholder: "如：公司、家" %>

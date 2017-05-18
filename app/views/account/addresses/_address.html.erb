@@ -1,13 +1,13 @@
 <tr>
   <td>
-    <label class="label label-<%= address.default? ? 'success' : 'default'%>"><%= address.label %></label>
+    <label class="btn btn-round btn-<%= address.default? ? 'info' : 'white'%>"><%= address.label %></label>
   </td>
   <td><%= address.name %></td>
   <td><%= address.cellphone %></td>
-  <td width="40%"><%= address.address %></td>
-  <td>
+  <td width="35%"><%= address.address %></td>
+  <td class="td-number">
     <% unless address.default? %>
-      <%= link_to '设为默认', set_default_account_address_path(address), method: :post, remote: true, class: "btn btn-raised btn-success btn-sm" %>
+      <%= link_to '设为默认', set_default_account_address_path(address), method: :post, remote: true, class: "btn btn-raised btn-info btn-round btn-sm" %>
     <% end %>
     <%= link_to fa_icon("edit"), edit_account_address_path(address), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
     <%= render partial: "common/delete_btn", locals: { path: account_address_path(address), message: "确认删除“#{address.label}”这条收货信息吗？" } %>
