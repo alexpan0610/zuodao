@@ -1,36 +1,63 @@
-<div class="my-content-raised main">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4>订单详情</h4>
-    </div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th width="80%">课程明细</th>
-          <th>单价</th>
-          <th>数量</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @product_lists.each_with_index do |product_list, index| %>
-          <tr>
-            <td><%= index + 1 %></td>
-            <td>
-              <%= product_list.product_name %>
-              <% if product_list.product.category.name == "名片" %>
-                <%= product_list.customization.name %>
+<div class="my-content account-orders">
+  <div class="container">
+    <div class="card">
+      <div class="card-header card-header-icon" data-background-color="blue">
+        <i class="material-icons">assignment</i>
+      </div>
+      <h4 class="card-title">
+        订单详情
+        <br/>
+        <small>
+          <%= @order.number %>
+        </small>
+      </h4>
+      <div class="card-content">
+        <div class="table-responsive">
+          <table class="table table-shopping">
+            <thead>
+              <tr>
+                <th class="text-center"></th>
+                <th width="25%">Product</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Qty</th>
+                <th class="text-right">Amount</th>
+                <th class="text-right">Opt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @order_details.each do |detail| %>
+              <tr>
+                <td>
+                  <%= render_product_image(detail, "img-container") %>
+                </td>
+                <td class="td-name">
+                  <%= detail.title %>
+                  <br/>
+                  <small><%= render_text(detail.description) %></small>
+                </td>
+                <td class="td-number text-right">
+                  <small>￥</small>
+                  <%= render_price(detail.price) %>
+                </td>
+                <td class="td-number quantity">
+                  x<%= detail.quantity %>
+                </td>
+                <td class="td-number">
+                  <small>￥</small>
+                  <%= render_price(detail.quantity * detail.price) %>
+                </td>
+              </tr>
               <% end %>
-            </td>
-            <td><%= product_list.product_price %></td>
-            <td><%= product_list.quantity %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <div class="panel-footer">
-      <%= render "state_option", order: @order %>
-      <div class="pt5 pb5">总计 ¥ <%= @order.total %> 元</div>
+            </tbody>
+          </table>
+          <span class="pull-right">
+            <%= link_to account_orders_path, class: "btn btn-white" do %>
+            <i class="material-icons">keyboard_arrow_left</i>BACK
+            <% end %>
+            <%= render partial: "state_option", locals: {order: @order, size: ""} %>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

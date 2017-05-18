@@ -1,5 +1,5 @@
 class Admin::OrdersController <  Admin::AdminController
-  before_action :find_order_by_id, only: [:show, :ship, :shipped, :cancel, :return]
+  before_action :find_order_by_id, only: [:show, :confirm_cancel, :ship, :confirm_goods_returned]
 
   def index
     if params[:start_date].present?

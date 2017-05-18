@@ -27,7 +27,7 @@
                 <td class="td-total">
                   Total
                 </td>
-                <td colspan="2" class="td-price text-right">
+                <td colspan="2" class="td-price">
                   <small class="text-info">¥</small>
                   <span class="text-info">
                     <%= render_price(current_cart.total_price) %>
@@ -36,7 +36,7 @@
               </tr>
               <!-- 结算按钮 -->
               <tr>
-                <td colspan="4" class="text-center">
+                <td colspan="4" class="td-number">
                   <%= link_to checkout_cart_path(current_cart, selections: @cart_items.ids.map(&:to_s)),
                   class: "btn-checkout btn btn-raised btn-info btn-round btn-sm" do %>
                     去结算

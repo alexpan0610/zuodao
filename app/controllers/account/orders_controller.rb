@@ -1,14 +1,13 @@
 class Account::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_order, only: :create
-  before_action :find_order_by_number, only: [:pay, :make_payment, :apply_cancel, :return_goods]
+  before_action :find_order_by_number, only: [:show, :pay, :make_payment, :apply_for_cancel, :confirm_receipt, :apply_for_return]
 
   def index
     @orders = current_user.orders.page(params[:page]).per_page(10)
   end
 
   def show
-    @order = Order.find(params[:id])
     @order_details = @order.order_details
   end
 
@@ -39,10 +38,10 @@ class Account::OrdersController < ApplicationController
 
   # 取消订单
   def apply_for_cancel
-    if @order.placed? || @order.paid?
-      # 取消订单
-      @order.cancel!
-      operation_error(:notice, "订单#{@order.number}取消成功！")
+    if @order.paid?
+      # 申请取消订单
+      @order.apply_for_cancel!
+      operation_error(:notice, "订单#{@order.number}已提交取消申请，请耐心等待审核")
     elsif @order.cancelled?
       # 订单已经取消
       operation_error(:warning, "订单#{@order.number}已经取消，不能重复取消！")
@@ -143,7 +142,7 @@ class Account::OrdersController < ApplicationController
   # 处理订单生成异常
   def checkout_error(level, msg)
     flash[level] = msg
-    redirect_to checkout_cart_path(selections: params[:items])
+    redirect_to checkout_cart_path(current_cart, selections: params[:items])
   end
 
   # 处理用户操作异常

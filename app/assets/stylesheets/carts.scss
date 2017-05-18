@@ -31,8 +31,12 @@
     box-shadow: none;
     background-color: transparent;
 
-    .card-header.card-header-icon {
-      float: right;
+    .card {
+      margin: 0;
+    }
+
+    .card .card-content {
+      padding: 5px 15px 5px;
     }
 
     .card [data-background-color] {

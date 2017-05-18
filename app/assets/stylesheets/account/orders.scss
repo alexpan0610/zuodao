@@ -2,15 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// 订单列表
 .account-orders {
-  .order {
+  .card {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 
+    .card-title {
+      font-weight: 300;
+      line-height: 1.5em;
+    }
   }
-  .pagination {
+}
 
+// 订单详情
+.account-order {
+  .card {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+    .card-title {
+      font-weight: 300;
+      line-height: 1.5em;
+    }
   }
 }
 
 .pay {
-  
+
 }
