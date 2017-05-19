@@ -17,13 +17,8 @@
                 <th class="text-right">操作</th>
               </tr>
             </thead>
-            <tbody>
-              <%= render partial: "address", collection: @addresses, as: :address %>
-              <tr>
-                <td colspan="5" class="text-right">
-                  <%= link_to fa_icon("plus", text: "新增"), new_account_address_path, class: "btn btn-raised btn-info" %>
-                </td>
-              </tr>
+            <tbody id="addresses-list">
+              <%= render "addresses" %>
             </tbody>
           </table>
         </div>

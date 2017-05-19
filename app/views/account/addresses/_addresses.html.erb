@@ -1,3 +1,4 @@
+<% @addresses.each do |address| %>
 <tr>
   <td>
     <label class="btn btn-round btn-<%= address.default? ? 'info' : 'white'%>"><%= address.label %></label>
@@ -11,5 +12,11 @@
     <% end %>
     <%= link_to fa_icon("edit"), edit_account_address_path(address), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
     <%= render partial: "common/delete_btn", locals: { path: account_address_path(address), message: "确认删除“#{address.label}”这条收货信息吗？" } %>
+  </td>
+</tr>
+<% end %>
+<tr>
+  <td colspan="5" class="text-right">
+    <%= link_to fa_icon("plus", text: "新增"), new_account_address_path, class: "btn btn-raised btn-info" %>
   </td>
 </tr>

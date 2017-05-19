@@ -1,3 +1,4 @@
-$('#addresses-list').html('<%= escape_javascript render partial: "address", collection: @addresses, as: :address %>');
+$('#addresses-list').html('<%= escape_javascript render "addresses" %>');
 $('#checkout-addresses').html('<%= escape_javascript render partial: "carts/checkout_addresses" %>');
+$('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
 listenCheckoutAddressSelection();
