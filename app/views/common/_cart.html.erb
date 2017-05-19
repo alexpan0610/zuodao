@@ -17,7 +17,7 @@
           <table class="table table-shopping">
             <tbody>
               <% @cart_items.each_with_index do |item, index| %>
-                <%= render partial: "common/cart_item", locals: { item: item, index: index } %>
+                <%= render "common/cart_item", item: item, index: index %>
               <% end %>
               <!-- 删除选中课程和总价 -->
               <tr>

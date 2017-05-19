@@ -52,7 +52,7 @@
             <td>￥<%= render_price(order.total_price) %></td>
             <td><%= render_create_time(order)%></td>
             <td>
-              <%= render partial: "state_option", locals: {order: order, size: "btn-sm"} %>
+              <%= render "state_option", order: order, size: "btn-sm" %>
             </td>
             <td>
               <%= link_to("查看详情", admin_order_path(order), class: "btn btn-raised btn-white btn-sm") %>

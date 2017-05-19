@@ -67,7 +67,7 @@
                     <%= order.total_price %>
                   </td>
                   <td class="td-number">
-                    <%= render partial: "state_option", locals: { order: order, size: "btn-sm" } %>
+                    <%= render "state_option", order: order, size: "btn-sm" %>
                   </td>
                   <td class="td-number">
                     <%= link_to("DETAILS", account_order_path(order.number), class: "btn btn-raised btn-info btn-sm") %>

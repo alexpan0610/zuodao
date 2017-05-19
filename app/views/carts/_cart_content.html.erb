@@ -22,7 +22,7 @@
       </thead>
       <tbody>
         <% @cart_items.each_with_index do |item, index| %>
-        <%= render partial: "carts/cart_item", locals: { f: f, item: item, index: index } %>
+        <%= render "carts/cart_item", f: f, item: item, index: index %>
         <% end %>
         <!-- 删除选中课程和总价 -->
         <tr>

@@ -53,7 +53,7 @@
             <%= link_to account_orders_path, class: "btn btn-white" do %>
               <i class="material-icons">keyboard_arrow_left</i>BACK
             <% end %>
-            <%= render partial: "state_option", locals: {order: @order, size: ""} %>
+            <%= render "state_option", order: @order, size: "" %>
           </span>
         </div>
       </div>

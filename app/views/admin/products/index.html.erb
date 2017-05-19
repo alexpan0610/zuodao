@@ -34,7 +34,7 @@
               <td><%= product.quantity %></td>
               <td>
                 <%= link_to fa_icon("edit"), edit_admin_product_path(product), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
-                <%= render partial: "common/delete_btn", locals: { path: admin_product_path(product), message: "确定删除课程“#{product.title}”吗？" } %>
+                <%= render "common/delete_btn", path: admin_product_path(product), message: "确定删除课程“#{product.title}”吗？" %>
               </td>
               <td><%= render_create_time(product) %></td>
             </tr>
