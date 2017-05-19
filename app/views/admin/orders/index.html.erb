@@ -31,14 +31,14 @@
       </div>
     </div>
     <div class="panel panel-default">
-      <table class="table">
+      <table class="table table-shopping">
         <thead>
           <tr>
             <th>#</th>
             <th>订购者</th>
             <th>邮箱</th>
-            <th>金额</th>
-            <th>下单时间</th>
+            <th class="text-center">金额</th>
+            <th class="text-center">下单时间</th>
             <th>操作</th>
             <th>详情</th>
           </tr>
@@ -49,8 +49,8 @@
             <td><%= index + 1 %></td>
             <td><%= order.name %></td>
             <td><%= order.user.email %></td>
-            <td>￥<%= render_price(order.total_price) %></td>
-            <td><%= render_create_time(order)%></td>
+            <td class="text-center">￥<%= render_price(order.total_price) %></td>
+            <td class="text-center"><%= render_create_time(order)%></td>
             <td>
               <%= render "state_option", order: order, size: "btn-sm" %>
             </td>
