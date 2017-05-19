@@ -11,7 +11,7 @@
     </div>
 
     <div class="collapse navbar-collapse" id="navigation-example">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="<%= products_path %>" class="dropdown-toggle">选课</a>
           <ul class="dropdown-menu">
@@ -24,12 +24,11 @@
           </ul>
         </li>
       </ul>
-
       <ul class="nav navbar-nav navbar-right">
         <% if params[:controller] != "carts" %>
-          <li class="dropdown cart-nav">
-            <%= render "common/cart" %>
-          </li>
+        <li class="dropdown cart-nav">
+          <%= render "common/cart" %>
+        </li>
         <% end %>
         <% unless current_user %>
         <li>

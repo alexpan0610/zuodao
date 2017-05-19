@@ -12,8 +12,6 @@ class ProductsController < ApplicationController
     else
       @products = @result.where(category_id: params[:category].to_i)
     end
-    # 显示方式，列表或网格
-    params[:view] = params[:view].present? ? params[:view] : 'grid'
   end
 
   def show

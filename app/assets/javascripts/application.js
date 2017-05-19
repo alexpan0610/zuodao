@@ -15,7 +15,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-datepicker
-//= require material-kit
+//= require bootstrap-tagsinput
+//= require atv-img-animation
+//= require material-kit-pro
 //= require material.min
 //= require nouislider.min
 //= require turbolinks
