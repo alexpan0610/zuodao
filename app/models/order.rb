@@ -52,7 +52,7 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: :applying_for_cancel, to: :cancelled
+      transitions from: [:placed, :applying_for_cancel], to: :cancelled
     end
 
     event :ship do

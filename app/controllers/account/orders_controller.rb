@@ -1,7 +1,7 @@
 class Account::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_order, only: :create
-  before_action :find_order_by_number, only: [:show, :pay, :make_payment, :apply_for_cancel, :confirm_receipt, :apply_for_return]
+  before_action :find_order_by_number, only: [:show, :pay, :cancel, :make_payment, :apply_for_cancel, :confirm_receipt, :apply_for_return]
 
   def index
     if params[:start_date].present?
@@ -31,6 +31,26 @@ class Account::OrdersController < ApplicationController
   def pay
   end
 
+  # 取消订单
+  def cancel
+    if @order.placed?
+      @order.cancel!
+      operation_error(:notice, "订单#{@order.number}已取消")
+    elsif @order.cancelled?
+      # 订单已经取消
+      operation_error(:warning, "订单#{@order.number}已经取消，不能重复取消！")
+    elsif @order.shipping? || @order.shipped?
+      # 订单已经出货
+      operation_error(:warning, "您的订单#{@order.number}已经出货，请您申请退货！")
+    elsif @order.applying_for_return?
+      # 申请退货中
+      operation_error(:warning, "您的订单#{@order.number}正在申请退货，不能取消！")
+    else
+      # 其他情况
+      operation_error(:alert, "您的订单#{@order.number}取消失败！")
+    end
+  end
+
   # 完成支付
   def make_payment
     # 订单已经支付
@@ -43,10 +63,9 @@ class Account::OrdersController < ApplicationController
     end
   end
 
-  # 取消订单
+  # 申请取消订单
   def apply_for_cancel
     if @order.paid?
-      # 申请取消订单
       @order.apply_for_cancel!
       operation_error(:notice, "订单#{@order.number}已提交取消申请，请耐心等待审核")
     elsif @order.cancelled?

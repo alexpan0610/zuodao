@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :orders do
       member do
         get :pay
+        post :cancel
         post :make_payment
         post :apply_for_cancel
         post :confirm_receipt
