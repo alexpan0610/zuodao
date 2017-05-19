@@ -57,7 +57,7 @@ class ProductsController < ApplicationController
         return redirect_to product_path(@product)
       end
     end
-    redirect_to checkout_cart_path(selections:[item.id])
+    redirect_to checkout_cart_path(item_ids:[item.id])
   end
 
   # 是否超卖

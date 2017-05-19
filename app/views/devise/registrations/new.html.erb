@@ -27,7 +27,7 @@
                   </span>
                   <div class="form-group label-floating">
                     <label class="control-label">E-mail</label>
-                    <%= f.text_field :email, as: :email, required: true, autofocus: true, class: "form-control" %>
+                    <%= f.text_field :email, type: :email, required: true, autofocus: true, class: "form-control" %>
                   </div>
                 </div>
 
@@ -37,7 +37,7 @@
                   </span>
                   <div class="form-group label-floating">
                     <label class="control-label">登录密码</label>
-                    <%= f.text_field :password, as: :password, required: true, class: "form-control" %>
+                    <%= f.text_field :password, type: :password, required: true, class: "form-control" %>
                   </div>
                 </div>
 
@@ -47,7 +47,7 @@
                   </span>
                   <div class="form-group label-floating">
                     <label class="control-label">确认密码</label>
-                    <%= f.text_field :password_confirmation, as: :password, required: true, class: "form-control" %>
+                    <%= f.text_field :password_confirmation, type: :password, required: true, class: "form-control" %>
                   </div>
                 </div>
 

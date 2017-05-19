@@ -112,21 +112,24 @@ function slideUpAlert() {
 function listenVisibilityOfProgresses() {
   var eventFired = false;
   $(window).scroll(function() {
-    var hT = $('#progresses').offset().top,
-      hH = $('#progresses').outerHeight(),
-      wH = $(window).height(),
-      wS = $(this).scrollTop();
-    if (!eventFired && wS > (hT + hH - wH)) {
-      // 当进度条可见时，播放动画
-      $('[data-toggle="tooltip"]').tooltip({
-        trigger: 'manual'
-      }).tooltip('show');
+    var offset = $('#progresses').offset();
+    if (offset != null) {
+      var hT = offset.top,
+        hH = $('#progresses').outerHeight(),
+        wH = $(window).height(),
+        wS = $(this).scrollTop();
+      if (!eventFired && wS > (hT + hH - wH)) {
+        // 当进度条可见时，播放动画
+        $('[data-toggle="tooltip"]').tooltip({
+          trigger: 'manual'
+        }).tooltip('show');
 
-      $(".progress-bar").each(function() {
-        each_bar_width = $(this).attr('aria-valuenow');
-        $(this).width(each_bar_width + '%');
-      });
-      eventFired = true;
+        $(".progress-bar").each(function() {
+          each_bar_width = $(this).attr('aria-valuenow');
+          $(this).width(each_bar_width + '%');
+        });
+        eventFired = true;
+      }
     }
   });
 }
@@ -140,16 +143,22 @@ function parseToInt(value) {
 }
 
 // 初始化购物车物品选中状态
-function setSelections(selections) {
+function setSelections(item_ids) {
   var cartItemsCount = parseInt($("#cart-items-count").val());
-  var count = 0;
-  for (i = 0; i < cartItemsCount; i++) {
-    var checked = $.inArray($("#cart-item-select-" + i).val(), selections) > -1;
-    $("#cart-item-select-" + i).prop("checked", checked);
-    if (checked) count++;
+  if (cartItemsCount > 0 && item_ids.length == cartItemsCount) {
+    // 所有课程都被选中
+    cartSelectAll(true);
+  } else {
+    var count = 0;
+    for (i = 0; i < cartItemsCount; i++) {
+      var item = $("#cart-item-select-" + i);
+      var checked = $.inArray(item.val(), item_ids) > -1;
+      item.prop("checked", checked);
+      if (checked) count++;
+    }
+    // 禁用/启用 删除选中课程按钮
+    disableDeleteAllButton(count == 0);
   }
-  // 禁用/启用 删除选中课程按钮
-  disableDeleteAllButton(count == 0);
 }
 
 // 全选购物车课程

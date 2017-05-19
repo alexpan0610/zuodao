@@ -26,9 +26,11 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown cart-nav" id="auto-dropdown">
-          <%= render "common/cart" %>
-        </li>
+        <% if params[:controller] != "carts" %>
+          <li class="dropdown cart-nav">
+            <%= render "common/cart" %>
+          </li>
+        <% end %>
         <% unless current_user %>
         <li>
           <%= link_to new_user_registration_path do %>

@@ -37,7 +37,7 @@
               <!-- 结算按钮 -->
               <tr>
                 <td colspan="4" class="td-number">
-                  <%= link_to checkout_cart_path(current_cart, selections: @cart_items.ids.map(&:to_s)),
+                  <%= link_to checkout_cart_path(current_cart, item_ids: @cart_items.ids.map(&:to_s)),
                   class: "btn-checkout btn btn-raised btn-info btn-round btn-sm" do %>
                     去结算
                     <i class="material-icons">keyboard_arrow_right</i>

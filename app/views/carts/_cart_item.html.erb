@@ -2,7 +2,7 @@
   <td>
     <div class="checkbox">
       <label>
-        <input type="checkbox" name="selections[]" value="<%= item.id %>" id="cart-item-select-<%= index %>"/>
+        <input type="checkbox" name="item_ids[]" value="<%= item.id %>" id="cart-item-select-<%= index %>"/>
       </label>
     </div>
   </td>
@@ -44,6 +44,6 @@
     data-toggle="modal" data-target="#confirm-dialog" onclick='confirmRemoveCartItem("<%= item.id %>", "确认将课程 <%= item.product.title %> 移出购物车吗？")'>
       <i class="material-icons">close</i>
     </button>
-    <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, remote: true, class: "invisible", id: "cart-btn-delete-#{item.id}" %>
+    <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, class: "invisible", id: "cart-btn-delete-#{item.id}" %>
   </td>
 </tr>

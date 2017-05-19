@@ -1,7 +1,8 @@
 $('.cart-nav').html('<%= escape_javascript render(partial: "common/cart") %>');
 $('.cart-content').html('<%= escape_javascript render "carts/cart_content" %>');
+$.material.init();
 $('#product-quantity').html('<%= @product.quantity %>');
-setSelections(<%= @selections.to_json.html_safe %>);
+setSelections(<%= @item_ids.to_json.html_safe %>);
 listenCartItemsSelections();
 if (<%= @product.quantity %> > 1) {
   $('#quantity-plus').removeClass("disabled");
