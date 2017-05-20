@@ -1,19 +1,19 @@
 /*!
-    
+
  =========================================================
  * Material Kit - v1.1.1.0
  =========================================================
- 
+
  * Product Page: http://www.creative-tim.com/product/material-kit
  * Copyright 2017 Creative Tim (http://www.creative-tim.com)
  * Licensed under MIT (https://github.com/timcreative/material-kit/blob/master/LICENSE.md)
- 
+
  =========================================================
- 
+
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- 
+
  */
- 
+
 body {
   background-color: #CCCCCC;
 }
@@ -1432,17 +1432,17 @@ output {
 }
 .form-group.is-focused .form-control {
   outline: none;
-  background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#D2D2D2, #D2D2D2);
+  background-image: linear-gradient(#03a9f4, #03a9f4), linear-gradient(#D2D2D2, #D2D2D2);
   background-size: 100% 2px, 100% 1px;
   box-shadow: none;
   transition-duration: 0.3s;
 }
 .form-group.is-focused .form-control .material-input:after {
-  background-color: #9c27b0;
+  background-color: #03a9f4;
 }
 .form-group.is-focused label,
 .form-group.is-focused label.control-label {
-  color: #9c27b0;
+  color: #03a9f4;
 }
 .form-group.is-focused.label-placeholder label,
 .form-group.is-focused.label-placeholder label.control-label {
