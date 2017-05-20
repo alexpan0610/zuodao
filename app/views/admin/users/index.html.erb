@@ -1,4 +1,4 @@
-<div class="my-content main admin-users">
+<div class="my-content-raised main admin-users">
   <div class="container-fluid">
     <div class="page-header">
       <h3>用户列表
@@ -6,7 +6,7 @@
       </h3>
     </div>
     <div class="panel panel-default">
-      <table class="table">
+      <table class="table table-shopping">
         <thead>
           <tr>
             <th>#</th>
@@ -21,7 +21,7 @@
             <td><%= user.email %></td>
             <td>
               <%= link_to fa_icon("edit"), edit_admin_user_path(user), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
-              <%= render partial: "common/delete_btn", locals: { path: admin_user_path(user), message: "确定删除用户“#{user.email}”吗？" } %>
+              <%= render "common/delete_btn", path: admin_user_path(user), message: "确定删除用户“#{user.email}”吗？" %>
             </td>
           </tr>
           <% end %>

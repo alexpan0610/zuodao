@@ -1,70 +1,94 @@
-<div class="my-content main checkout">
+<div class="my-content checkout">
   <div class="container">
-    <div class="page-header">
-      <h2>结算</h2>
-    </div>
-    <p>填写并核对订单信息</p>
-    <%= form_for [:account, @order] do |f| %>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="addresses" id="checkout-addresses">
-          <%= render partial: "checkout_addresses" %>
-        </div>
-        <div class="payment-method">
+    <div class="card">
+      <div class="card-header card-header-icon" data-background-color="blue">
+        <i class="material-icons">monetization_on</i>
+      </div>
+      <h4 class="card-title">
+        结算
+        <br/>
+        <small>
+          填写并核对订单信息
+        </small>
+      </h4>
+      <%= form_for [:account, @order] do |f| %>
+        <div class="card-content">
           <div class="page-header">
-            <h4>付款信息</h4>
+            <h4>收货信息</h4>
           </div>
-          <input type="hidden" name="payment_method" value="none" id="payment-method"/>
-          <%= link_to("微信支付", "javascript:;", class: "wechat btn btn-raised btn-white") %>
-          <%= link_to("支付宝", "javascript:;", class: "alipay btn btn-raised btn-white") %>
-          <hr/>
-        </div>
-        <div class="details">
-          <div class="page-header">
-            <h4>购物清单
-              <small>共购买 <b class="text-danger"><%= @items.count %></b> 件商品</small>
-            </h4>
+          <div class="addresses" id="checkout-addresses">
+            <%= render partial: "checkout_addresses" %>
           </div>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>图片</th>
-                <th>名称</th>
-                <th>描述</th>
-                <th>单价</th>
-                <th>数量</th>
-                <th>小计</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @items.each do |item| %>
-                <tr class="item">
-                  <td>
-                    <%= link_to product_path(item.product) do %>
-                      <%= render_product_image(item.product, "thumbnail") %>
-                    <% end %>
+          <div class="payment-method">
+            <div class="page-header">
+              <h4>付款信息</h4>
+            </div>
+            <input type="hidden" name="payment_method" value="none" id="payment-method"/>
+            <%= link_to("微信支付", "javascript:;", class: "wechat btn btn-raised btn-white") %>
+            <%= link_to("支付宝", "javascript:;", class: "alipay btn btn-raised btn-white") %>
+            <hr/>
+          </div>
+          <div class="details">
+            <div class="page-header">
+              <h4>购物清单
+                <small>共购买
+                  <b class="text-danger"><%= @items.count %></b>
+                  门课程</small>
+              </h4>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-shopping">
+                <thead>
+                  <tr>
+                    <th class="text-center"></th>
+                    <th width="25%">Product</th>
+                    <th class="text-right">Price</th>
+                    <th class="text-right">Qty</th>
+                    <th class="text-right">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @items.each do |item| %>
                     <input type="hidden" name="items[]" value="<%= item.id %>">
-                  </td>
-                  <td><%= item.product.title %></td>
-                  <td><%= render_text(item.product.description) %></td>
-                  <td>￥<b><%= render_price(item.product.price) %></b></td>
-                  <td><b><%= item.quantity %></b></td>
-                  <td class="text-danger">￥<b><%= render_price(item.quantity * item.product.price) %></b></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+                    <tr>
+                      <td>
+                        <%= render_product_image(item.product, "img-container") %>
+                      </td>
+                      <td class="td-name">
+                        <%= item.product.title %>
+                        <br/>
+                        <small><%= render_text(item.product.description) %></small>
+                      </td>
+                      <td class="td-number text-right">
+                        <small>￥</small>
+                        <%= render_price(item.product.price) %>
+                      </td>
+                      <td class="td-number quantity">
+                        x<%= item.quantity %>
+                      </td>
+                      <td class="td-number">
+                        <small>￥</small>
+                        <%= render_price(item.quantity * item.product.price) %>
+                      </td>
+                    </tr>
+                  <% end %>
+                  <tr>
+                    <td colspan="4" class="td-number">
+                      <h4 class="text-danger">
+                        <small>合计：</small>
+                        ￥<%= calculate_total_price(@items) %>
+                      </h4>
+                    </td>
+                    <td class="td-number">
+                      <%= f.button "提交订单", type: :submit, class: "btn btn-raised btn-danger btn-round" %>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <hr/>
-      </div>
-      <div class="summary panel-footer">
-        <h4 class="text-danger">
-          <small>合计：</small>
-          ￥<%= calculate_total_price(@items) %>
-        </h4>
-        <%= f.button "提交订单", type: :submit, class: "btn btn-raised btn-danger btn-lg" %>
-      </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
 </div>

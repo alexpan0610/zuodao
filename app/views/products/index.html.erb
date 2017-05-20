@@ -1,32 +1,7 @@
-<div class="main my-content">
+<div class="my-content product-list">
   <div class="container">
-    <div class="product-header">
-      <div class="row">
-        <%= form_for "", url: products_path , method: :get, class: "search-form" do |f| %>
-        <div class="col-md-6">
-          <div class="input-group search-box">
-            <%= f.text_field "", name: "query", value: params[:query], class: "form-control", placeholder: "颠覆认知的课程正在等你..." %>
-            <div class="input-group-btn">
-              <button class="btn btn-raised btn-white" type="submit">
-                <i class="glyphicon glyphicon-search"></i>
-              </button>
-            </div>
-          </div>
-          <div class="btn-group pull-right">
-            <%= f.button(fa_icon("th-large"), name: "view", value: "grid", class: "btn btn-raised btn-white #{params[:view] == "grid" ? "disabled" : ""}") %>
-            <%= f.button(fa_icon("th-list"), name: "view", value: "list", class: "btn btn-raised btn-white #{params[:view] == "list" ? "disabled" : ""}") %>
-          </div>
-        </div>
-        <% end %>
-      </div>
-    </div>
-    <hr/>
-    <div class="product-list">
-      <% if params[:view] == 'grid' %>
-      <%= render partial: "grid_product", collection: @products, as: :product %>
-      <% elsif params[:view] == 'list' %>
-      <%= render partial: "list_product", collection: @products, as: :product %>
-      <% end %>
+    <div class="row">
+      <%= render partial: "product", collection: @products, as: :product %>
     </div>
   </div>
 </div>

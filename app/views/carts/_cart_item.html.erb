@@ -2,13 +2,13 @@
   <td>
     <div class="checkbox">
       <label>
-        <input type="checkbox" name="selections[]" value="<%= item.id %>" id="cart-item-select-<%= index %>"/>
+        <input type="checkbox" name="item_ids[]" value="<%= item.id %>" id="cart-item-select-<%= index %>"/>
       </label>
     </div>
   </td>
   <td>
     <%= link_to product_path(item.product), class: "img-container" do %>
-      <%= render_product_image(item.product, "") %>
+      <%= render_product_image_medium(item.product) %>
     <% end %>
   </td>
   <td class="td-name">
@@ -21,7 +21,7 @@
     <%= render_price(item.product.price) %>
   </td>
   <td class="td-number quantity">
-    <input type="text" name="quantities[]" value="<%= item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input" disabled>
+    <input type="text" name="quantities[]" value="<%= item.quantity == 0 ? '已报满' : item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input" disabled>
     <div class="btn-group">
       <%= link_to decrease_cart_item_path(item, index: index), method: :post, remote: true,
       id: "quantity-minus-#{index}", disabled: (item.quantity <= 1), class: "btn btn-round btn-info btn-xs quantity-minus #{item.quantity <= 1 ? 'disabled' : ''}" do %>
@@ -41,9 +41,9 @@
   </td>
   <td class="td-actions text-center">
     <button type="button" rel="tooltip" title="Remove item" class="btn btn-simple"
-    data-toggle="modal" data-target="#confirm-dialog" onclick='confirmRemoveCartItem("<%= item.id %>", "确认将商品 <%= item.product.title %> 移出购物车吗？")'>
+    data-toggle="modal" data-target="#confirm-dialog" onclick='confirmRemoveCartItem("<%= item.id %>", "确认将课程 <%= item.product.title %> 移出购物车吗？")'>
       <i class="material-icons">close</i>
     </button>
-    <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, remote: true, class: "invisible", id: "cart-btn-delete-#{item.id}" %>
+    <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, class: "invisible", id: "cart-btn-delete-#{item.id}" %>
   </td>
 </tr>

@@ -1,4 +1,4 @@
-<div class="main my-content">
+<div class="container-fluid login">
   <div class="section section-full-screen section-signup">
     <div class="container">
       <div class="row">
@@ -25,14 +25,20 @@
                   <span class="input-group-addon">
                     <i class="material-icons">email</i>
                   </span>
-                  <%= f.input :email, label: false, placeholder: "E-mail", required: true, autofocus: true, class: "form-control" %>
+                  <div class="form-group label-floating">
+                    <label class="control-label">E-mail</label>
+                    <%= f.text_field :email, type: :email, required: true, autofocus: true, class: "form-control" %>
+                  </div>
                 </div>
 
                 <div class="input-group">
                   <span class="input-group-addon">
                     <i class="material-icons">lock_outline</i>
                   </span>
-                  <%= f.input :password, label: false, placeholder: "登录密码", required: true, class: "form-control" %>
+                  <div class="form-group label-floating">
+                    <label class="control-label">登录密码</label>
+                    <%= f.text_field :password, type: :password, required: true, class: "form-control" %>
+                  </div>
                 </div>
 
                 <div class="input-group">

@@ -1,12 +1,12 @@
-<div class="my-content main admin-products">
+<div class="my-content-raised main admin-products">
   <div class="container-fluid">
     <div class="page-header">
-      <h3>商品列表
+      <h3>课程列表
         <%= link_to(fa_icon("plus", text: "新增"), new_admin_product_path, class: "btn btn-raised btn-success pull-right") %>
       </h3>
     </div>
     <div class="panel panel-default">
-      <table class="table table-striped">
+      <table class="table table-shopping">
         <thead>
           <th>#</th>
           <th>图片</th>
@@ -14,7 +14,7 @@
           <th>名称</th>
           <th>描述</th>
           <th>价格</th>
-          <th>库存</th>
+          <th>名额</th>
           <th>操作</th>
           <th>创建时间</th>
         </thead>
@@ -24,17 +24,17 @@
               <td><%= index + 1 %></td>
               <td width="100">
                 <%= link_to product_path(product) do %>
-                  <%= render_product_image(product, "products-img") %>
+                  <%= render_product_image_thumb(product) %>
                 <% end %>
               </td>
               <td><%= product.category.name %></td>
               <td><%= product.title %></td>
               <td><%= render_text(product.description, length: 20) %></td>
-              <td><%= render_price(product.price) %></td>
+              <td>￥<%= render_price(product.price) %></td>
               <td><%= product.quantity %></td>
               <td>
                 <%= link_to fa_icon("edit"), edit_admin_product_path(product), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
-                <%= render partial: "common/delete_btn", locals: { path: admin_product_path(product), message: "确定删除商品“#{product.title}”吗？" } %>
+                <%= render "common/delete_btn", path: admin_product_path(product), message: "确定删除课程“#{product.title}”吗？" %>
               </td>
               <td><%= render_create_time(product) %></td>
             </tr>

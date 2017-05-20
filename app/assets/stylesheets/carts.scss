@@ -1,6 +1,7 @@
 // Place all the styles related to the carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 // 导航条上的购物车
 .navbar-transparent {
   .cart-nav {
@@ -20,56 +21,47 @@
 
   .cart-empty {
     color: #333;
+    font-size: 1.6em;
     text-align: center;
     min-width: 200px;
   }
 
-  .cart-item {
-    margin: 0 10px;
-    min-width: 300px;
+  .cart-nav-content {
+    font-size: 0.7em;
+    box-shadow: none;
+    background-color: transparent;
 
-    .media-body p {
-      font-size: 0.8em;
-      font-weight: 400;
-    }
-  }
-
-  .cart-img {
-    width: 80px;
-    height: 80px;
-    border: 1px solid #DDD;
-  }
-
-  .media-right {
-    min-width: 50px;
-
-    p {
-      float: right;
+    .card {
+      margin: 0;
     }
 
-    .cart-btn-delete {
-      color: #B22222;
-      float: right;
+    .card .card-content {
+      padding: 5px 15px 5px;
     }
-  }
 
-  .cart-bottom {
-    padding: 0 10px;
-    font-size: 0.9em;
-    font-weight: 400;
-
-    .btn-to-cart {
-      padding: 3px 6px;
-      font-size: 0.8em;
-      color: #FFF;
+    .card [data-background-color] {
+      margin-top: -20px;
+      border-radius: 3px;
+      padding: 5px;
+    }
+    .table-shopping .img-container {
+      width: 80px;
+      max-height: 100px;
+    }
+    .table-shopping .td-name {
+      min-width: 150px;
+    }
+    .table-shopping .td-number {
+      min-width: 120px;
+    }
+    .table .td-price {
+      font-size: 1.6em;
     }
   }
 }
+
 // 购物车页
-
 .carts {
-  margin: 101px 30px 0;
-
   .card {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 
@@ -84,8 +76,7 @@
     color: #03a9f4 !important;
     text-decoration: none;
   }
-
-  // 选中商品的数量
+  // 选中课程的数量
   #items-count {
     margin: 0 5px;
     font-size: 1.2em;

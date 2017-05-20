@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
       current_user.cart = cart
     end
     session_cart = find_session_cart
-    # 将临时购物车中的商品加入用户的购物车
+    # 将临时购物车中的课程加入用户的购物车
     unless session_cart.empty?
       cart.merge!(session_cart)
       session_cart.clean!

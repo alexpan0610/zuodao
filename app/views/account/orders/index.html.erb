@@ -1,18 +1,86 @@
-<div class="my-content main">
-  <div class="account-orders">
-    <h4>我的订单</h4>
-    <div class="search">
-      <%= form_for admin_orders_path, method: :get do %>
-        <span>开始:</span>
-        <%= date_field_tag :start_date, params[:start_date].to_s[0,10] %>
-        <span>结束:</span>
-        <%= date_field_tag :end_date, params[:end_date].to_s[0,10] %>
-        <%= button_tag fa_icon('search', text: "查询"), type: :submit, name: "", class: "btn btn-raised btn-white btn-sm" %>
-      <% end %>
-    </div>
-    <%= render partial: "order", collection: @orders, as: :order %>
-    <div class="pagination text-center">
-      <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+<div class="my-content account-orders">
+  <div class="container">
+    <div class="card">
+      <div class="card-header card-header-icon" data-background-color="blue">
+        <i class="material-icons">assignment</i>
+      </div>
+      <h4 class="card-title">我的订单</h4>
+      <div class="card-content">
+        <div class="search">
+          <%= form_for account_orders_path, method: :get do %>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <%= fa_icon("calendar lg") %>
+                </td>
+                <td colspan="2">
+                  <input class="datepicker form-control" type="text" name="start_date" value="<%= params[:start_date].to_s[0,10] %>"/>
+                </td>
+                <td>
+                  <h4>
+                    ~
+                  </h4>
+                </td>
+                <td colspan="2">
+                  <input class="datepicker form-control" type="text" name="end_date" value="<%= params[:end_date].to_s[0,10] %>"/>
+                </td>
+                <td>
+                  <%= button_tag fa_icon('search', text: "查询"), type: :submit, name: "", class: "btn btn-raised btn-white" %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <% end %>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-shopping">
+            <thead>
+              <tr>
+                <th class="text-center"></th>
+                <th>Product</th>
+                <th class="text-right">Amount</th>
+                <th class="text-right">Opt</th>
+                <th class="text-right">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @orders.each do |order| %>
+              <% detail = order.order_details.first %>
+                <tr>
+                  <td>
+                    <%= render_product_image(detail, "img-container") %>
+                  </td>
+                  <td class="td-name">
+                    <%= detail.title %>
+                    <br/>
+                    <small>
+                      <%= "等 " + order.order_details.count.to_s + " 门课程" %>
+                      <br/>
+                      <small>
+                        <%= render_create_time(order) %>
+                      </small>
+                    </small>
+                  </td>
+                  <td class="td-number">
+                    <small>￥</small>
+                    <%= order.total_price %>
+                  </td>
+                  <td class="td-number">
+                    <%= render "state_option", order: order, size: "btn-sm" %>
+                  </td>
+                  <td class="td-number">
+                    <%= link_to("DETAILS", account_order_path(order.number), class: "btn btn-raised btn-info btn-sm") %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="pagination text-right">
+            <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

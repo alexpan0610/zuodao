@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     resources :orders do
       member do
         get :pay
+        post :cancel
         post :make_payment
+        post :apply_for_cancel
+        post :confirm_receipt
+        post :apply_for_return
       end
     end
     resources :addresses do
@@ -16,7 +20,13 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :orders
+    resources :orders do
+      member do
+        post :confirm_cancel
+        post :ship
+        post :confirm_goods_returned
+      end
+    end
     resources :categories
     resources :products
     resources :users
@@ -24,7 +34,7 @@ Rails.application.routes.draw do
 
   resources :products do
     member do
-      post :add_to_cart
+      post :operations
     end
   end
 

@@ -16,6 +16,7 @@
 #
 
 class Order < ApplicationRecord
+  before_create :generate_number
   belongs_to :user
   has_many :order_details, dependent: :destroy
 
@@ -25,10 +26,17 @@ class Order < ApplicationRecord
 
   scope :recent, -> {order("created_at DESC")}
 
+  # 生成订单号
+  def generate_number
+    # 下单时间 + 随机序列
+    self.number = Date.today.strftime("%Y%m%d") + SecureRandom.uuid[-12,12].upcase;
+  end
+
   include AASM
     aasm do
     state :placed, initial: true
     state :paid
+    state :applying_for_cancel
     state :shipping
     state :shipped
     state :applying_for_return
@@ -39,8 +47,12 @@ class Order < ApplicationRecord
       transitions from: :placed, to: :paid
     end
 
+    event :apply_for_cancel do
+      transitions from: [:placed, :paid], to: :applying_for_cancel
+    end
+
     event :cancel do
-      transitions from: [:placed, :paid], to: :cancelled
+      transitions from: [:placed, :applying_for_cancel], to: :cancelled
     end
 
     event :ship do
@@ -52,7 +64,7 @@ class Order < ApplicationRecord
     end
 
     event :apply_for_return do
-      transitions from: [:shipping, :shipped], to: :applying_for_return
+      transitions from: :shipped, to: :applying_for_return
     end
 
     event :confirm_goods_returned do

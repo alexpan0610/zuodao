@@ -1,0 +1,18 @@
+<% case order.aasm_state %>
+<% when "placed"%>
+  <span class="btn btn-default disabled <%= size %>">待付款</span>
+<% when "paid" %>
+  <%= link_to("发货", ship_admin_order_path(order), method: :post, class: "btn btn-info #{size}") %>
+<% when "applying_for_cancel" %>
+  <%= link_to("确认取消订单", confirm_cancel_admin_order_path(order), method: :post, class: "btn btn-warning #{size}") %>
+<% when "shipping" %>
+  <span class="btn btn-warning disabled <%= size %>">配送中</span>
+<% when "shipped" %>
+  <span class="btn btn-success disabled <%= size %>">已收货</span>
+<% when "applying_for_return" %>
+  <%= link_to("确认退货", confirm_goods_returned_admin_order_path(order), method: :post, class: "btn btn-danger #{size}") %>
+<% when "cancelled" %>
+  <span class="btn btn-defalut disabled <%= size %>">已取消</span>
+<% when "returned" %>
+  <span class="btn btn-defalut disabled <%= size %>">已退货</span>
+<% end %>

@@ -1,3 +1,17 @@
 // Place all the styles related to the account/addresses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// 地址列表
+.account-addresses,
+// 地址内容
+.account-address {
+  .card {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+    .card-title {
+      font-weight: 300;
+      line-height: 1.5em;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Jdstore</title>
+    <title>做到</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -16,6 +16,7 @@
         <%= yield %>
       </div>
     </div>
+    <%= render "common/delete_confirm" %>
     <%= render "common/footer" %>
   </body>
 </html>

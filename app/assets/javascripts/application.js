@@ -15,7 +15,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-datepicker
-//= require material-kit
+//= require bootstrap-tagsinput
+//= require atv-img-animation
+//= require material-kit-pro
 //= require material.min
 //= require nouislider.min
 //= require turbolinks
@@ -30,9 +32,15 @@ $(document).on('turbolinks:load', function() {
       $(this).removeClass('open');
     });
 
+  // 收起通知
+  slideUpAlert();
+
+  // 监听进度区是否可见
+  listenVisibilityOfProgresses();
+
   /*商品数量输入控制*/
   $('#quantity-input').on('input', function(e) {
-    var max = parseToInt($('.product-quantity').html());
+    var max = parseToInt($('#product-quantity').html());
     var num = parseToInt($(this).val());
     if (num <= 1) {
       $(this).val('1');
@@ -40,7 +48,7 @@ $(document).on('turbolinks:load', function() {
     } else {
       $("#quantity-minus").removeClass('disabled');
     }
-    // 限制输入数量不大于库存
+    // 限制输入数量不大于名额
     if (num >= max) {
       $(this).val(max);
       $("#quantity-plus").addClass('disabled');
@@ -57,7 +65,7 @@ $(document).on('turbolinks:load', function() {
 
   /*增加数量*/
   $("#quantity-plus").click(function(e) {
-    var max = parseToInt($('.product-quantity').html());
+    var max = parseToInt($('#product-quantity').html());
     var num = parseInt($("#quantity-input").val()) + 1;
     $("#quantity-minus").removeClass("disabled");
     if (num >= max) {
@@ -95,6 +103,39 @@ $(document).on('turbolinks:load', function() {
   $('.datepicker').datepicker();
 });
 
+// 收起通知信息
+function slideUpAlert() {
+  $(".alert").delay(2000).slideUp(250, function() {
+    $(this).remove();
+  });
+}
+
+// 监听进度区是否可见
+function listenVisibilityOfProgresses() {
+  var eventFired = false;
+  $(window).scroll(function() {
+    var offset = $('#progresses').offset();
+    if (offset != null) {
+      var hT = offset.top,
+        hH = $('#progresses').outerHeight(),
+        wH = $(window).height(),
+        wS = $(this).scrollTop();
+      if (!eventFired && wS > (hT + hH - wH)) {
+        // 当进度条可见时，播放动画
+        $('[data-toggle="tooltip"]').tooltip({
+          trigger: 'manual'
+        }).tooltip('show');
+
+        $(".progress-bar").each(function() {
+          each_bar_width = $(this).attr('aria-valuenow');
+          $(this).width(each_bar_width + '%');
+        });
+        eventFired = true;
+      }
+    }
+  });
+}
+
 // 内容转为数字
 function parseToInt(value) {
   while (value.match(/[^\d]/)) {
@@ -104,28 +145,34 @@ function parseToInt(value) {
 }
 
 // 初始化购物车物品选中状态
-function setSelections(selections) {
+function setSelections(item_ids) {
   var cartItemsCount = parseInt($("#cart-items-count").val());
-  var count = 0;
-  for (i = 0; i < cartItemsCount; i++) {
-    var checked = $.inArray($("#cart-item-select-" + i).val(), selections) > -1;
-    $("#cart-item-select-" + i).prop("checked", checked);
-    if (checked) count++;
+  if (cartItemsCount > 0 && item_ids.length == cartItemsCount) {
+    // 所有课程都被选中
+    cartSelectAll(true);
+  } else {
+    var count = 0;
+    for (i = 0; i < cartItemsCount; i++) {
+      var item = $("#cart-item-select-" + i);
+      var checked = $.inArray(item.val(), item_ids) > -1;
+      item.prop("checked", checked);
+      if (checked) count++;
+    }
+    // 禁用/启用 删除选中课程按钮
+    disableDeleteAllButton(count == 0);
   }
-  // 禁用/启用 删除选中商品按钮
-  disableDeleteAllButton(count == 0);
 }
 
-// 全选购物车商品
+// 全选购物车课程
 function cartSelectAll(checked) {
   $(".cart-select-all").prop("checked", checked);
   var cartItemsCount = parseInt($("#cart-items-count").val());
   for (i = 0; i < cartItemsCount; i++) {
     $("#cart-item-select-" + i).prop("checked", checked);
   }
-  // 更新选中商品数量
+  // 更新选中课程数量
   $("#items-count").html(checked ? cartItemsCount : 0);
-  // 禁用/启用 删除选中商品按钮
+  // 禁用/启用 删除选中课程按钮
   disableDeleteAllButton(!checked);
   // 重新计算总价
   calculateTotalPrice();
@@ -137,12 +184,12 @@ function listenCartItemsSelections() {
   $(".cart-select-all").change(function(e) {
     cartSelectAll(this.checked);
   });
-  // 监听每个商品勾选
+  // 监听每个课程勾选
   var total = parseInt($("#cart-items-count").val());
   for (i = 0; i < total; i++) {
     new cartItemSelectionListener(total, i);
   }
-  // 禁用删除选中商品按钮
+  // 禁用删除选中课程按钮
   disableDeleteAllButton(true);
 }
 
@@ -154,18 +201,18 @@ function cartItemSelectionListener(total, index) {
     for (i = 0; i < total; i++) {
       if ($("#cart-item-select-" + i).is(":checked")) count++;
     }
-    // 商品全部被勾选
+    // 课程全部被勾选
     $(".cart-select-all").prop("checked", total == count);
-    // 更新选中商品数量
+    // 更新选中课程数量
     $("#items-count").html(count);
-    // 禁用/启用 删除选中商品按钮
+    // 禁用/启用 删除选中课程按钮
     disableDeleteAllButton(count == 0);
     // 重新计算总价
     calculateTotalPrice();
   });
 }
 
-// 禁用删除选中商品按钮
+// 禁用删除选中课程按钮
 function disableDeleteAllButton(disable) {
   if (disable) {
     $(".cart-btn-delete-all-fake").addClass("disabled");
@@ -242,15 +289,15 @@ function setSelected(button, selected) {
 function confirmDelete(path, message) {
   var dialog = $("#confirm-dialog");
   dialog.find(".btn-confirm").attr("href", path);
-  if(message !== undefined) {
+  if (message !== undefined) {
     dialog.find(".modal-body").html(message);
   }
 }
 
-// 移除购物车商品
+// 移除购物车课程
 function confirmRemoveCartItem(id, message) {
   var dialog = $("#confirm-dialog");
-  if(message !== undefined) {
+  if (message !== undefined) {
     dialog.find(".modal-body").html(message);
   }
   dialog.find(".btn-confirm").click(function() {
@@ -258,10 +305,10 @@ function confirmRemoveCartItem(id, message) {
   });
 }
 
-// 移除购物车中选中的商品
+// 移除购物车中选中的课程
 function confirmRemoveCartItems() {
   var dialog = $("#confirm-dialog");
-  dialog.find(".modal-body").html("确定移除选中的商品？");
+  dialog.find(".modal-body").html("确定移除选中的课程？");
   dialog.find(".btn-confirm").click(function() {
     $("#cart-btn-delete-all").click();
   });

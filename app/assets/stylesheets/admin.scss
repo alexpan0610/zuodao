@@ -13,7 +13,7 @@
 .sidebar .sidebar-wrapper {
   background-color: #fff;
   position: relative;
-  height: calc(100vh - 75px);
+  height: calc(100vh);
   overflow: auto;
   width: 260px;
   z-index: 4;
@@ -252,6 +252,12 @@
     outline: none;
     background-color: #FFF !important;
   }
+
+  .admin-content {
+    position: relative;
+    margin-left: 260px;
+    margin-bottom: -101px;
+  }
 }
 
 .side-nav > li > ul {
@@ -267,12 +273,4 @@
 
 .side-nav > li > ul > li > a:hover {
   color: #fff;
-}
-/* 内容区 */
-@media(min-width:768px) {
-  .admin-content {
-    position: relative;
-    margin-left: 260px;
-    height: 100vh;
-  }
 }

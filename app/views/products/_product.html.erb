@@ -1,0 +1,33 @@
+<div class="col-md-6 col-lg-4">
+  <div class="card card-blog card-atv">
+    <div class="card-image">
+      <%= link_to product_path(product) do %>
+        <div class="atvImg">
+          <%= render_product_image_origin(product) %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="card-content">
+      <span class="label label-info"><%= product.category.name %></span>
+      <h4 class="card-title">
+        <%= link_to product.title, product_path(product) %>
+      </h4>
+      <p class="card-description">
+        <%= render_text(product.description) %>
+      </p>
+      <div class="footer">
+        <div class="author">
+          <a href="#pablo">
+            <img src="http://odau7u92l.bkt.clouddn.com/%E6%9D%8E%E7%AC%91%E6%9D%A5.jpg" alt="..." class="avatar img-raised">
+            <span>Mike John</span>
+          </a>
+        </div>
+        <div class="price">
+          <small>￥</small>
+          <%= render_price(product.price) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,13 +7,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">JDstore</a>
+      <a class="navbar-brand" href="/">做到</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navigation-example">
-      <ul class="nav navbar-nav navbar-left">
+      <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="<%= products_path %>" class="dropdown-toggle">Products</a>
+          <a href="<%= products_path %>" class="dropdown-toggle">选课</a>
           <ul class="dropdown-menu">
             <% @categories.each_with_index do |category, index| %>
             <% if index != 0 %>
@@ -24,11 +24,12 @@
           </ul>
         </li>
       </ul>
-
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown cart-nav" id="auto-dropdown">
+        <% if params[:controller] != "carts" %>
+        <li class="dropdown cart-nav">
           <%= render "common/cart" %>
         </li>
+        <% end %>
         <% unless current_user %>
         <li>
           <%= link_to new_user_registration_path do %>

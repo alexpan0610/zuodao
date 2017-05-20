@@ -30,10 +30,14 @@ module ApplicationHelper
       "待支付"
     when 'paid'
       "已支付"
+    when 'applying_for_cancel'
+      "等待审核"
     when 'shipping'
       "已出货"
     when 'shipped'
       "已送达"
+    when 'applying_for_return'
+      "退货中"
     when 'cancelled'
       "已取消"
     when 'returend'
@@ -44,6 +48,10 @@ module ApplicationHelper
   def transparent_nav
     case params[:controller]
     when "welcome"
+      "navbar-transparent navbar-color-on-scroll"
+    when "devise/registrations"
+      "navbar-transparent navbar-color-on-scroll"
+    when "devise/sessions"
       "navbar-transparent navbar-color-on-scroll"
     when "products"
       if params[:action] == "show"

@@ -1,28 +1,28 @@
-<div class="my-content main account-addresses">
+<div class="my-content account-addresses">
   <div class="container">
-    <div class="page-header">
-      <h3>收货信息
-        <%= link_to fa_icon("plus", text: "新增"), new_account_address_path, class: "btn btn-raised btn-success pull-right" %>
-      </h3>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>标签</th>
-              <th>收货人</th>
-              <th>手机号</th>
-              <th>详细地址</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="addresses-list">
-            <%= render partial: "address", collection: @addresses, as: :address %>
-          </tbody>
-        </table>
+    <div class="card">
+      <div class="card-header card-header-icon" data-background-color="blue">
+        <i class="material-icons">place</i>
+      </div>
+      <h4 class="card-title">收货信息</h4>
+      <div class="card-content">
+        <div class="table-responsive">
+          <table class="table table-shopping">
+            <thead>
+              <tr>
+                <th>标签</th>
+                <th>收货人</th>
+                <th>手机号</th>
+                <th>详细地址</th>
+                <th class="text-right">操作</th>
+              </tr>
+            </thead>
+            <tbody id="addresses-list">
+              <%= render "addresses" %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<%= render "common/delete_confirm" %>

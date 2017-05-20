@@ -13,6 +13,7 @@
  *= require_tree .
  *= require font-awesome
  *= require material_icons
+ *= require bootstrap-tagsinput
  *= require_self
  */
 @import "bootstrap-sprockets";
@@ -56,10 +57,16 @@ body {
   padding-bottom: 140px;
   background-color: #deeff5;
 }
+
 // 内容区
 .my-content {
   margin: 101px 30px 0;
-  min-height: 740px;
+  padding-bottom: 60px;
+}
+// 内容区带悬浮效果
+.my-content-raised {
+  margin: 101px 30px 0;
+  padding-bottom: 60px;
   border-radius: 6px;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }

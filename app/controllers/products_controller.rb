@@ -12,30 +12,63 @@ class ProductsController < ApplicationController
     else
       @products = @result.where(category_id: params[:category].to_i)
     end
-    # 显示方式，列表或网格
-    params[:view] = params[:view].present? ? params[:view] : 'grid'
   end
 
   def show
     @product = Product.find(params[:id])
   end
 
-  def add_to_cart
-    @product = Product.find(params[:id])
-    @quantity = params[:quantity].present? ? params[:quantity].to_i : 1
-    # 验证加入购物车的商品数量是否超过库存
-    if @quantity > @product.quantity
-      @quantity = @product.quantity
-      current_cart.add(@product, @quantity)
-      flash[:warning] = "您加入购物车的商品数量超过库存，实际加入购物车的商品数量为#{@quantity}件。"
-      redirect_to product_path(@product)
-    else
-      current_cart.add(@product, @quantity)
-      respond_to :js
+  def operations
+    case params[:commit]
+    when "add_to_cart"
+      # 加入购物车
+      add_to_cart(is_over_sell?)
+    when "order_now"
+      # 立即下单
+      order_now(is_over_sell?)
     end
   end
 
   private
+
+  # 加入购物车
+  def add_to_cart(over_sell)
+    current_cart.add(@product, @quantity)
+    if over_sell
+      flash[:warning] = "您选择的数量超过课程名额，实际提交的名额为#{@quantity}人。"
+      redirect_to product_path(@product)
+    else
+      respond_to do |format|
+        format.js { render "products/add_to_cart"}
+      end
+    end
+  end
+
+  # 立即下单
+  def order_now(over_sell)
+    item = current_cart.add(@product, @quantity)
+    if over_sell
+      if @quantity > 0
+        flash[:warning] = "您选择的数量超过课程名额，实际提交的名额为#{@quantity}人。"
+      else
+        flash[:warning] = "您报名的课程#{@product.title}名额已满！"
+        return redirect_to product_path(@product)
+      end
+    end
+    redirect_to checkout_cart_path(item_ids:[item.id])
+  end
+
+  # 是否超卖
+  def is_over_sell?
+    @product = Product.find(params[:id])
+    @quantity = params[:quantity].present? ? params[:quantity].to_i : 1
+    if @quantity > @product.quantity
+      @quantity = @product.quantity
+      true
+    else
+      false
+    end
+  end
 
   def validate_search_key
     @query = params[:query].gsub(/\|\'|\/|\?/, "") if params[:query].present?
