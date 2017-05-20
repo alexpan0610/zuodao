@@ -1,59 +1,57 @@
 <div class="product-page">
   <div class="wrapper background-blue">
-    <div itemscope itemtype="http://schema.org/Product">
-      <div id="productPage" class="header" data-no-turbolink style="background: url('http://ooz9ucbbf.bkt.clouddn.com/product%20background.jpg')no-repeat;background-size: cover; ">
+    <div class="header">
 
-        <div class="container">
-          <div class="row" style="margin-top: 100px;margin-bottom:200px">
-            <div class="col-sm-6 col-md-6">
-              <div class="product-image">
-                <a href="http://demos.creative-tim.com/material-kit-pro/presentation.html" target="_blank">
-                  <img src="http://68.media.tumblr.com/40b4d52448eaea2a125a108b7670dbb4/tumblr_ns1ua2dmYM1t7cmmpo1_1280.png">
-                </a>
-              </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="product-image">
+              <a href="http://demos.creative-tim.com/material-kit-pro/presentation.html" target="_blank">
+                <img src="http://68.media.tumblr.com/40b4d52448eaea2a125a108b7670dbb4/tumblr_ns1ua2dmYM1t7cmmpo1_1280.png">
+              </a>
             </div>
-            <div class="col-sm-6 col-md-5 col-md-offset-1">
-              <div class="pay-area">
-                <div class="text-center">
-                  <h1 itemprop="name" class="product-name">
-                    <%= @product.title %>
-                  </h1>
+          </div>
+          <div class="col-md-5 col-md-offset-1">
+            <div class="pay-area">
+              <div class="text-center">
+                <h1 itemprop="name" class="product-name">
+                  <%= @product.title %>
+                </h1>
 
-                  <h5 class="tagline">
-                    <%= @product.description %>
-                  </h5>
+                <h5 class="tagline">
+                  <%= @product.description %>
+                </h5>
 
-                  <h4 class="product-price">
-                    <small>￥</small>
-                    <%= render_price(@product.price) %>
-                  </h4>
+                <h4 class="product-price">
+                  <small>￥</small>
+                  <%= render_price(@product.price) %>
+                </h4>
 
-                  <div class="tagline">
-                    本期剩余名额 :
-                    <span id="product-quantity">
-                      <%= @product.quantity == 0 ? '已报满' : @product.quantity %>
-                    </span>
-                  </div>
-
-                  <%= simple_form_for @product, method: :post, remote: true, url: operations_product_path(@product) do |f| %>
-                    <div class="row">
-                      <%= link_to(mi.remove, "", id: "quantity-minus", class: "quantity-minus btn btn-white btn-sm btn-simple disabled") %>
-                      <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input" %>
-                      <%= link_to(mi.add, "", id: "quantity-plus", class: "quantity-plus btn btn-white btn-sm btn-simple #{@product.quantity <= 1 ? 'disabled' : ''}") %>
-                    </div>
-                    <div class="tab-content">
-                      <div class="tab-pane active">
-                        <button type="submit" name="commit" value="add_to_cart" class="btn-product-option btn btn-warning btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
-                          <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
-                        </button>
-                        <button type="submit" name="commit" value="order_now" class="btn-product-option btn btn-danger btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
-                          立刻下单
-                        </button>
-                      </div>
-                    </div>
-                  <% end %>
-
+                <div class="tagline">
+                  本期剩余名额 :
+                  <span id="product-quantity">
+                    <%= @product.quantity == 0 ? '已报满' : @product.quantity %>
+                  </span>
                 </div>
+
+                <%= simple_form_for @product, method: :post, remote: true, url: operations_product_path(@product) do |f| %>
+                  <div class="row">
+                    <%= link_to(mi.remove, "", id: "quantity-minus", class: "quantity-minus btn btn-white btn-sm btn-simple disabled") %>
+                    <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input" %>
+                    <%= link_to(mi.add, "", id: "quantity-plus", class: "quantity-plus btn btn-white btn-sm btn-simple #{@product.quantity <= 1 ? 'disabled' : ''}") %>
+                  </div>
+                  <div class="tab-content">
+                    <div class="tab-pane active">
+                      <button type="submit" name="commit" value="add_to_cart" class="btn-product-option btn btn-warning btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
+                        <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
+                      </button>
+                      <button type="submit" name="commit" value="order_now" class="btn-product-option btn btn-danger btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
+                        立刻下单
+                      </button>
+                    </div>
+                  </div>
+                <% end %>
+
               </div>
             </div>
           </div>

@@ -46,9 +46,12 @@ module ApplicationHelper
   end
 
   def transparent_nav
-    puts "contoller name : " + params[:controller].to_s
     case params[:controller]
     when "welcome"
+      "navbar-transparent navbar-color-on-scroll"
+    when "devise/registrations"
+      "navbar-transparent navbar-color-on-scroll"
+    when "devise/sessions"
       "navbar-transparent navbar-color-on-scroll"
     when "products"
       if params[:action] == "show"
