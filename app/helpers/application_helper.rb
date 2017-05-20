@@ -49,6 +49,10 @@ module ApplicationHelper
     case params[:controller]
     when "welcome"
       "navbar-transparent navbar-color-on-scroll"
+    when "devise/registrations"
+      "navbar-transparent navbar-color-on-scroll"
+    when "devise/sessions"
+      "navbar-transparent navbar-color-on-scroll"
     when "products"
       if params[:action] == "show"
         "navbar-transparent navbar-color-on-scroll"
