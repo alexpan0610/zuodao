@@ -158,7 +158,7 @@ class Account::OrdersController < ApplicationController
     @items.each do |item|
       # 生成订单详情
       @order_detail = OrderDetail.new
-      @order_detail.images = item.product.images
+      @order_detail.image = item.product.image
       @order_detail.title = item.product.title
       @order_detail.description = item.product.description
       @order_detail.price = item.product.price

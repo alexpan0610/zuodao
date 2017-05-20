@@ -1,41 +1,7 @@
 <div class="my-content product-list">
   <div class="container">
     <div class="row">
-      <% @products.each do |product| %>
-        <div class="col-md-6 col-lg-4">
-          <div class="card card-blog card-atv">
-            <div class="card-image">
-              <a href="#pablo">
-                <div class="atvImg">
-                  <%= image_tag("card-profile4.jpg", class: "img") %>
-                </div>
-              </a>
-            </div>
-
-            <div class="card-content">
-              <h6 class="category text-success">Legal</h6>
-              <h4 class="card-title">
-                <a href="#pablo">This is a perspective card, the image is moving on hover</a>
-              </h4>
-              <p class="card-description">
-                Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-              </p>
-              <div class="footer">
-                <div class="author">
-                  <a href="#pablo">
-                    <img src="assets/img/faces/marc.jpg" alt="..." class="avatar img-raised">
-                    <span>Mike John</span>
-                  </a>
-                </div>
-                <div class="stats">
-                  <i class="material-icons">schedule</i>
-                  5 min read
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render partial: "product", collection: @products, as: :product %>
     </div>
   </div>
 </div>

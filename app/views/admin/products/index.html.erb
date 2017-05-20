@@ -24,7 +24,7 @@
               <td><%= index + 1 %></td>
               <td width="100">
                 <%= link_to product_path(product) do %>
-                  <%= render_product_image(product, "products-img") %>
+                  <%= render_product_image_thumb(product) %>
                 <% end %>
               </td>
               <td><%= product.category.name %></td>

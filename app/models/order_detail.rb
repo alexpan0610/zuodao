@@ -14,6 +14,5 @@
 #
 
 class OrderDetail < ApplicationRecord
-  serialize :images, JSON
   belongs_to :order
 end

@@ -46,6 +46,7 @@ module ApplicationHelper
   end
 
   def transparent_nav
+    puts "contoller name : " + params[:controller].to_s
     case params[:controller]
     when "welcome"
       "navbar-transparent navbar-color-on-scroll"
