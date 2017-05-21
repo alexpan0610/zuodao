@@ -52,7 +52,9 @@
                     <input type="hidden" name="items[]" value="<%= item.id %>">
                     <tr>
                       <td>
-                        <%= render_product_image(item.product, "img-container") %>
+                        <div class="img-container">
+                          <%= render_product_image_thumb(item.product) %>
+                        </div>
                       </td>
                       <td class="td-name">
                         <%= item.product.title %>
