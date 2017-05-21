@@ -27,13 +27,15 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def destroy
-    if @user.admin?
-      flash[:alert] = "不能删除管理员账户"
+    if @user == current_user
+      flash[:alert] = "不能删除当前账户"
+    elsif @user.admin?
+      flash[:warning] = "不能删除管理员账户"
     else
       if @user.destroy
-        flash[:alert] = "用户#{@user.title}已被删除"
+        flash[:alert] = "用户#{@user.email}已被删除"
       else
-        flash[:warning] = "用户#{@user.title}删除失败"
+        flash[:warning] = "用户#{@user.email}删除失败"
       end
     end
     redirect_to admin_users_path
