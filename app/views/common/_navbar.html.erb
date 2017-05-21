@@ -7,19 +7,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">做到</a>
+      <a class="navbar-brand" href="/">
+        <%= image_tag "brand.png", alt: "做到" %>
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="navigation-example">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="<%= products_path %>" class="dropdown-toggle">选课</a>
+          <a href="<%= products_path %>" class="dropdown-toggle">课程</a>
           <ul class="dropdown-menu">
             <% @categories.each_with_index do |category, index| %>
-            <% if index != 0 %>
-            <li class="divider"></li>
-            <% end %>
-            <li><%= link_to(category.name, products_path(category: category.id)) %></li>
+              <% if index != 0 %>
+                <li class="divider"></li>
+              <% end %>
+              <li><%= link_to(category.name, products_path(category: category.id)) %></li>
             <% end %>
           </ul>
         </li>

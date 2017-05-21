@@ -7,10 +7,9 @@
             <h1 class="title">你与牛人之间只差这最后一课</h1>
             <h4 class="slogan">认知是人与人之前唯一的门槛，但人人都能通过掌握认知学习法完成认知升级</h4>
             <br/>
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="btn btn-danger btn-round btn-raised btn-lg">
-              <i class="fa fa-play"></i>
-              开始上课
-            </a>
+            <%= link_to products_path, class: "btn btn-danger btn-lg btn-round btn-raised" do %>
+              <%= fa_icon("play", text: "开始上课") %>
+            <% end %>
           </div>
         </div>
       </div>

@@ -71,6 +71,16 @@ body {
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
+.navbar .navbar-brand img {
+  height: 30px;
+  display: inline-block;
+}
+
+.navbar .navbar-nav > li > a {
+  font-size: 1em;
+  letter-spacing: 1px;
+}
+
 //---------Footer---------
 footer {
   position: absolute;
