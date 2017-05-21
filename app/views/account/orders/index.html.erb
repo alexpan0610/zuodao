@@ -49,7 +49,9 @@
               <% detail = order.order_details.first %>
                 <tr>
                   <td>
-                    <%= render_product_image(detail, "img-container") %>
+                    <div class="img-container">
+                      <%= render_product_image_thumb(detail) %>
+                    </div>
                   </td>
                   <td class="td-name">
                     <%= detail.title %>
