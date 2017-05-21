@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
     title_cont: @query,
     description_cont: @query,
     m: 'or'
-    ).result(distinct: true)
+    ).result(distinct: true).includes("category")
     if params[:category].blank?
       @products = @result.order('created_at DESC')
     else
