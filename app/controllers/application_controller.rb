@@ -55,7 +55,11 @@ class ApplicationController < ActionController::Base
     cart
   end
 
+  def save_back_url
+    session[:back_url] ||= request.referer
+  end
+
   def back(path)
-    redirect_to request.referer || path
+    redirect_to session.delete(:back_url) || path
   end
 end

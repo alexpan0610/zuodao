@@ -1,29 +1,29 @@
-<% if @addresses.empty? %>
-  <%= link_to fa_icon("plus", text: "新增"), new_account_address_path, class: "btn btn-raised btn-info" %>
-<% else %>
-  <% selected = @selected.present? ? @selected : current_user.default_address %>
-  <input type="hidden" name="selected_address" value="<%= selected.nil? ? 'none' : selected.id %>" id="selected-address"/>
-  <input type="hidden" value="<%= current_user.addresses.count %>" id="addresses-count"/>
-  <table class="table">
-    <% @addresses.each_with_index do |address, index| %>
-    <tr>
-      <td>
-        <a href="" class="btn btn-raised btn-<%= address == selected ? 'danger' : 'white' %> address-label" id="address-<%= index %>">
-          <%= address.label %>
-        </a>
-        <input type="hidden" value="<%= address.id %>" id="address-id-<%= index %>"/>
-      </td>
-      <td><%= address.name %></td>
-      <td width="40%"><%= address.address %></td>
-      <td><%= address.cellphone %></td>
-      <td>
-        <% selected_id = selected.nil? ? '' : selected.id %>
-        <%= link_to("设为默认", set_default_account_address_path(address, selected: selected_id),
-        method: :post, remote: true, id: "checkout-btn-set-default-#{index}",
-        class: "btn btn-info btn-round btn-sm #{address.default? ? 'invisible' : 'visible'}") %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
-<% end %>
-<hr/>
+<% selected = @selected.present? ? @selected : current_user.default_address %>
+<input type="hidden" name="selected_address" value="<%= selected.nil? ? 'none' : selected.id %>" id="selected-address"/>
+<input type="hidden" value="<%= current_user.addresses.count %>" id="addresses-count"/>
+<table class="table">
+  <% @addresses.each_with_index do |address, index| %>
+  <tr>
+    <td>
+      <a href="" class="btn btn-raised btn-<%= address == selected ? 'danger' : 'white' %> address-label" id="address-<%= index %>">
+        <%= address.label %>
+      </a>
+      <input type="hidden" value="<%= address.id %>" id="address-id-<%= index %>"/>
+    </td>
+    <td><%= address.name %></td>
+    <td width="40%"><%= address.address %></td>
+    <td><%= address.cellphone %></td>
+    <td>
+      <% selected_id = selected.nil? ? '' : selected.id %>
+      <%= link_to("设为默认", set_default_account_address_path(address, selected: selected_id),
+      method: :post, remote: true, id: "checkout-btn-set-default-#{index}",
+      class: "btn btn-info btn-round btn-sm #{address.default? ? 'invisible' : 'visible'}") %>
+    </td>
+  </tr>
+  <% end %>
+  <tr>
+    <td colspan="5">
+      <%= link_to fa_icon("plus", text: "新增"), new_account_address_path, class: "btn btn-raised btn-info" %>
+    </td>
+  </tr>
+</table>

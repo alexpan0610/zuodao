@@ -1,6 +1,7 @@
 class Account::AddressesController < ApplicationController
   before_action :authenticate_user!
   before_action :find_address_by_id, only: [:edit, :update, :destroy, :set_default]
+  before_action :save_back_url, only: [:new, :edit]
 
   def index
     @addresses = current_user.addresses
@@ -14,7 +15,7 @@ class Account::AddressesController < ApplicationController
     @address = Address.new(address_params)
     @address.user = current_user
     if @address.save
-      save()
+      save
     else
       render :new
     end
@@ -22,7 +23,7 @@ class Account::AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      save()
+      save
     else
       render :edit
     end
@@ -48,7 +49,7 @@ class Account::AddressesController < ApplicationController
     if params[:action] == "update"
       flash[:notice] = "收货地址已成功修改！"
     end
-    redirect_to account_addresses_path
+    back account_addresses_path
   end
 
   def find_address_by_id
