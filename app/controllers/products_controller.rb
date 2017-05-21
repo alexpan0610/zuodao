@@ -61,7 +61,7 @@ class ProductsController < ApplicationController
   # 是否超卖
   def is_over_sell?
     @product = Product.find(params[:id])
-    @quantity = params[:quantity].present? ? params[:quantity].to_i : 1
+    @quantity = params[:quantity].to_i
     if @quantity > @product.quantity
       @quantity = @product.quantity
       true

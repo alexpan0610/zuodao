@@ -35,20 +35,18 @@
                 </div>
 
                 <%= simple_form_for @product, method: :post, remote: true, url: operations_product_path(@product) do |f| %>
-                  <div class="row">
+                  <div class="buy-quantity">
                     <%= link_to(mi.remove, "", id: "quantity-minus", class: "quantity-minus btn btn-white btn-sm btn-simple disabled") %>
-                    <%= f.input_field "", name: "quantity", value: '1', id: "quantity-input", class: "quantity-input" %>
+                    <%= f.input_field "", name: "quantity", value: 1, id: "quantity-input", class: "quantity-input" %>
                     <%= link_to(mi.add, "", id: "quantity-plus", class: "quantity-plus btn btn-white btn-sm btn-simple #{@product.quantity <= 1 ? 'disabled' : ''}") %>
                   </div>
-                  <div class="tab-content">
-                    <div class="tab-pane active">
-                      <button type="submit" name="commit" value="add_to_cart" class="btn-product-option btn btn-warning btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
-                        <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
-                      </button>
-                      <button type="submit" name="commit" value="order_now" class="btn-product-option btn btn-danger btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
-                        立刻下单
-                      </button>
-                    </div>
+                  <div class="operations">
+                    <button type="submit" name="commit" value="add_to_cart" class="btn-product-option btn btn-warning btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
+                      <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
+                    </button>
+                    <button type="submit" name="commit" value="order_now" class="btn-product-option btn btn-danger btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
+                      立刻下单
+                    </button>
                   </div>
                 <% end %>
 

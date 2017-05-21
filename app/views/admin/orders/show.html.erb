@@ -25,7 +25,7 @@
               <tr class="order-detail">
                 <td><%= index + 1 %></td>
                 <td><%= order_detail.title %></td>
-                <td><%= render_text(order_detail.description) %></td>
+                <td><%= render_product_description(order_detail) %></td>
                 <td class="td-number">
                   ￥<%= render_price(order_detail.price) %>
                 </td>

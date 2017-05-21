@@ -33,8 +33,9 @@ class Cart < ApplicationRecord
   end
 
   def add(product, quantity)
+    # 商品已经在购物车中，增加商品的数量
     if products.include?(product)
-      @cart_item = cart_items.find_by(product_id: product.id)
+      @cart_item = cart_items.find_by_product_id(product.id)
     else
       @cart_item = cart_items.build
     end

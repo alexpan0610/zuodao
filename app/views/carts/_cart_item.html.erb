@@ -14,7 +14,7 @@
   <td class="td-name">
     <%= link_to(item.product.title, product_path(item.product)) %>
     <br/>
-    <small><%= render_text(item.product.description) %></small>
+    <small><%= render_product_description(item.product) %></small>
   </td>
   <td class="td-number text-right">
     <small>￥</small>

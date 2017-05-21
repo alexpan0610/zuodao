@@ -1,8 +1,8 @@
 // Place all the styles related to the carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 // 导航条上的购物车
+
 .navbar-transparent {
   .cart-nav {
     .badge {
@@ -36,7 +36,7 @@
     }
 
     .card .card-content {
-      padding: 5px 15px 5px;
+      padding: 5px 15px;
     }
 
     .card [data-background-color] {
@@ -44,23 +44,27 @@
       border-radius: 3px;
       padding: 5px;
     }
+
     .table-shopping .img-container {
       width: 80px;
       max-height: 100px;
     }
+
     .table-shopping .td-name {
       min-width: 150px;
     }
+
     .table-shopping .td-number {
-      min-width: 120px;
+      min-width: 130px;
     }
+
     .table .td-price {
       font-size: 1.6em;
     }
   }
 }
-
 // 购物车页
+
 .carts {
   .card {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;

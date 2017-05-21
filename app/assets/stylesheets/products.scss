@@ -30,22 +30,11 @@
     background-size: cover;
     padding: 200px 0;
   }
-  // 数量输入框
-  .quantity-input {
-    color: #333 !important;
-    border: 1px solid #FFF;
-    border-radius: 0;
-    box-shadow: 0 16px 26px -10px rgba(3, 169, 244, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(3, 169, 244, 0.2);
-  }
-  // 加减按钮
-  .quantity-minus,
-  .quantity-plus {
-    color: #000;
-    padding: 4px 10px;
-
-    &.disabled {
-      color: #424242;
-      background-color: #E0E0E0;
+  .buy-quantity {
+    // 加减按钮
+    .quantity-minus,
+    .quantity-plus {
+      pointer-events: auto;
     }
   }
 }
@@ -84,13 +73,15 @@
 }
 
 .product-page .quantity-input {
+  color: #333;
   text-align: center;
   width: 60px;
-  color: #b1b1b1;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 3px;
+  border: 1px solid #FFF;
+  box-shadow: 0 16px 26px -10px rgba(3, 169, 244, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(3, 169, 244, 0.2);
 }
-//名额数量框
+//名额数量
 .product-page h5.tagline {
   font-size: 16px;
 }

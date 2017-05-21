@@ -12,13 +12,13 @@ module FlashesHelper
   def render_alert_icon(key)
     case flash_class(key)
     when "info"
-      content_tag(:i, "info_outline", class: "material-icons")
+      mi.info_outline
     when "success"
-      content_tag(:i, "check", class: "material-icons")
+      mi.check
     when "danger"
-      content_tag(:i, "error_outline", class: "material-icons")
+      mi.error_outline
     when "warning"
-      content_tag(:i, "warning", class: "material-icons")
+      mi.warning
     end
   end
 end

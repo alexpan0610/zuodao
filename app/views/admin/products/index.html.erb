@@ -29,7 +29,7 @@
               </td>
               <td><%= product.category.name %></td>
               <td><%= product.title %></td>
-              <td><%= render_text(product.description, length: 20) %></td>
+              <td><%= render_product_description(product) %></td>
               <td>￥<%= render_price(product.price) %></td>
               <td><%= product.quantity %></td>
               <td>

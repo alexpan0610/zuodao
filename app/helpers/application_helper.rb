@@ -12,6 +12,10 @@ module ApplicationHelper
     time.strftime('%H:%M:%S %m/%d %Y' )
   end
 
+  def render_product_description(product)
+    render_text(product.description, length: 30)
+  end
+
   def render_text(text, length: length)
     if length.nil?
       text
