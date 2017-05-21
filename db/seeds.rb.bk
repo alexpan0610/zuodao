@@ -44,3 +44,31 @@ LABELS = ["公司","家","宿舍"]
   user: user
   )
 end
+
+category = Category.create!(
+name: "认知学习法"
+)
+
+10.times do
+  Product.create!(
+  title: Faker::App.name,
+  description: Faker::Lorem.sentence,
+  price: Faker::Number.decimal(4,2),
+  quantity: Faker::Number.number(3),
+  category: category
+  )
+end
+
+category = Category.create!(
+name: "千古营销课"
+)
+
+10.times do
+  Product.create!(
+  title: Faker::App.name,
+  description: Faker::Lorem.sentence,
+  price: Faker::Number.decimal(4,2),
+  quantity: Faker::Number.number(3),
+  category: category
+  )
+end

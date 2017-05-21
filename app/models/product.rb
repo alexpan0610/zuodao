@@ -3,7 +3,7 @@
 # Table name: products
 #
 #  id          :integer          not null, primary key
-#  images      :string
+#  image       :string
 #  title       :string
 #  description :text
 #  price       :float
