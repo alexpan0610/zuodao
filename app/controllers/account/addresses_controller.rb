@@ -56,6 +56,6 @@ class Account::AddressesController < ApplicationController
   end
 
   def address_params
-    params.require(:address).permit(:name, :cellphone, :address)
+    params.require(:address).permit(:label, :name, :cellphone, :address)
   end
 end
