@@ -50,7 +50,6 @@
   }
 }
 //---Liuchuan do for product detail page
-
 .product-page .product-image {
   box-shadow: 0 29px 32px -20px rgba(0,0,0,0.5);
   margin: 20px auto;
@@ -77,6 +76,11 @@
   font-weight: 600;
   margin-bottom: 20px;
   margin-top: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .product-page .quantity-input {
