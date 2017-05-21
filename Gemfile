@@ -37,6 +37,7 @@ gem 'bootstrap-tagsinput-rails'
 gem 'simple_form'
 gem 'ransack'
 gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-aws'
 gem "mini_magick"
 gem 'font-awesome-rails'
 gem 'faker'

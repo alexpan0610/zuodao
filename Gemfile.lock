@@ -45,6 +45,14 @@ GEM
     arel (7.1.1)
     autoprefixer-rails (7.1.0)
       execjs
+    aws-sdk (2.9.21)
+      aws-sdk-resources (= 2.9.21)
+    aws-sdk-core (2.9.21)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.9.21)
+      aws-sdk-core (= 2.9.21)
+    aws-sigv4 (1.0.0)
     bcrypt (3.1.11)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
@@ -57,6 +65,9 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    carrierwave-aws (1.1.0)
+      aws-sdk (~> 2.0)
+      carrierwave (>= 0.7, < 2.0)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -85,6 +96,7 @@ GEM
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
+    jmespath (1.3.1)
     jquery-rails (4.1.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -213,6 +225,7 @@ DEPENDENCIES
   bootstrap-tagsinput-rails
   byebug
   carrierwave (~> 1.0)
+  carrierwave-aws
   coffee-rails (~> 4.2)
   devise
   faker
