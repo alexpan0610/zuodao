@@ -17,7 +17,7 @@
 //= require bootstrap-datepicker
 //= require bootstrap-tagsinput
 //= require atv-img-animation
-//= require material-kit-pro
+//= require material-kit
 //= require material.min
 //= require nouislider.min
 //= require turbolinks
