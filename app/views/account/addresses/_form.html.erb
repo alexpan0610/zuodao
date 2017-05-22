@@ -9,7 +9,7 @@
         <div class="card-content">
           <%= simple_form_for [:account, @address] do |f| %>
             <div class="form-inputs">
-              <%= f.input :label, label: "标签", placeholder: "如：公司、家" %>
+              <%= f.input :label, label: "标签", placeholder: "如：公司、家", autofocus: true %>
               <%= f.input :name, label: "收货人" %>
               <%= f.input :cellphone, label: "手机号" %>
               <%= f.input :address, label: "详细地址" %>

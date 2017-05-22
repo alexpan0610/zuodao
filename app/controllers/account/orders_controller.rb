@@ -181,7 +181,7 @@ class Account::OrdersController < ApplicationController
   # 处理用户操作异常
   def operation_error(level, msg)
     flash[level] = msg
-    redirect_back fallback_location: proc { account_orders_path }
+    back account_orders_path
   end
 
   def find_order_by_number

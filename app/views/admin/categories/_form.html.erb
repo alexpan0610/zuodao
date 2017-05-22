@@ -1,6 +1,6 @@
 <%= simple_form_for [:admin, @category] do |f| %>
   <div class="form-inputs">
-    <%= f.input :name, label: "分类名称" %>
+    <%= f.input :name, label: "分类名称", autofocus: true %>
   </div>
   <div class="form-actions">
     <%= link_to("取消", :back, class: "btn btn-raised btn-white") %>

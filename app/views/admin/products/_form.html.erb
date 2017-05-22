@@ -1,5 +1,5 @@
 <%= simple_form_for [:admin, @product] do |f| %>
-  <%= f.input :title, label: "名称" %>
+  <%= f.input :title, label: "名称", autofocus: true %>
   <%= f.input :description, label: "描述" %>
   <%= f.input :price, label: "价格" %>
   <%= f.input :quantity, label: "名额" %>

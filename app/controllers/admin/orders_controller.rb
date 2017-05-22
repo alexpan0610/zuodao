@@ -19,19 +19,19 @@ class Admin::OrdersController <  Admin::AdminController
   # 确认取消订单
   def confirm_cancel
     @order.cancel!
-    redirect_back fallback_location: proc { admin_orders_path }
+    back admin_orders_path
   end
 
   # 发货
   def ship
     @order.ship!
-    redirect_back fallback_location: proc { admin_orders_path }
+    back admin_orders_path
   end
 
   # 确认退货
   def confirm_goods_returned
     @order.confirm_goods_returned!
-    redirect_back fallback_location: proc { admin_orders_path }
+    back admin_orders_path
   end
 
   private

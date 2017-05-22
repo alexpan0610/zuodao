@@ -1,6 +1,6 @@
 <%= simple_form_for [:admin, @user] do |f| %>
   <div class="form-inputs">
-    <%= f.input :email, label: "E-mail" %>
+    <%= f.input :email, label: "E-mail", autofocus: true %>
     <%= f.input :password, label: "登录密码" %>
     <%= f.input :is_admin, label: "管理员" %>
   </div>

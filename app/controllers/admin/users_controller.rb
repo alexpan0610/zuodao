@@ -12,7 +12,8 @@ class Admin::UsersController < Admin::AdminController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_users_path
+      flash[:notice] = "用户#{@user.email}保存成功"
+      back admin_users_path
     else
       render :new
     end
@@ -20,7 +21,8 @@ class Admin::UsersController < Admin::AdminController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_users_path, notice: "用户#{@user.email}更新成功！"
+      flash[:notice] = "用户#{@user.email}已更新"
+      back admin_users_path
     else
       render :edit
     end
@@ -38,7 +40,7 @@ class Admin::UsersController < Admin::AdminController
         flash[:warning] = "用户#{@user.email}删除失败"
       end
     end
-    redirect_to admin_users_path
+    back admin_users_path
   end
 
   private

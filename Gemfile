@@ -41,15 +41,14 @@ gem 'carrierwave-aws'
 gem "mini_magick"
 gem 'font-awesome-rails'
 gem 'faker'
-gem 'annotate'
 gem 'aasm'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  gem 'annotate'
   gem 'dotenv-rails'
   gem 'awesome_rails_console'
 end

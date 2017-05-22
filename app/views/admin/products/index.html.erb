@@ -11,32 +11,38 @@
           <th>#</th>
           <th>图片</th>
           <th>分类</th>
-          <th>名称</th>
-          <th>描述</th>
-          <th>价格</th>
-          <th>名额</th>
-          <th>操作</th>
-          <th>创建时间</th>
+          <th>商品</th>
+          <th class="text-right">价格</th>
+          <th class="text-right">名额</th>
+          <th class="text-center">操作</th>
         </thead>
         <tbody>
           <% @products.each_with_index do |product, index| %>
             <tr>
               <td><%= index + 1 %></td>
-              <td width="100">
+              <td width="200px">
                 <%= link_to product_path(product) do %>
                   <%= render_product_image_thumb(product) %>
                 <% end %>
               </td>
               <td><%= product.category.name %></td>
-              <td><%= product.title %></td>
-              <td><%= render_product_description(product) %></td>
-              <td>￥<%= render_price(product.price) %></td>
-              <td><%= product.quantity %></td>
-              <td>
+              <td class="td-name">
+                <%= product.title %>
+                <br/>
+                <small>
+                  <%= render_product_description(product) %>
+                  <br/>
+                  <small>
+                    <%= render_create_time(product) %>
+                  </small>
+                </small>
+              </td>
+              <td class="text-right">￥<%= render_price(product.price) %></td>
+              <td class="text-right"><%= product.quantity %></td>
+              <td class="text-center">
                 <%= link_to fa_icon("edit"), edit_admin_product_path(product), rel: "tooltip", title: "编辑", class: "btn btn-raised btn-white btn-sm" %>
                 <%= render "common/delete_btn", path: admin_product_path(product), message: "确定删除课程“#{product.title}”吗？" %>
               </td>
-              <td><%= render_create_time(product) %></td>
             </tr>
           <% end %>
         </tbody>
