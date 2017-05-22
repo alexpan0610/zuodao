@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
 
   def index
     @result = Product.ransack(
+    category_name_cont: @query,
     title_cont: @query,
     description_cont: @query,
     m: 'or'
