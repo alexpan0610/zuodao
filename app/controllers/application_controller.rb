@@ -19,14 +19,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def change_quantity(quantity)
-    @product = @cart_item.product
-    @cart_item.quantity += quantity
-    @product.quantity -= quantity
-    @cart_item.save
-    @product.save
-  end
-
   def load_categories
     @categories = Category.all
   end

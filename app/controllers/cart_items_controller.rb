@@ -8,27 +8,27 @@ class CartItemsController < ApplicationController
   end
 
   def increase
-    # 检查名额
+    # 增加名额
     if @cart_item.product.quantity > 0
-      change_quantity(1)
+      @cart_item.change_quantity!(1)
     end
 	end
 
 	def decrease
-    # 购物车中的课程数量最少为1件
+    # 课程数量最少为1件
 		if @cart_item.quantity > 1
-			change_quantity(-1)
+			@cart_item.change_quantity!(-1)
 		end
 	end
 
   def destroy
-    change_quantity(-@cart_item.quantity)
     @cart_item.destroy
+    flash.now[:notice] = "课程 #{@cart_item.product.title} 已从购物车中移除~"
     respond_to do |format|
       format.js { render "carts/delete_item"}
     end
   end
-  
+
   private
 
   def find_cart_item

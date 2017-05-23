@@ -23,4 +23,19 @@ class Product < ApplicationRecord
   validates :description, presence: true
   validates :price, presence: true
   validates :quantity, presence: true
+
+  # 变更库存
+  def change_stock!(quantity)
+    self.quantity += quantity
+    if self.quantity >= 0
+      return self.save
+    else
+      return false
+    end
+  end
+
+  # 是否售罄
+  def is_sold_out?
+    self.quantity <= 0
+  end
 end

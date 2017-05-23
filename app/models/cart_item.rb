@@ -13,4 +13,11 @@
 class CartItem < ApplicationRecord
   belongs_to :cart, counter_cache: true
   belongs_to :product
+
+  # 变更数量
+  def change_quantity!(quantity)
+    self.quantity += quantity
+    self.save
+    self
+  end
 end

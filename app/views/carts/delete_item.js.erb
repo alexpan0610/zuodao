@@ -1,11 +1,8 @@
 $('.cart-nav').html('<%= escape_javascript render(partial: "common/cart") %>');
 $('.cart-content').html('<%= escape_javascript render "carts/cart_content" %>');
-$('#product-quantity').html('<%= @product.quantity %>');
-if (<%= @product.quantity %> > 1) {
-  $('#quantity-plus').removeClass("disabled");
-  $('.btn-product-option').removeAttr("disabled");
-  $('.btn-product-option').removeClass("disabled");
-}
+// 显示提示消息
+$('.navbar').after('<%= escape_javascript render(partial: "common/flashes") %>');
+slideUpAlert();
 //重新渲染页面后，重新加载js
 $.material.init();
 setSelections(<%= @item_ids.to_json.html_safe %>);

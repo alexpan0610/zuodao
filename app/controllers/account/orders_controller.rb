@@ -1,6 +1,6 @@
 class Account::OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_order, only: :create
+  before_action :check_order_info, only: :create
   before_action :find_order_by_number, only: [:show, :pay, :cancel, :make_payment, :apply_for_cancel, :confirm_receipt, :apply_for_return]
 
   def index
@@ -19,12 +19,14 @@ class Account::OrdersController < ApplicationController
   end
 
   def create
-    # 生成订单
-    create_order
-    # 生成购物清单
-    create_order_details
-    # 前往支付页
-    redirect_to pay_account_order_path(@order.number)
+    if check_stock
+      # 生成订单
+      create_order
+      # 生成购物清单
+      create_order_details
+      # 前往支付页
+      redirect_to pay_account_order_path(@order.number)
+    end
   end
 
   # 支付页
@@ -123,9 +125,7 @@ class Account::OrdersController < ApplicationController
   private
 
   # 检查订单信息
-  def check_order
-    # 获取购物清单
-    @items = CartItem.where(id: params[:items])
+  def check_order_info
     # 获取收获地址
     if params[:selected_address] == "none"
       return checkout_error(:warning, "请选择一个收货地址！")
@@ -138,6 +138,30 @@ class Account::OrdersController < ApplicationController
     @payment = params[:payment_method]
   end
 
+  # 检查库存
+  def check_stock
+    # 获取购物清单
+    @items = CartItem.where(id: params[:items])
+    @items.each do |item|
+      @product = item.product
+      # 已售罄
+      if @product.is_sold_out?
+        order_error(:warning, "课程#{@product.title}名额已满！")
+        return false
+      # 订单名额超过剩余名额
+      elsif item.quantity > item.product.quantity
+        order_error(:warning, "您报名课程#{@product.title}的名额超出剩余名额！")
+        return false
+      # 成功变更库存
+      elsif item.product.change_stock!(-item.quantity)
+        return true
+      else
+        order_error(:alert, "非常抱歉，您报名课程#{@product.title}的请求出错了！")
+        return false
+      end
+    end
+  end
+
   # 生成订单
   def create_order
     @order = Order.new
@@ -148,7 +172,7 @@ class Account::OrdersController < ApplicationController
     @order.total_price = current_cart.calculate_total_price(@items)
     @order.user = current_user
     unless @order.save
-      checkout_error(:alert, "生成订单出错！")
+      order_error(:alert, "生成订单出错！")
     end
   end
 
@@ -165,17 +189,26 @@ class Account::OrdersController < ApplicationController
       @order_detail.quantity = item.quantity
       @order.order_details << @order_detail
       unless @order_detail.save
-        checkout_error(:alert, "生成购物清单出错！")
+        return order_error(:alert, "生成购物清单出错！")
       end
-      # 移出购物车
-      current_cart.cart_items.delete(item)
     end
+    # 删除完成结算的课程
+    @items.destroy_all
   end
 
   # 处理订单生成异常
   def checkout_error(level, msg)
     flash[level] = msg
     redirect_to checkout_cart_path(current_cart, item_ids: params[:items])
+  end
+
+  # 处理订单生成异常
+  def order_error(level, msg)
+    if @order.present?
+      @order.destroy
+    end
+    flash[level] = msg
+    redirect_to carts_path
   end
 
   # 处理用户操作异常
