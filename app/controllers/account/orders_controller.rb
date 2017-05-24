@@ -2,6 +2,7 @@ class Account::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_order_info, only: :create
   before_action :find_order_by_number, only: [:show, :pay, :cancel, :make_payment, :apply_for_cancel, :confirm_receipt, :apply_for_return]
+  before_action :save_back_url, only: [:create, :pay, :cancel, :make_payment, :apply_for_cancel, :confirm_receipt, :apply_for_return]
 
   def index
     if params[:start_date].present?
