@@ -41,7 +41,7 @@ gem 'carrierwave-qiniu'
 gem 'qiniu-rs'
 gem "mini_magick"
 gem 'font-awesome-rails'
-gem 'faker'
+gem 'figaro'
 gem 'aasm'
 
 group :development, :test do
