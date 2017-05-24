@@ -11,9 +11,11 @@
 #  order_id    :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  product_id  :integer
 #
 
 class OrderDetail < ApplicationRecord
   mount_uploader :image, ImageUploader
   belongs_to :order
+  belongs_to :product
 end

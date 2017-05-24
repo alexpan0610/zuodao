@@ -32,6 +32,16 @@ class Order < ApplicationRecord
     self.number = Date.today.strftime("%Y%m%d") + SecureRandom.uuid[-12,12].upcase;
   end
 
+  # 恢复库存
+  def revert_stock
+    order_details.each do |order_detail|
+      unless order_detail.product.change_stock!(order_detail.quantity)
+        return false
+      end
+    end
+    return true
+  end
+
   include AASM
     aasm do
     state :placed, initial: true
@@ -52,7 +62,11 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: [:placed, :applying_for_cancel], to: :cancelled
+      transitions from: [:placed, :applying_for_cancel], to: :cancelled do
+        guard do
+          revert_stock
+        end
+      end
     end
 
     event :ship do

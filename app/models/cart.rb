@@ -43,11 +43,10 @@ class Cart < ApplicationRecord
     return @cart_item.change_quantity!(quantity)
   end
 
-  def total_price
-    calculate_total_price(cart_items)
-  end
-
-  def calculate_total_price(items)
+  def total_price(items = nil)
+    if items.nil?
+      items = cart_items
+    end
     total = 0.0
     items.each do |item|
       if item.product.price.present?

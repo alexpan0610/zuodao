@@ -169,7 +169,7 @@ class Account::OrdersController < ApplicationController
     @order.cellphone = @address.cellphone
     @order.address = @address.address
     @order.payment_method = @payment
-    @order.total_price = current_cart.calculate_total_price(@items)
+    @order.total_price = current_cart.total_price(@items)
     @order.user = current_user
     unless @order.save
       order_error(:alert, "生成订单出错！")
@@ -182,6 +182,7 @@ class Account::OrdersController < ApplicationController
     @items.each do |item|
       # 生成订单详情
       @order_detail = OrderDetail.new
+      @order_detail.product = item.product
       @order_detail.image = item.product.image
       @order_detail.title = item.product.title
       @order_detail.description = item.product.description
