@@ -1,5 +1,6 @@
 class Admin::OrdersController <  Admin::AdminController
   before_action :find_order_by_id, only: [:show, :confirm_cancel, :ship, :confirm_goods_returned]
+  before_action :save_back_url, only: [:confirm_cancel, :ship, :confirm_goods_returned]
 
   def index
     if params[:start_date].present?

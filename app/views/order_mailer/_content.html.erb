@@ -1,17 +1,17 @@
 <div class="container-fluid">
   <div class="page-header">
-    <h3>
-      <%= title %>
-      <br/>
-      <small>
-        <% case to %>
-        <% when "user" %>
-          <%= link_to("订单链接", account_order_url(@order.number)) %>
-        <% when "admin" %>
-          <%= link_to("订单链接", admin_order_url(@order)) %>
-        <% end %>
-      </small>
-    </h3>
+    <h4>
+      <% case to %>
+      <% when "user" %>
+        尊敬的
+        <%= @user.email %>，您好，
+        您的 <%= link_to '订单' + @order.number, account_order_url(@order.number) %>
+        <%= msg %>
+      <% when "admin" %>
+        <%= link_to("订单" + @order.number, admin_order_url(@order)) %>
+        <%= msg %>
+      <% end %>
+    </h4>
   </div>
   <div class="panel panel-default">
     <div class="panel-body">
