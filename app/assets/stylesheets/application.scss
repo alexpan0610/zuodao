@@ -21,22 +21,23 @@
 @import "font-awesome";
 @import "material-kit";
 @import "customize";
+// 固定位置的消息通知
+.alert-fixed {
+  position: fixed; // 必须有这个属性
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 10;
+  border-radius: 0px;
+}
 // 前端界面通知
 .my-alert {
-  position: absolute;
-  z-index: 10;
   top: 71px;
-  left: 0;
-  right: 0;
 }
 // 管理界面通知
 
 .admin-alert {
-  position: absolute;
-  z-index: 10;
   top: -30px;
-  left: 0;
-  right: 0;
 }
 // footer置底代码
 

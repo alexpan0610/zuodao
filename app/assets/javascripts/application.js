@@ -105,6 +105,7 @@ $(document).on('turbolinks:load', function() {
 
 // 收起通知信息
 function slideUpAlert() {
+  // 消息停留2000毫秒（2秒），消失动画时间250毫秒
   $(".alert").delay(2000).slideUp(250, function() {
     $(this).remove();
   });

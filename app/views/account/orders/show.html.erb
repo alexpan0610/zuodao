@@ -12,6 +12,33 @@
         </small>
       </h4>
       <div class="card-content">
+        <h4>
+          收货信息
+          <br/>
+          <small>
+            <table class="table">
+              <tr>
+                <td><%= @order.name %></td>
+                <td><%= @order.cellphone %></td>
+                <td width="60%"><%= @order.address %></td>
+              </tr>
+            </table>
+          </small>
+        </h4>
+        <hr/>
+        <h4>
+          支付信息
+          <br/>
+          <small>
+            <table class="table">
+              <tr>
+                <td>实付金额：<span class="text-danger">￥<%= render_price(@order.total_price) %></span></td>
+                <td>支付方式：<%= render_payment_method(@order) %></td>
+              </tr>
+            </table>
+          </small>
+        </h4>
+        <hr/>
         <div class="table-responsive">
           <table class="table table-shopping">
             <thead>

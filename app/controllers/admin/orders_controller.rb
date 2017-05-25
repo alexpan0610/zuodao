@@ -20,18 +20,24 @@ class Admin::OrdersController <  Admin::AdminController
   def confirm_cancel
     @order.cancel!
     back admin_orders_path
+    # 发送确认取消通知
+    OrderMailer.notify_order_cancelled(@order).deliver!
   end
 
   # 发货
   def ship
     @order.ship!
     back admin_orders_path
+    # 发送出货通知
+    OrderMailer.notify_order_shipping(@order).deliver!
   end
 
   # 确认退货
   def confirm_goods_returned
     @order.confirm_goods_returned!
     back admin_orders_path
+    # 发送确认退货通知
+    OrderMailer.notify_goods_returned(@order).deliver!
   end
 
   private

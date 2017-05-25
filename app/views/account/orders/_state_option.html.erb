@@ -1,6 +1,6 @@
 <% case order.aasm_state %>
 <% when "placed"%>
-  <%= link_to("立即支付", pay_account_order_path(order.number), class: "btn btn-danger #{size}") %>
+  <%= link_to("完成支付", pay_account_order_path(order.number), class: "btn btn-danger #{size}") %>
   <%= link_to("取消订单", cancel_account_order_path(order.number), method: :post, class: "btn btn-white #{size}") %>
 <% when "paid" %>
   <%= link_to("申请取消", apply_for_cancel_account_order_path(order.number), method: :post, class: "btn btn-white #{size}") %>

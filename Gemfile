@@ -37,7 +37,8 @@ gem 'bootstrap-tagsinput-rails'
 gem 'simple_form'
 gem 'ransack'
 gem 'carrierwave', '~> 1.0'
-gem 'carrierwave-qiniu'
+gem 'carrierwave-qiniu', '~> 1.1.0'
+gem 'carrierwave-i18n'
 gem 'qiniu-rs'
 gem "mini_magick"
 gem 'font-awesome-rails'
@@ -61,6 +62,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'letter_opener'
 end
 
 group :production do

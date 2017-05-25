@@ -9,6 +9,33 @@
     </div>
     <div class="panel panel-default">
       <div class="panel-body">
+        <h4>
+          收货信息
+          <br/>
+          <small>
+            <table class="table">
+              <tr>
+                <td><%= @order.name %></td>
+                <td><%= @order.cellphone %></td>
+                <td width="60%"><%= @order.address %></td>
+              </tr>
+            </table>
+          </small>
+        </h4>
+        <hr/>
+        <h4>
+          支付信息
+          <br/>
+          <small>
+            <table class="table">
+              <tr>
+                <td>实付金额：<span class="text-danger">￥<%= render_price(@order.total_price) %></span></td>
+                <td>支付方式：<%= render_payment_method(@order) %></td>
+              </tr>
+            </table>
+          </small>
+        </h4>
+        <hr/>
         <table class="table table-shopping">
           <thead>
             <tr>
@@ -16,7 +43,7 @@
               <th>名称</th>
               <th>描述</th>
               <th class="text-right">单价</th>
-              <th class="text-right">数量</th>
+              <th class="text-right">名额</th>
               <th class="text-right">小计</th>
             </tr>
           </thead>
@@ -38,13 +65,7 @@
               </tr>
             <% end %>
             <tr>
-              <td colspan="3">
-                <h4 class="text-danger">
-                  <small>合计：</small>
-                  ￥<%= @order.total_price %>
-                </h4>
-              </td>
-              <td class="text-right" colspan="3">
+              <td class="text-right" colspan="6">
                 <%= link_to :back, class: "btn btn-white" do %>
                   <i class="material-icons">keyboard_arrow_left</i>BACK
                 <% end %>

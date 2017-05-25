@@ -23,8 +23,6 @@ class Account::OrdersController < ApplicationController
     if check_stock
       # 生成订单
       create_order
-      # 生成购物清单
-      create_order_details
       # 前往支付页
       redirect_to pay_account_order_path(@order.number)
     end
@@ -61,6 +59,8 @@ class Account::OrdersController < ApplicationController
       @order.make_payment!
       flash[:notice] = "订单支付成功！"
       redirect_to account_orders_path
+      # 发送完成支付通知
+      OrderMailer.notify_order_paid(@order).deliver!
     else
       operation_error(:warning, "订单#{@order.number}已经完成支付，不能重复支付！")
     end
@@ -71,6 +71,8 @@ class Account::OrdersController < ApplicationController
     if @order.paid?
       @order.apply_for_cancel!
       operation_error(:notice, "订单#{@order.number}已提交取消申请，请耐心等待审核")
+      # 发送申请取消订单通知
+      OrderMailer.notify_apply_cancel(@order).deliver!
     elsif @order.cancelled?
       # 订单已经取消
       operation_error(:warning, "订单#{@order.number}已经取消，不能重复取消！")
@@ -92,6 +94,10 @@ class Account::OrdersController < ApplicationController
       # 订单正在配送
       @order.confirm_receipt!
       operation_error(:notice, "您的订单#{@order.number}成功确认收货！")
+      # 发送确认收货通知
+      OrderMailer.notify_order_receipt(@order).deliver!
+      # 发送订单完成通知
+      OrderMailer.notify_order_finished(@order).deliver!
     elsif @order.cancelled?
       # 订单已经取消
       operation_error(:warning, "您的订单#{@order.number}已经取消！")
@@ -112,6 +118,8 @@ class Account::OrdersController < ApplicationController
       # 订单正在配送或送达
       @order.apply_for_return!
       operation_error(:notice, "订单#{@order.number}的退货申请已经提交！")
+      # 发送申请退货通知
+      OrderMailer.notify_apply_return(@order).deliver!
     elsif @order.cancelled?
       # 订单已经取消
       operation_error(:warning, "您的订单#{@order.number}已经取消！")
@@ -165,16 +173,19 @@ class Account::OrdersController < ApplicationController
 
   # 生成订单
   def create_order
-    @order = Order.new
+    @order = current_user.orders.build
     @order.name = @address.name
     @order.cellphone = @address.cellphone
     @order.address = @address.address
     @order.payment_method = @payment
     @order.total_price = current_cart.total_price(@items)
-    @order.user = current_user
-    unless @order.save
-      order_error(:alert, "生成订单出错！")
+    if @order.save
+      create_order_details
+    else
+      return order_error(:alert, "生成订单出错！")
     end
+    # 发送下单通知
+    OrderMailer.notify_order_placed(@order).deliver!
   end
 
   # 生成购物清单
@@ -182,14 +193,13 @@ class Account::OrdersController < ApplicationController
     @order_details = []
     @items.each do |item|
       # 生成订单详情
-      @order_detail = OrderDetail.new
+      @order_detail = @order.order_details.build
       @order_detail.product = item.product
       @order_detail.image = item.product.image
       @order_detail.title = item.product.title
       @order_detail.description = item.product.description
       @order_detail.price = item.product.price
       @order_detail.quantity = item.quantity
-      @order.order_details << @order_detail
       unless @order_detail.save
         return order_error(:alert, "生成购物清单出错！")
       end
