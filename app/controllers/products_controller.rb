@@ -2,12 +2,7 @@ class ProductsController < ApplicationController
   before_action :validate_search_key, only: [:index]
 
   def index
-    @result = Product.ransack(
-    category_name_cont: @query,
-    title_cont: @query,
-    description_cont: @query,
-    m: 'or'
-    ).result(distinct: true).includes("category")
+    @result = Product.ransack(search_criteria).result(distinct: true).includes("category")
     if params[:category].blank?
       @products = @result.order('created_at DESC')
     else
@@ -41,5 +36,14 @@ class ProductsController < ApplicationController
 
   def validate_search_key
     @query = params[:query].gsub(/\|\'|\/|\?/, "") if params[:query].present?
+  end
+
+  def search_criteria
+    {
+      category_name_cont: @query,
+      title_cont: @query,
+      description_cont: @query,
+      m: 'or'
+    }
   end
 end
