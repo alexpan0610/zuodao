@@ -27,8 +27,12 @@ class ProductsController < ApplicationController
       end
     when "order_now"
       # 立即下单
-      item = current_cart.add!(@product, @quantity)
-      redirect_to checkout_cart_path(item_ids:[item.id])
+      item = CartItem.new(product: @product, quantity: @quantity)
+      if item.save
+        redirect_to checkout_cart_path(item_ids:[item.id])
+      else
+        redirect_to product_path(@product), warning: "课程#{@product.title}下单失败!~"
+      end
     end
   end
 

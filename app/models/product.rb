@@ -30,11 +30,7 @@ class Product < ApplicationRecord
   # 变更库存
   def change_stock!(quantity)
     self.quantity += quantity
-    if self.quantity >= 0
-      return self.save
-    else
-      return false
-    end
+    self.save
   end
 
   # 是否售罄
