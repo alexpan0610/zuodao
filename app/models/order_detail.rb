@@ -7,7 +7,7 @@
 #  title       :string
 #  description :text
 #  price       :float
-#  quantity    :integer          default("0")
+#  quantity    :integer          default(0)
 #  order_id    :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

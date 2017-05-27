@@ -158,11 +158,11 @@ class Account::OrdersController < ApplicationController
         order_error(:warning, "课程#{@product.title}名额已满！")
         return false
       # 订单名额超过剩余名额
-      elsif item.quantity > item.product.quantity
+      elsif item.quantity > @product.quantity
         order_error(:warning, "您报名课程#{@product.title}的名额超出剩余名额！")
         return false
       # 成功变更库存
-      elsif item.product.change_stock!(-item.quantity)
+      elsif @product.change_stock!(-item.quantity)
         return true
       else
         order_error(:alert, "非常抱歉，您报名课程#{@product.title}的请求出错了！")

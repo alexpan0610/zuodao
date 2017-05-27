@@ -22,14 +22,17 @@
   display: block;
 }
 // 课程详情
+
 .product-page {
   margin-bottom: 60px;
+
   .header {
     background-image: url('http://ooz9ucbbf.bkt.clouddn.com/product%20background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     padding: 200px 0;
   }
+
   .buy-quantity {
     // 加减按钮
     .quantity-minus,
@@ -39,6 +42,7 @@
   }
 }
 //---Liuchuan do for product detail page
+
 .product-page .product-image {
   box-shadow: 0 29px 32px -20px rgba(0,0,0,0.5);
   margin: 20px auto;
@@ -82,6 +86,7 @@
   box-shadow: 0 16px 26px -10px rgba(3, 169, 244, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(3, 169, 244, 0.2);
 }
 //名额数量
+
 .product-page h5.tagline {
   font-size: 16px;
 }
@@ -106,20 +111,19 @@
   }
 }
 
-.product-page .pay-area .choose-license,
 .product-page .pay-area .tab-content {
   max-width: 420px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.product-page .pay-area .btn b {
-  font-size: 14px;
+.product-page .tab-content .tab-pane .text {
+  letter-spacing: 2px;
+  line-height: 26px;
 }
 
-.product-page .pay-area .btn b .discount-price {
-  color: #FF3300;
-  display: inline-block;
+.product-page .pay-area .btn b {
+  font-size: 14px;
 }
 
 .product-page .pay-area .btn b strike {
@@ -152,9 +156,7 @@
   height: auto;
   border-bottom-color: transparent;
 }
-
 // 课程列表
-
 .product-list {
   .card {
     display: inline-block;
@@ -179,6 +181,20 @@
     margin-right: 15px;
     margin-top: -30px;
     box-shadow: 0 0 0 0 transparent;
+  }
+
+  .card .card-favorites {
+    font-size: .9em;
+    font-weight: 400;
+    text-decoration: none;
+    float: right;
+  }
+  .card .card-favorites.favorited {
+    color: #da6565;
+  }
+
+  .card .card-favorites i {
+    font-size: 1.2em;
   }
 
   .card .card-title {

@@ -4,7 +4,7 @@
 #
 #  id               :integer          not null, primary key
 #  user_id          :integer
-#  cart_items_count :integer          default("0")
+#  cart_items_count :integer          default(0)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

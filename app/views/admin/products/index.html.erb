@@ -20,8 +20,8 @@
           <% @products.each_with_index do |product, index| %>
             <tr>
               <td><%= index + 1 %></td>
-              <td width="200px">
-                <%= link_to product_path(product) do %>
+              <td width="160px">
+                <%= link_to product_path(product), class: "img-container img-rounded img-raised" do %>
                   <%= render_product_image_thumb(product) %>
                 <% end %>
               </td>

@@ -9,18 +9,23 @@
     </div>
 
     <div class="card-content">
-      <span class="label label-info"><%= product.category.name %></span>
+      <span class="label label-info">
+        <%= product.category.name %>
+      </span>
       <h4 class="card-title">
         <%= link_to product.title, product_path(product) %>
+        <span id="favorites-<%= product.id %>">
+          <%= render "products/favorites", product: product %>
+        </span>
       </h4>
       <p class="card-description">
         <%= render_product_description(product) %>
       </p>
       <div class="footer">
         <div class="author">
-          <a href="#pablo">
-            <img src="http://ooz9ucbbf.bkt.clouddn.com/%E6%88%91%EF%BC%88%E6%AD%A3%E6%96%B9%E5%BD%A2%EF%BC%892.jpg" alt="千古流传" class="avatar img-raised">
-            <span>千古流传</span>
+          <a href="https://mp.weixin.qq.com/s?__biz=MzI0NzE2ODc1Nw==&mid=2650228271&idx=1&sn=6533b0a90b06bffe31ccdd64f97abdcb&chksm=f1b7cdb5c6c044a368199179c740ef595e0e1bba16013d8acf100ad217b346a71e93b1174a0c#rd">
+            <img src="https://ws1.sinaimg.cn/large/006tKfTcgy1ffzyl45ci0j301o01o3yg.jpg" alt="千古刘传" class="avatar img-raised">
+            <span>千古刘传</span>
           </a>
         </div>
         <div class="price">

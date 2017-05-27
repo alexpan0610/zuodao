@@ -5,7 +5,7 @@
 #  id             :integer          not null, primary key
 #  number         :string
 #  payment_method :string
-#  total_price    :float            default("0.0")
+#  total_price    :float            default(0.0)
 #  aasm_state     :string           default("placed")
 #  name           :string
 #  cellphone      :string

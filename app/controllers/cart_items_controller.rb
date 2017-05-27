@@ -25,7 +25,7 @@ class CartItemsController < ApplicationController
     @cart_item.destroy
     flash.now[:notice] = "课程 #{@cart_item.product.title} 已从购物车中移除~"
     respond_to do |format|
-      format.js { render "carts/delete_item"}
+      format.js { render "carts/delete_item" }
     end
   end
 

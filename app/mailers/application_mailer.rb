@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: '[做到]团队'
+  default from: 'service@zuodao.com'
   layout 'mailer'
 end

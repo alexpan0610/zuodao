@@ -40,7 +40,7 @@ $(document).on('turbolinks:load', function() {
 
   /*商品数量输入控制*/
   $('#quantity-input').on('input', function(e) {
-    var max = parseToInt($('#product-quantity').html());
+    var max = parseInt($(this).attr('max'));
     var num = parseToInt($(this).val());
     if (num <= 1) {
       $(this).val('1');
@@ -57,6 +57,7 @@ $(document).on('turbolinks:load', function() {
       $("#quantity-plus").removeClass('disabled');
     }
   }).on('blur', function(e) {
+    // 当用户输入0或空白时，将数量设为1
     var value = $(this).val();
     if (value == '' || value == '0') {
       $(this).val('1');
@@ -65,7 +66,7 @@ $(document).on('turbolinks:load', function() {
 
   /*增加数量*/
   $("#quantity-plus").click(function(e) {
-    var max = parseToInt($('#product-quantity').html());
+    var max = parseInt($(this).attr('max'));
     var num = parseInt($("#quantity-input").val()) + 1;
     $("#quantity-minus").removeClass("disabled");
     if (num >= max) {
@@ -137,11 +138,13 @@ function listenVisibilityOfProgresses() {
   });
 }
 
-// 内容转为数字
+// 将用户输入的内容转为数字
 function parseToInt(value) {
+  // 去掉用户输入的所有非数字字符
   while (value.match(/[^\d]/)) {
     value = value.replace(/[^\d]/, '');
   }
+  // 将剩下的合法内容转为数字
   return parseInt(value == '' ? 0 : value);
 }
 

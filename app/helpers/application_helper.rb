@@ -13,10 +13,10 @@ module ApplicationHelper
   end
 
   def render_product_description(product)
-    render_text(product.description, length: 30)
+    render_text(product.description, 30)
   end
 
-  def render_text(text, length: length)
+  def render_text(text, length = nil)
     if length.nil?
       text
     else

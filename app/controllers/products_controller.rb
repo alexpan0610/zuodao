@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
       current_cart.add!(@product, @quantity)
       flash.now[:notice] = "课程 #{@product.title} 的 #{@quantity} 个名额已加入购物车！"
       respond_to do |format|
-        format.js { render "products/add_to_cart"}
+        format.js { render "products/add_to_cart" }
       end
     when "order_now"
       # 立即下单

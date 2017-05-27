@@ -49,12 +49,12 @@
               <% detail = order.order_details.first %>
                 <tr>
                   <td>
-                    <div class="img-container">
+                    <%= link_to product_path(detail.product), class: "img-container img-rounded img-raised" do %>
                       <%= render_product_image_thumb(detail) %>
-                    </div>
+                    <% end %>
                   </td>
                   <td class="td-name">
-                    <%= detail.title %>
+                    <%= link_to detail.title, product_path(detail.product) %>
                     <br/>
                     <small>
                       <%= "等 " + order.order_details.count.to_s + " 门课程" %>
@@ -78,8 +78,8 @@
               <% end %>
             </tbody>
           </table>
-          <div class="pagination text-right">
-            <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+          <div class="text-right">
+            <%= will_paginate @orders, renderer: BootstrapPagination::Rails, class: "pagination-info" %>
           </div>
         </div>
       </div>
