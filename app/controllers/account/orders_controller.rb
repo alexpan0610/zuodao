@@ -20,11 +20,13 @@ class Account::OrdersController < ApplicationController
   end
 
   def create
+    # 检查库存
     if check_stock
       # 生成订单
-      create_order
-      # 前往支付页
-      redirect_to pay_account_order_path(@order.number)
+      if create_order
+        # 前往支付页
+        redirect_to pay_account_order_path(@order.number)
+      end
     end
   end
 
@@ -155,18 +157,15 @@ class Account::OrdersController < ApplicationController
       @product = item.product
       # 已售罄
       if @product.is_sold_out?
-        order_error(:warning, "课程#{@product.title}名额已满！")
-        return false
+        return order_error(:warning, "课程#{@product.title}名额已满！")
       # 订单名额超过剩余名额
       elsif item.quantity > @product.quantity
-        order_error(:warning, "您报名课程#{@product.title}的名额超出剩余名额！")
-        return false
+        return order_error(:warning, "您报名课程#{@product.title}的名额超出剩余名额！")
       # 成功变更库存
       elsif @product.change_stock!(-item.quantity)
         return true
       else
-        order_error(:alert, "非常抱歉，您报名课程#{@product.title}的请求出错了！")
-        return false
+        return order_error(:alert, "非常抱歉，您报名课程#{@product.title}的请求出错了！")
       end
     end
   end
@@ -180,12 +179,13 @@ class Account::OrdersController < ApplicationController
     @order.payment_method = @payment
     @order.total_price = current_cart.total_price(@items)
     if @order.save
-      create_order_details
+      return create_order_details
     else
       return order_error(:alert, "生成订单出错！")
     end
     # 发送下单通知
     OrderMailer.notify_order_placed(@order).deliver!
+    return true
   end
 
   # 生成购物清单
@@ -206,6 +206,7 @@ class Account::OrdersController < ApplicationController
     end
     # 删除完成结算的课程
     @items.destroy_all
+    return true
   end
 
   # 处理订单生成异常
@@ -221,6 +222,7 @@ class Account::OrdersController < ApplicationController
     end
     flash[level] = msg
     redirect_to carts_path
+    return false
   end
 
   # 处理用户操作异常
