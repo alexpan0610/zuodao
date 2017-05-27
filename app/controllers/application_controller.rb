@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def is_login?
+    if !current_user
+      redirect_to new_user_session_path, notice: "你需要登录后才能收藏课程！~"
+    end
+  end
+
   def current_cart
     if current_user
       @current_cart ||= find_user_cart

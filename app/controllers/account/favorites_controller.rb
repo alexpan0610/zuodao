@@ -1,5 +1,5 @@
 class Account::FavoritesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :is_login?
   before_action :find_product_by_id, only: [:favorite, :dislikes]
   respond_to :js, only: [:favorite, :dislikes]
 

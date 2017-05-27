@@ -1,4 +1,4 @@
-<% if current_user.favorited?(product) %>
+<% if current_user && current_user.favorited?(product) %>
   <%= link_to dislikes_account_favorite_path(product), method: :post, remote: true, class: "card-favorites favorited" do %>
     <%= product.favorites_count %> <%= mi.favorite %>
   <% end %>
