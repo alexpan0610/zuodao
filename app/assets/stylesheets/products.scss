@@ -158,6 +158,26 @@
 }
 // 课程列表
 .product-list {
+  // 没有结果时，显示的内容
+  .empty {
+    .card {
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+      .card-title {
+        margin-top: 0;
+        font-weight: 300;
+        line-height: 1.5em;
+      }
+      .card-content {
+        padding: 60px 20px;
+        text-align: center;
+      }
+      .card-content a {
+        text-decoration: none;
+      }
+    }
+  }
+
   .card {
     display: inline-block;
     width: 100%;

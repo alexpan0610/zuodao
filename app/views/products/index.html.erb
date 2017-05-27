@@ -1,7 +1,11 @@
 <div class="my-content product-list">
   <div class="container">
     <div class="row">
-      <%= render partial: "product", collection: @products, as: :product %>
+      <% if @products.empty? %>
+        <%= render "empty" %>
+      <% else %>
+        <%= render partial: "product", collection: @products, as: :product %>
+      <% end %>
     </div>
   </div>
 </div>
