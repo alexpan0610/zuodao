@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20170524090111) do
   end
 
   create_table "order_details", force: :cascade do |t|
-    t.string   "image"
+    t.string   "images"
     t.string   "title"
     t.text     "description"
     t.float    "price"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20170524090111) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "image"
+    t.string   "images"
     t.string   "title"
     t.text     "description"
     t.float    "price"

@@ -16,7 +16,7 @@
   }
 
   .header {
-    background-image: url('https://ws3.sinaimg.cn/large/006tNbRwgy1ffrso5xpn4j31kw0vju0x.jpg');
+    background-image: url('https://ws1.sinaimg.cn/large/006tNbRwgy1ffzzbvcbdgj31kw10i7lc.jpg');
     padding-top: 50px;
 
     .title {
@@ -57,8 +57,17 @@
     }
   }
 
+  .referer {
+    background-color: #ddebf6
+  }
+
   .referrer h2 {
     letter-spacing: 3px;
+  }
+
+  .section h2{
+    color:#095786;
+    font-weight:lighter;
   }
 
   .section-bottom {

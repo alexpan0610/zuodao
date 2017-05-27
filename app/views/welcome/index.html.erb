@@ -1,14 +1,14 @@
 <div class="landing-page">
   <div class="wrapper background-blue">
-    <div class="header header-filter">
-      <div class="container">
+    <div class="header">
+      <div class="container" style="padding-top:18vh;">
         <div class="row">
-          <div class="col-md-8 col-md-offset-2 text-center">
+          <div class="col-md-5">
             <h1 class="title">你与牛人之间只差这最后一课</h1>
             <h4 class="slogan">认知是人与人之前唯一的门槛，但人人都能通过掌握认知学习法完成认知升级</h4>
             <br/>
             <%= link_to products_path, class: "btn btn-danger btn-lg btn-round btn-raised" do %>
-              <%= fa_icon("play", text: "开始上课") %>
+            <%= fa_icon("play", text: "开始上课") %>
             <% end %>
           </div>
         </div>
@@ -93,38 +93,70 @@
           </div>
         </section>
 
-        <div class="section text-center section-features">
+        <div class="section section-content">
           <div class="container">
             <div class="row">
-              <div class="col-md-4">
-                <div class="info">
-                  <div class="icon icon-primary">
-                    <i class="material-icons">assignment</i>
-                  </div>
-                  <h4 class="info-title">手把手极简教程</h4>
-                  <p>以「做到」为原则的教程体系，第一件事就是输出完整作品。步骤详细到无需思考，照做就行。</p>
+
+              <div class="col-md-4 col-md-offset-1">
+                <div class="section-description">
+                  <h2 class="title">手把手极简教程</h2>
+                  <h5 class="description">以「做到」为原则的教程体系，第一件事就是输出完整作品。步骤详细到无需思考，照做就行。
+                  </h5>
                 </div>
               </div>
 
-              <div class="col-md-4">
-                <div class="info">
-                  <div class="icon icon-success">
-                    <i class="material-icons">videogame_asset</i>
-                  </div>
-                  <h4 class="info-title">学习游戏化</h4>
-                  <p>不同的课程内容，将被设计成不同的策略、竞技、对抗游戏，让大家通过游戏速成新技能。</p>
+              <div class="col-md-6 ">
+                <div class="image-container">
+                  <!-- 实在找不到类，样式写在表单里-->
+                  <img style="width: 100%;" src="https://ws1.sinaimg.cn/large/006tNbRwgy1fg02h3qy53j31b30z1wi9.jpg">
                 </div>
               </div>
 
-              <div class="col-md-4">
-                <div class="info">
-                  <div class="icon icon-warning">
-                    <i class="material-icons">supervisor_account</i>
-                  </div>
-                  <h4 class="info-title">全程辅导</h4>
-                  <p>不定期邀请牛人分享，通过线下聚会、及线上社群进行社会化学习，老师全程答疑。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section section-content">
+          <div class="container">
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="image-container">
+                  <!-- 实在找不到类，样式写在表单里-->
+                  <img style="width: 100%;" src="https://ws2.sinaimg.cn/large/006tNbRwgy1fg02glp0h3j310b0m5jvk.jpg">
                 </div>
               </div>
+
+              <div class="col-md-4 col-md-offset-1">
+                <div class="section-description">
+                  <h2 class="title">学习游戏化</h2>
+                  <h5 class="description">不同的课程内容，将被设计成不同的策略、竞技、对抗游戏，让大家通过游戏速成新技能。
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section section-content">
+          <div class="container">
+            <div class="row">
+
+              <div class="col-md-4 col-md-offset-1">
+                <div class="section-description">
+                  <h2 class="title">全程辅导</h2>
+                  <h5 class="description">不定期邀请牛人分享，通过线下聚会、及线上社群进行社会化学习，老师全程答疑。
+                  </h5>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="image-container">
+                  <!-- 实在找不到类，样式写在表单里-->
+                  <img style="width: 100%;" src="https://ws1.sinaimg.cn/large/006tNbRwgy1fg02gidqsbj314010bn0k.jpg">
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -204,10 +236,10 @@
         <div class="section section-bottom">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <h2 class="title text-center">还不来一起认知升级？</h2>
+              <h2 class="title text-center">现在开始认知升级！</h2>
               <h4 class="description text-center">现在报名将获得得到知识卡一份。</h4>
               <div class="row">
-                <div class="text-center" >
+                <div class="text-center">
                   <%= link_to products_path, class: "btn btn-danger btn-round" do %>
                   现在就报名
                   <% end %>
