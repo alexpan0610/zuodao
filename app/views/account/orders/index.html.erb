@@ -49,12 +49,20 @@
               <% detail = order.order_details.first %>
                 <tr>
                   <td>
-                    <%= link_to product_path(detail.product), class: "img-container img-rounded img-raised" do %>
-                      <%= render_product_image_thumb(detail) %>
+                    <% if detail.product.present? %>
+                      <%= link_to product_path(detail.product), class: "img-container img-rounded img-raised" do %>
+                        <%= render_product_image_thumb(detail) %>
+                      <% end %>
+                    <% else %>
+                      <%= image_tag "https://ws4.sinaimg.cn/large/006tNbRwly1fg2m4a67llj306y06yaa2.jpg", class: "img-container img-rounded img-raised" %>
                     <% end %>
                   </td>
                   <td class="td-name">
-                    <%= link_to detail.title, product_path(detail.product) %>
+                    <% if detail.product.present? %>
+                      <%= link_to detail.title, product_path(detail.product) %>
+                    <% else %>
+                      <%= detail.title %>
+                    <% end %>
                     <br/>
                     <small>
                       <%= "等 " + order.order_details.count.to_s + " 门课程" %>
