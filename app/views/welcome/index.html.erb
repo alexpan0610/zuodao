@@ -1,11 +1,11 @@
 <div class="landing-page">
   <div class="wrapper background-blue">
-    <div class="header">
-      <div class="container" style="padding-top:18vh;">
+    <div class="header header-filter">
+      <div class="container" >
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-8 col-md-offset-2 text-center">
             <h1 class="title">你与牛人之间只差这最后一课</h1>
-            <h4 class="slogan">认知是人与人之前唯一的门槛，但人人都能通过掌握认知学习法完成认知升级</h4>
+            <h4 class="slogan">认知是人与人之间唯一的门槛，但人人都能通过掌握认知学习法完成认知升级</h4>
             <br/>
             <%= link_to products_path, class: "btn btn-danger btn-lg btn-round btn-raised" do %>
             <%= fa_icon("play", text: "开始上课") %>
@@ -93,14 +93,16 @@
           </div>
         </section>
 
-        <div class="section section-content">
+        <div class="section section-features">
           <div class="container">
             <div class="row">
 
               <div class="col-md-4 col-md-offset-1">
                 <div class="section-description">
                   <h2 class="title">手把手极简教程</h2>
-                  <h5 class="description">以「做到」为原则的教程体系，第一件事就是输出完整作品。步骤详细到无需思考，照做就行。
+                  <h5 class="description">以「做到」为原则的教程体系，第一件事就是输出完整作品。
+                    <br><br>传统的教程一开始就教你基础理论和原理，但通常来说，这样的学习很容易让你从入门到放弃，这不符合认知原理。
+                    <br><br>我们的教学根据认知原理重塑，详细到无需思考仅需照做，第一件事就是让你学习做出完成作品。
                   </h5>
                 </div>
               </div>
@@ -108,7 +110,7 @@
               <div class="col-md-6 ">
                 <div class="image-container">
                   <!-- 实在找不到类，样式写在表单里-->
-                  <img style="width: 100%;" src="https://ws1.sinaimg.cn/large/006tNbRwgy1fg02h3qy53j31b30z1wi9.jpg">
+                  <img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fg02h3qy53j31b30z1wi9.jpg">
                 </div>
               </div>
 
@@ -116,36 +118,39 @@
           </div>
         </div>
 
-        <div class="section section-content">
+        <div class="section section-features">
           <div class="container">
             <div class="row">
 
-              <div class="col-md-6">
+              <div class="col-md-4 col-md-offset-1 col-md-push-6">
+                <div class="section-description">
+                  <h2 class="title">学习游戏化</h2>
+                  <h5 class="description">为什么学习不可以像游戏一样，让人沉迷上瘾呢？
+                    <br><br>课程内容，将被设计成不同的策略、竞技、对抗游戏，让大家通过游戏速成新技能。
+                </div>
+              </div>
+              <div class="col-md-6 col-md-pull-5">
                 <div class="image-container">
                   <!-- 实在找不到类，样式写在表单里-->
-                  <img style="width: 100%;" src="https://ws2.sinaimg.cn/large/006tNbRwgy1fg02glp0h3j310b0m5jvk.jpg">
+                  <img  src="https://ws2.sinaimg.cn/large/006tNbRwgy1fg02glp0h3j310b0m5jvk.jpg">
                 </div>
               </div>
 
-              <div class="col-md-4 col-md-offset-1">
-                <div class="section-description">
-                  <h2 class="title">学习游戏化</h2>
-                  <h5 class="description">不同的课程内容，将被设计成不同的策略、竞技、对抗游戏，让大家通过游戏速成新技能。
-                  </h5>
-                </div>
-              </div>
             </div>
           </div>
         </div>
 
-        <div class="section section-content">
+        <div class="section section-features">
           <div class="container">
             <div class="row">
 
               <div class="col-md-4 col-md-offset-1">
                 <div class="section-description">
                   <h2 class="title">全程辅导</h2>
-                  <h5 class="description">不定期邀请牛人分享，通过线下聚会、及线上社群进行社会化学习，老师全程答疑。
+                  <h5 class="description">一切的学习均是社交。
+                  <br><br>认知科学认为，越是社会化的学习，你能获取信息量越多，理解得越深。
+                  <br><br>我们不定期邀请牛人分享，通过线下聚会、及线上社群进行社会化学习，学习的过程与同学交流切磋。
+                  <br><br>同时，老师以及助教会全程答疑。
                   </h5>
                 </div>
               </div>
@@ -153,7 +158,7 @@
               <div class="col-md-6">
                 <div class="image-container">
                   <!-- 实在找不到类，样式写在表单里-->
-                  <img style="width: 100%;" src="https://ws1.sinaimg.cn/large/006tNbRwgy1fg02gidqsbj314010bn0k.jpg">
+                  <img  src="https://ws1.sinaimg.cn/large/006tNbRwgy1fg02gidqsbj314010bn0k.jpg">
                 </div>
               </div>
 
@@ -161,7 +166,8 @@
           </div>
         </div>
 
-        <div class="container referrer">
+      <div class="section-referrer">
+        <div class="container">
           <div class="section text-center">
             <h2 class="title">牛人推荐</h2>
 
@@ -232,6 +238,7 @@
             </div>
           </div>
         </div>
+      </div>
 
         <div class="section section-bottom">
           <div class="row">
