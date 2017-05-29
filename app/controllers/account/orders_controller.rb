@@ -217,6 +217,7 @@ class Account::OrdersController < ApplicationController
 
   # 处理订单生成异常
   def order_error(level, msg)
+    # 销毁订单信息
     if @order.present?
       @order.destroy
     end

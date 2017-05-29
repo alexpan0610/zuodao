@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
     else
       @products = @result.where(category_id: params[:category].to_i)
     end
+    @products = @products.page(params[:page]).per_page(9)
   end
 
   def show

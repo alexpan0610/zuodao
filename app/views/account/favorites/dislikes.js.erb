@@ -1,4 +1,5 @@
-$("#favorites-" + <%= @product.id %>).html('<%= escape_javascript render "products/favorites", product: @product %>');
+$("#favorites-" + <%= @product.id %>).html('<%= escape_javascript render "products/favorites_small", product: @product %>');
+$("#favorite").html('<%= escape_javascript render "products/favorites", product: @product %>');
 // 显示提示消息
 $('.navbar').after('<%= escape_javascript render(partial: "common/flashes") %>');
 slideUpAlert();

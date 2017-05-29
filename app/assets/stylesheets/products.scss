@@ -130,18 +130,17 @@
   color: #666666;
 }
 
-.product-page .pay-area .btn-wd {
-  min-width: 160px;
-  width: 49%;
-}
-
 .product-page .pay-area form {
   display: inline-block;
-  width: 49%;
+  width: 60%;
 }
 
 .product-page .pay-area form .btn-wd {
   width: 100%;
+}
+
+.product-page .pay-area form .btn-half {
+  width: 50%;
 }
 
 .product-page .product .description {
@@ -204,17 +203,8 @@
   }
 
   .card .card-favorites {
-    font-size: .9em;
-    font-weight: 400;
-    text-decoration: none;
+    margin: 0;
     float: right;
-  }
-  .card .card-favorites.favorited {
-    color: #da6565;
-  }
-
-  .card .card-favorites i {
-    font-size: 1.2em;
   }
 
   .card .card-title {

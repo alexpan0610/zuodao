@@ -12,11 +12,11 @@
       <span class="label label-info">
         <%= product.category.name %>
       </span>
+      <span id="favorites-<%= product.id %>">
+        <%= render "products/favorites_small", product: product %>
+      </span>
       <h4 class="card-title">
         <%= link_to product.title, product_path(product) %>
-        <span id="favorites-<%= product.id %>">
-          <%= render "products/favorites", product: product %>
-        </span>
       </h4>
       <p class="card-description">
         <%= render_product_description(product) %>
