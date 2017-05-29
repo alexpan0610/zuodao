@@ -37,6 +37,8 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :password, presence: true
 
+  scope :asc, -> { order("created_at ASC") }
+
   def admin?
     is_admin
   end

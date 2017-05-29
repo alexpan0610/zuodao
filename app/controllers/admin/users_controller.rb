@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::AdminController
   before_action :find_user_by_id, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all.page(params[:page])
+    @users = User.all.asc.page(params[:page])
   end
 
   def new
