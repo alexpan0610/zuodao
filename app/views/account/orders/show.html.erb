@@ -54,12 +54,20 @@
               <% @order_details.each do |detail| %>
               <tr>
                 <td>
-                  <div class="img-container img-rounded img-raised">
-                    <%= render_product_image_thumb(detail) %>
-                  </div>
+                  <% if detail.product.present? %>
+                    <%= link_to product_path(detail.product), class: "img-container img-rounded img-raised" do %>
+                      <%= render_product_image_thumb(detail) %>
+                    <% end %>
+                  <% else %>
+                    <%= image_tag "https://ws4.sinaimg.cn/large/006tNbRwly1fg2m4a67llj306y06yaa2.jpg", class: "img-container img-rounded img-raised" %>
+                  <% end %>
                 </td>
                 <td class="td-name">
-                  <%= detail.title %>
+                  <% if detail.product.present? %>
+                    <%= link_to detail.title, product_path(detail.product) %>
+                  <% else %>
+                    <%= detail.title %>
+                  <% end %>
                   <br/>
                   <small><%= render_product_description(detail) %></small>
                 </td>
