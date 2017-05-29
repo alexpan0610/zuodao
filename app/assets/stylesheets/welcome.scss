@@ -108,7 +108,13 @@
     border-top: 5px solid #fff;
   }
 
+  .progress-text {
+    font-size: 1.2em;
+    letter-spacing: 3px;
+  }
+
   .progress {
+    margin-top: 5px;
     border-radius: 0;
     overflow: visible;
   }
