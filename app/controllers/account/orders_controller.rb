@@ -165,7 +165,7 @@ class Account::OrdersController < ApplicationController
         return order_error(:warning, "您报名课程#{@product.title}的名额超出剩余名额！")
       end
     end
-    return true
+    true
   end
 
   # 生成订单
@@ -183,6 +183,7 @@ class Account::OrdersController < ApplicationController
     else
       return order_error(:alert, "生成订单出错！")
     end
+    true
   end
 
   # 生成购物清单
@@ -223,7 +224,7 @@ class Account::OrdersController < ApplicationController
     end
     flash[level] = msg
     redirect_to carts_path
-    return false
+    false
   end
 
   # 处理用户操作异常
