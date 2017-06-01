@@ -66,7 +66,7 @@ $(document).on('turbolinks:load', function() {
 
   /*增加数量*/
   $("#quantity-plus").click(function(e) {
-    var max = parseInt($(this).attr('max'));
+    var max = parseInt($("#quantity-input").attr('max'));
     var num = parseInt($("#quantity-input").val()) + 1;
     $("#quantity-minus").removeClass("disabled");
     if (num >= max) {
