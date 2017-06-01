@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
     @quantity = params[:quantity].to_i
     case params[:commit]
     when "add_to_cart"
+      return if over_sell?
       # 加入购物车
       current_cart.add!(@product, @quantity)
       flash.now[:notice] = "课程 #{@product.title} 的 #{@quantity} 个名额已加入购物车！"
@@ -27,6 +28,7 @@ class ProductsController < ApplicationController
         format.js { render "products/add_to_cart" }
       end
     when "order_now"
+      return if over_sell?
       # 立即下单
       item = CartItem.new(product: @product, quantity: @quantity)
       if item.save
@@ -38,6 +40,11 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  # 是否超卖
+  def over_sell?
+    @quantity > @product.quantity
+  end
 
   def validate_search_key
     @query = params[:query].gsub(/\|\'|\/|\?/, "") if params[:query].present?
