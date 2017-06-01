@@ -22,8 +22,11 @@ class ProductsController < ApplicationController
     when "add_to_cart"
       return if over_sell?
       # 加入购物车
-      current_cart.add!(@product, @quantity)
-      flash.now[:notice] = "课程 #{@product.title} 的 #{@quantity} 个名额已加入购物车！"
+      if current_cart.add!(@product, @quantity)
+        flash.now[:notice] = "课程 #{@product.title} 的 #{@quantity} 个名额已加入购物车！"
+      else
+        flash.now[:warning] = "您选择的数量超出课程 #{@product.title} 的名额！"
+      end
       respond_to do |format|
         format.js { render "products/add_to_cart" }
       end

@@ -40,7 +40,8 @@ class Cart < ApplicationRecord
       @cart_item = cart_items.build
       @cart_item.product = product
     end
-    return @cart_item.change_quantity!(quantity)
+    # 限制购物车商品数不超过库存
+    @cart_item.change_quantity!(quantity) if @cart_item.quantity + quantity <= product.quantity
   end
 
   def total_price(items = nil)

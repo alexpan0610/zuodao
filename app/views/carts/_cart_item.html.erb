@@ -28,7 +28,7 @@
         <i class="material-icons">remove</i>
       <% end %>
       <%= link_to increase_cart_item_path(item, index: index), method: :post, remote: true,
-      id: "quantity-plus-#{index}", disabeld: (item.product.quantity <= 0), class: "btn btn-round btn-info btn-xs quantity-plus #{item.product.quantity <= 0 ? 'disabled' : ''}" do %>
+      id: "quantity-plus-#{index}", disabeld: (item.product.quantity <= 0), class: "btn btn-round btn-info btn-xs quantity-plus #{item.quantity >= item.product.quantity ? 'disabled' : ''}" do %>
         <i class="material-icons">add</i>
       <% end %>
     </div>

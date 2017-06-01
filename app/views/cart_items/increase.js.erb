@@ -3,7 +3,7 @@ var btnMinus = $('#quantity-minus-<%= params[:index] %>');
 $('#quantity-input-<%= params[:index] %>').val('<%= @cart_item.quantity %>');
 $('#cart-item-quantity-<%= params[:index] %>').html('× <%= @cart_item.quantity %>');
 $('#cart-item-subtotal-<%= params[:index] %>').html('<%= render_price(@cart_item.quantity * @cart_item.product.price) %>');
-if (<%= @cart_item.product.quantity <= 0 %>) {
+if (<%= @cart_item.quantity >= @cart_item.product.quantity %>) {
   btnPlus.attr("disabled");
   btnPlus.addClass("disabled");
 } else if (<%= @cart_item.product.quantity > 1 %>) {

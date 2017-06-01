@@ -18,6 +18,5 @@ class CartItem < ApplicationRecord
   def change_quantity!(quantity)
     self.quantity += quantity
     self.save
-    self
   end
 end

@@ -9,7 +9,7 @@ class CartItemsController < ApplicationController
 
   def increase
     # 增加名额
-    if @cart_item.product.quantity > 0
+    if @cart_item.quantity < @cart_item.product.quantity
       @cart_item.change_quantity!(1)
     end
 	end
