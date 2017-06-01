@@ -1,8 +1,8 @@
-<div class="container-fluid login">
+<div class="container-fluid login header-filter">
   <div class="section section-full-screen section-signup">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
           <div class="card card-signup">
             <div class="header header-info text-center ">
               <h4>登录</h4>
@@ -19,8 +19,8 @@
               </div>
             </div>
             <p class="text-divider">邮箱登录</p>
-            <div class="content">
-              <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="content">
                 <div class="input-group">
                   <span class="input-group-addon">
                     <i class="material-icons">email</i>
@@ -45,11 +45,11 @@
                   <%= f.input :remember_me, label: false, inline_label: "记住我", as: :boolean if devise_mapping.rememberable? %>
                 </div>
 
-                <div class="footer text-center">
-                  <%= f.submit "登录", data: { disable_with: "登录中..." }, class: "btn btn-round btn-info"%>
-                </div>
-              <% end %>
-            </div>
+              </div>
+              <div class="footer text-center">
+                <%= f.submit "登录", data: { disable_with: "登录中..." }, class: "btn btn-round btn-info"%>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

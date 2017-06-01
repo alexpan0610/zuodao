@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <h4>
+      <% case to %>
+      <% when "user" %>
+        尊敬的
+        <%= @user.email %>，您好，
+        您的 <%= link_to '订单' + @order.number, account_order_url(@order.number) %>
+        <%= msg %>
+      <% when "admin" %>
+        <%= link_to("订单" + @order.number, admin_order_url(@order)) %>
+        <%= msg %>
+      <% end %>
+    </h4>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>
+        收货信息
+        <br/>
+        <small>
+          <table class="table">
+            <tr>
+              <td><%= @order.name %></td>
+              <td><%= @order.cellphone %></td>
+              <td width="60%"><%= @order.address %></td>
+            </tr>
+          </table>
+        </small>
+      </h4>
+      <hr/>
+      <h4>
+        支付信息
+        <br/>
+        <small>
+          <table class="table">
+            <tr>
+              <td>实付金额：<span class="text-danger">￥<%= @order.total_price %></span>
+              </td>
+              <td>支付方式：
+                <% case @order.payment_method %>
+                <% when "alipay" %>
+                <%= "支付宝" %>
+                <% when "wechat" %>
+                <%= "微信支付" %>
+                <% end %>
+              </td>
+            </tr>
+          </table>
+        </small>
+      </h4>
+      <hr/>
+      <table class="table table-shopping">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>课程信息</th>
+            <th class="text-right">单价</th>
+            <th class="text-right">名额</th>
+            <th class="text-right">小计</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_details.each_with_index do |order_detail, index| %>
+          <tr class="order-detail">
+            <td><%= index + 1 %></td>
+            <td>
+              <%= order_detail.title %>
+              <br/>
+              <small>
+                <%= order_detail.description %>
+              </small>
+            </td>
+            <td class="text-right">
+              ￥<%= order_detail.price %>
+            </td>
+            <td class="text-right">
+              <%= order_detail.quantity %>
+            </td>
+            <td class="text-right text-danger">
+              ￥<%= order_detail.quantity * order_detail.price %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

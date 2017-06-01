@@ -21,24 +21,26 @@
 @import "font-awesome";
 @import "material-kit";
 @import "customize";
-
+// 固定位置的消息通知
+.alert-fixed {
+  position: fixed; // 必须有这个属性
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 10;
+  border-radius: 0px;
+}
 // 前端界面通知
 .my-alert {
-  position: absolute;
-  z-index: 10;
   top: 71px;
-  left: 0;
-  right: 0;
 }
 // 管理界面通知
+
 .admin-alert {
-  position: absolute;
-  z-index: 10;
   top: -30px;
-  left: 0;
-  right: 0;
 }
 // footer置底代码
+
 html {
   height: 100%;
   box-sizing: border-box;
@@ -57,7 +59,6 @@ body {
   padding-bottom: 140px;
   background-color: #deeff5;
 }
-
 // 内容区
 .my-content {
   margin: 101px 30px 0;
@@ -70,17 +71,25 @@ body {
   border-radius: 6px;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
-
+// logo
 .navbar .navbar-brand img {
   height: 30px;
   display: inline-block;
 }
-
+// 搜索框
+.navbar .navbar-form .form-group .form-control {
+  height: 36px;
+  background-image: linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+}
+// 下拉菜单文字
 .navbar .navbar-nav > li > a {
   font-size: 1em;
   letter-spacing: 1px;
 }
-
+// 头图阴影
+.header-filter:after {
+  background-color: rgba(0, 0, 0, 0.25);
+}
 //---------Footer---------
 footer {
   position: absolute;
@@ -126,7 +135,6 @@ footer {
     }
   }
 }
-
 //---Pill控件修正
 .nav-pills > li > a {
   line-height: 24px;
@@ -136,12 +144,13 @@ footer {
   min-width: 100px;
   text-align: center;
   color: #555555;
-  transition: all .3s;
+  transition: all 0.3s;
   text-align: -webkit-center;
 }
+
 .nav-pills > li i {
   display: block;
   font-size: 30px;
   padding: 15px 0;
-  margin-bottom: 25px
+  margin-bottom: 25px;
 }

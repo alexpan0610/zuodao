@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511130229) do
+ActiveRecord::Schema.define(version: 20170527065439) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "label"
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(version: 20170511130229) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "course_relationships", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_course_relationships_on_product_id"
+    t.index ["user_id"], name: "index_course_relationships_on_user_id"
+  end
+
   create_table "order_details", force: :cascade do |t|
     t.string   "image"
     t.string   "title"
@@ -56,7 +65,9 @@ ActiveRecord::Schema.define(version: 20170511130229) do
     t.integer  "order_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "product_id"
     t.index ["order_id"], name: "index_order_details_on_order_id"
+    t.index ["product_id"], name: "index_order_details_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -80,11 +91,13 @@ ActiveRecord::Schema.define(version: 20170511130229) do
     t.string   "title"
     t.text     "description"
     t.float    "price"
-    t.integer  "quantity",    default: 0
-    t.boolean  "is_hidden",   default: true
+    t.integer  "quantity",        default: 0
+    t.boolean  "is_hidden",       default: true
     t.integer  "category_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.text     "catalog"
+    t.integer  "favorites_count", default: 0
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 

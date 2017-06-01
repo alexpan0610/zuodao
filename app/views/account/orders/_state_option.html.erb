@@ -1,19 +1,19 @@
 <% case order.aasm_state %>
 <% when "placed"%>
-  <%= link_to("PAY", pay_account_order_path(order.number), class: "btn btn-danger #{size}") %>
-  <%= link_to("CANCEL", cancel_account_order_path(order.number), method: :post, class: "btn btn-white #{size}") %>
+  <%= link_to("完成支付", pay_account_order_path(order.number), class: "btn btn-danger #{size}") %>
+  <%= link_to("取消订单", cancel_account_order_path(order.number), method: :post, class: "btn btn-white #{size}") %>
 <% when "paid" %>
-  <%= link_to("CANCEL", apply_for_cancel_account_order_path(order.number), method: :post, class: "btn btn-white #{size}") %>
+  <%= link_to("申请取消", apply_for_cancel_account_order_path(order.number), method: :post, class: "btn btn-white #{size}") %>
 <% when "applying_for_cancel" %>
-  <span class="btn btn-info disabled <%= size %>">PENDING</span>
+  <span class="btn btn-info disabled <%= size %>">等待审核</span>
 <% when "shipping" %>
-  <%= link_to("RECEIPT", confirm_receipt_account_order_path(order.number), method: :post, class: "btn btn-warning #{size}") %>
+  <%= link_to("确认收货", confirm_receipt_account_order_path(order.number), method: :post, class: "btn btn-warning #{size}") %>
 <% when "shipped" %>
-  <%= link_to("RETURN", apply_for_return_account_order_path(order.number), method: :post, class: "btn btn-white #{size}") %>
+  <%= link_to("退货", apply_for_return_account_order_path(order.number), method: :post, class: "btn btn-white #{size}") %>
 <% when "applying_for_return" %>
-  <span class="btn btn-warning disabled <%= size %>">RETURNING</span>
+  <span class="btn btn-warning disabled <%= size %>">退货中</span>
 <% when "cancelled" %>
-  <span class="btn btn-defalut disabled <%= size %>">CANCELLED</span>
+  <span class="btn btn-defalut disabled <%= size %>">已取消</span>
 <% when "returned" %>
-  <span class="btn btn-defalut disabled <%= size %>">RETURNED</span>
+  <span class="btn btn-defalut disabled <%= size %>">已退货</span>
 <% end %>

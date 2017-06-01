@@ -2,16 +2,13 @@ class ProductsController < ApplicationController
   before_action :validate_search_key, only: [:index]
 
   def index
-    @result = Product.ransack(
-    title_cont: @query,
-    description_cont: @query,
-    m: 'or'
-    ).result(distinct: true).includes("category")
+    @result = Product.ransack(search_criteria).result(distinct: true).includes("category")
     if params[:category].blank?
       @products = @result.order('created_at DESC')
     else
       @products = @result.where(category_id: params[:category].to_i)
     end
+    @products = @products.page(params[:page]).per_page(9)
   end
 
   def show
@@ -19,58 +16,39 @@ class ProductsController < ApplicationController
   end
 
   def operations
+    @product = Product.find(params[:id])
+    @quantity = params[:quantity].to_i
     case params[:commit]
     when "add_to_cart"
       # 加入购物车
-      add_to_cart(is_over_sell?)
+      current_cart.add!(@product, @quantity)
+      flash.now[:notice] = "课程 #{@product.title} 的 #{@quantity} 个名额已加入购物车！"
+      respond_to do |format|
+        format.js { render "products/add_to_cart" }
+      end
     when "order_now"
       # 立即下单
-      order_now(is_over_sell?)
+      item = CartItem.new(product: @product, quantity: @quantity)
+      if item.save
+        redirect_to checkout_cart_path(item_ids:[item.id])
+      else
+        redirect_to product_path(@product), warning: "课程#{@product.title}下单失败!~"
+      end
     end
   end
 
   private
 
-  # 加入购物车
-  def add_to_cart(over_sell)
-    current_cart.add(@product, @quantity)
-    if over_sell
-      flash[:warning] = "您选择的数量超过课程名额，实际提交的名额为#{@quantity}人。"
-      redirect_to product_path(@product)
-    else
-      respond_to do |format|
-        format.js { render "products/add_to_cart"}
-      end
-    end
-  end
-
-  # 立即下单
-  def order_now(over_sell)
-    item = current_cart.add(@product, @quantity)
-    if over_sell
-      if @quantity > 0
-        flash[:warning] = "您选择的数量超过课程名额，实际提交的名额为#{@quantity}人。"
-      else
-        flash[:warning] = "您报名的课程#{@product.title}名额已满！"
-        return redirect_to product_path(@product)
-      end
-    end
-    redirect_to checkout_cart_path(item_ids:[item.id])
-  end
-
-  # 是否超卖
-  def is_over_sell?
-    @product = Product.find(params[:id])
-    @quantity = params[:quantity].to_i
-    if @quantity > @product.quantity
-      @quantity = @product.quantity
-      true
-    else
-      false
-    end
-  end
-
   def validate_search_key
     @query = params[:query].gsub(/\|\'|\/|\?/, "") if params[:query].present?
+  end
+
+  def search_criteria
+    {
+      category_name_cont: @query,
+      title_cont: @query,
+      description_cont: @query,
+      m: 'or'
+    }
   end
 end

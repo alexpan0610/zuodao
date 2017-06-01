@@ -12,7 +12,8 @@ class Admin::CategoriesController < Admin::AdminController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to admin_categories_path, notice: 'Category successfully created.'
+      flash[:notice] = "课程分类#{@category.name}保存成功"
+      back admin_categories_path
     else
       render :new
     end
@@ -20,7 +21,8 @@ class Admin::CategoriesController < Admin::AdminController
 
   def update
     if @category.update(category_params)
-      redirect_to admin_categories_path, notice: 'Category has been updated.'
+      flash[:notice] = "课程分类#{@category.name}已更新"
+      back admin_categories_path
     else
       render :edit
     end
@@ -28,7 +30,8 @@ class Admin::CategoriesController < Admin::AdminController
 
   def destroy
     @category.destroy
-    redirect_to admin_categories_path, notice: 'Category was destroyed.'
+    flash[:alert] = "课程分类#{@category.name}已删除"
+    back admin_categories_path
   end
 
   private

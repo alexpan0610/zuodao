@@ -1,5 +1,6 @@
 class Admin::OrdersController <  Admin::AdminController
   before_action :find_order_by_id, only: [:show, :confirm_cancel, :ship, :confirm_goods_returned]
+  before_action :save_back_url, only: [:confirm_cancel, :ship, :confirm_goods_returned]
 
   def index
     if params[:start_date].present?
@@ -19,19 +20,25 @@ class Admin::OrdersController <  Admin::AdminController
   # 确认取消订单
   def confirm_cancel
     @order.cancel!
-    redirect_back fallback_location: proc { admin_orders_path }
+    back admin_orders_path
+    # 发送确认取消通知
+    OrderMailer.notify_order_cancelled(@order).deliver!
   end
 
   # 发货
   def ship
     @order.ship!
-    redirect_back fallback_location: proc { admin_orders_path }
+    back admin_orders_path
+    # 发送出货通知
+    OrderMailer.notify_order_shipping(@order).deliver!
   end
 
   # 确认退货
   def confirm_goods_returned
     @order.confirm_goods_returned!
-    redirect_back fallback_location: proc { admin_orders_path }
+    back admin_orders_path
+    # 发送确认退货通知
+    OrderMailer.notify_goods_returned(@order).deliver!
   end
 
   private

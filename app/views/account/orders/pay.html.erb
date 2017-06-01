@@ -3,20 +3,20 @@
     <div class="card text-center">
       <div class="card-content">
         <div class="page-header">
-          <h4>
+          <h3>
             <% if @order.payment_method == "wechat" %>
             微信支付
             <% elsif @order.payment_method == "alipay" %>
             支付宝
             <% end %>
-          </h4>
+          </h2>
         </div>
-        <div class="img-container">
+        <div class="img-container img-rounded img-raised">
           <%= image_tag("qrcode.png", class: "thumbnail") %>
         </div>
         <hr/>
         <div class="btn-finish">
-          <%= link_to "完成支付", make_payment_account_order_path(@order.number), method: :post, class: "btn btn-raised btn-info", data: { alert: "付款成功！返回首页~" } %>
+          <%= link_to "支付成功", make_payment_account_order_path(@order.number), method: :post, class: "btn btn-raised btn-info", data: { alert: "付款成功！返回首页~" } %>
         </div>
       </div>
     </div>

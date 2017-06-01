@@ -1,7 +1,20 @@
 <div class="my-content product-list">
   <div class="container">
     <div class="row">
-      <%= render partial: "product", collection: @products, as: :product %>
+      <div class="col-md-12">
+        <% if @products.empty? %>
+          <%= render "empty" %>
+        <% else %>
+          <%= render partial: "product", collection: @products, as: :product %>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="text-center">
+            <%= will_paginate @users, renderer: BootstrapPagination::Rails, class: "pagination-info" %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,11 @@
+<% if current_user && current_user.favorited?(product) %>
+  <%= link_to dislikes_account_favorite_path(product), method: :post, remote: true,
+  class: "btn btn-raised btn-just-icon btn-round btn-danger" do %>
+    <%= mi.favorite %>
+  <% end %>
+<% else %>
+  <%= link_to favorite_account_favorite_path(product), method: :post, remote: true,
+  class: "btn btn-raised btn-just-icon btn-round btn-default" do %>
+    <%= mi.favorite %>
+  <% end %>
+<% end %>

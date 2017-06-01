@@ -12,7 +12,8 @@ class Admin::ProductsController < Admin::AdminController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to admin_products_path
+      flash[:notice] = "课程#{@product.title}保存成功"
+      back admin_products_path
     else
       render :new
     end
@@ -20,7 +21,8 @@ class Admin::ProductsController < Admin::AdminController
 
   def update
     if @product.update(product_params)
-      redirect_to admin_products_path, notice: "产品#{@product.title}更新成功！"
+      flash[:notice] = "课程#{@product.title}已更新"
+      back admin_products_path
     else
       render :edit
     end
@@ -32,7 +34,7 @@ class Admin::ProductsController < Admin::AdminController
     else
       flash[:warning] = "产品#{@product.title}删除失败"
     end
-    redirect_to admin_products_path
+    back admin_products_path
   end
 
   private
@@ -42,6 +44,6 @@ class Admin::ProductsController < Admin::AdminController
   end
 
   def product_params
-    params.require(:product).permit(:image, :title, :description, :price, :quantity, :category_id)
+    params.require(:product).permit(:image, :title, :description, :catalog, :price, :quantity, :category_id)
   end
 end

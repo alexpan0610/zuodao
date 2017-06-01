@@ -37,19 +37,20 @@ gem 'bootstrap-tagsinput-rails'
 gem 'simple_form'
 gem 'ransack'
 gem 'carrierwave', '~> 1.0'
-gem 'carrierwave-aws'
+gem 'carrierwave-qiniu', '~> 1.1.0'
+gem 'carrierwave-i18n'
+gem 'qiniu-rs'
 gem "mini_magick"
 gem 'font-awesome-rails'
-gem 'faker'
-gem 'annotate'
+gem 'figaro'
 gem 'aasm'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  gem 'annotate'
   gem 'dotenv-rails'
   gem 'awesome_rails_console'
 end
@@ -61,6 +62,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'letter_opener'
 end
 
 group :production do

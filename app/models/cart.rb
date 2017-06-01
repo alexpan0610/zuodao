@@ -4,7 +4,7 @@
 #
 #  id               :integer          not null, primary key
 #  user_id          :integer
-#  cart_items_count :integer          default("0")
+#  cart_items_count :integer          default(0)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
@@ -20,7 +20,7 @@ class Cart < ApplicationRecord
 
   def merge!(cart)
     cart.cart_items.each do |item|
-      add(item.product, item.quantity)
+      add!(item.product, item.quantity)
     end
   end
 
@@ -32,30 +32,21 @@ class Cart < ApplicationRecord
     @cart_items = cart_items.includes(:product)
   end
 
-  def add(product, quantity)
+  def add!(product, quantity)
     # 商品已经在购物车中，增加商品的数量
     if products.include?(product)
       @cart_item = cart_items.find_by_product_id(product.id)
     else
       @cart_item = cart_items.build
+      @cart_item.product = product
     end
-    change_quantity!(product, quantity)
+    return @cart_item.change_quantity!(quantity)
   end
 
-  def change_quantity!(product, quantity)
-    @cart_item.product = product
-    @cart_item.quantity += quantity
-    product.quantity -= quantity
-    product.save
-    @cart_item.save
-    return @cart_item
-  end
-
-  def total_price
-    calculate_total_price(cart_items)
-  end
-
-  def calculate_total_price(items)
+  def total_price(items = nil)
+    if items.nil?
+      items = cart_items
+    end
     total = 0.0
     items.each do |item|
       if item.product.price.present?

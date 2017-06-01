@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def is_login?
+    if !current_user
+      redirect_to new_user_session_path, notice: "你需要登录后才能收藏课程！~"
+    end
+  end
+
   def current_cart
     if current_user
       @current_cart ||= find_user_cart
@@ -18,14 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def change_quantity(quantity)
-    @product = @cart_item.product
-    @cart_item.quantity += quantity
-    @product.quantity -= quantity
-    @cart_item.save
-    @product.save
-  end
 
   def load_categories
     @categories = Category.all

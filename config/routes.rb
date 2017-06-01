@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :account do
+    resources :favorites do
+      member do
+        post :favorite
+        post :dislikes
+      end
+    end
     resources :orders do
       member do
         get :pay

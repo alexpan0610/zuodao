@@ -1,0 +1,26 @@
+<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 empty">
+  <div class="card">
+    <% if params[:controller] == "products"%>
+      <div class="card-header card-header-icon" data-background-color="blue">
+        <%= fa_icon("th lg") %>
+      </div>
+      <h4 class="card-title">课程</h4>
+      <div class="card-content">
+        <h4>
+          没有找到与 <b class="text-danger"><%= params[:query] %></b> 有关的课程，再试试其它关键字吧 ~
+        </h4>
+      </div>
+    <% else %>
+      <div class="card-header card-header-icon" data-background-color="blue">
+        <%= fa_icon("heart lg") %>
+      </div>
+      <h4 class="card-title">收藏</h4>
+      <div class="card-content">
+        <h4>
+          您还木有收藏任何课程，
+          <%= link_to "快去看看感兴趣的课程吧！ ~ ", products_path, class: "text-info" %>
+        </h4>
+      </div>
+    <% end %>
+  </div>
+</div>

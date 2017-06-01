@@ -49,12 +49,20 @@
               <% detail = order.order_details.first %>
                 <tr>
                   <td>
-                    <div class="img-container">
-                      <%= render_product_image_thumb(detail) %>
-                    </div>
+                    <% if detail.product.present? %>
+                      <%= link_to product_path(detail.product), class: "img-container img-rounded img-raised" do %>
+                        <%= render_product_image_thumb(detail) %>
+                      <% end %>
+                    <% else %>
+                      <%= image_tag "https://ws4.sinaimg.cn/large/006tNbRwly1fg2m4a67llj306y06yaa2.jpg", class: "img-container img-rounded img-raised" %>
+                    <% end %>
                   </td>
                   <td class="td-name">
-                    <%= detail.title %>
+                    <% if detail.product.present? %>
+                      <%= link_to detail.title, product_path(detail.product) %>
+                    <% else %>
+                      <%= detail.title %>
+                    <% end %>
                     <br/>
                     <small>
                       <%= "等 " + order.order_details.count.to_s + " 门课程" %>
@@ -72,14 +80,14 @@
                     <%= render "state_option", order: order, size: "btn-sm" %>
                   </td>
                   <td class="td-number">
-                    <%= link_to("DETAILS", account_order_path(order.number), class: "btn btn-raised btn-info btn-sm") %>
+                    <%= link_to("订单详情", account_order_path(order.number), class: "btn btn-raised btn-info btn-sm") %>
                   </td>
                 </tr>
               <% end %>
             </tbody>
           </table>
-          <div class="pagination text-right">
-            <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+          <div class="text-right">
+            <%= will_paginate @orders, renderer: BootstrapPagination::Rails, class: "pagination-info" %>
           </div>
         </div>
       </div>
