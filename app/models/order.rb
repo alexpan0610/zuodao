@@ -35,8 +35,10 @@ class Order < ApplicationRecord
   # 恢复库存
   def revert_stock
     order_details.each do |order_detail|
-      unless order_detail.product.change_stock!(order_detail.quantity)
-        return false
+      if order_detail.product
+        unless order_detail.product.change_stock!(order_detail.quantity)
+          return false
+        end
       end
     end
     return true

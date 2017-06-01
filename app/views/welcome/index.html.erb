@@ -2,15 +2,13 @@
   <div class="wrapper background-blue">
     <div class="header header-filter">
       <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2 text-center">
-            <h1 class="title">你与牛人之间只差这最后一课</h1>
-            <h4 class="slogan">认知是人与人之间唯一的门槛，但人人都能通过掌握认知学习法完成认知升级</h4>
-            <br/>
-            <%= link_to products_path, class: "btn btn-danger btn-lg btn-round btn-raised" do %>
-            <%= fa_icon("play", text: "开始上课") %>
-            <% end %>
-          </div>
+        <div class="col-md-10 col-md-offset-1 text-center">
+          <h1 class="title">你与牛人之间只差这最后一课</h1>
+          <h4 class="slogan">认知是人与人之间唯一的门槛，但人人都能通过掌握认知学习法完成认知升级</h4>
+          <br/>
+          <%= link_to products_path, class: "btn btn-danger btn-lg btn-round btn-raised" do %>
+          <%= fa_icon("play", text: "开始上课") %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -107,7 +105,7 @@
                 </div>
               </div>
 
-              <div class="col-md-6 ">
+              <div class="col-md-6">
                 <div class="image-container">
                   <!-- 实在找不到类，样式写在表单里-->
                   <img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fg02h3qy53j31b30z1wi9.jpg">
@@ -241,15 +239,17 @@
           </div>
 
           <div class="section section-bottom">
-            <div class="row">
-              <div class="col-md-8 col-md-offset-2">
-                <h2 class="title text-center">现在开始认知升级！</h2>
-                <h4 class="description text-center">现在报名将获得得到知识卡一份。</h4>
-                <div class="row">
-                  <div class="text-center">
-                    <%= link_to products_path, class: "btn btn-danger btn-round" do %>
-                    现在就报名
-                    <% end %>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <h2 class="title text-center">现在开始认知升级！</h2>
+                  <h4 class="description text-center">现在报名将获得得到知识卡一份。</h4>
+                  <div class="row">
+                    <div class="text-center">
+                      <%= link_to products_path, class: "btn btn-danger btn-round" do %>
+                      现在就报名
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
