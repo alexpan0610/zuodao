@@ -1,26 +1,36 @@
+<!-- 结算页面的地址列表 -->
+<!-- 默认选中用户的默认地址 -->
 <% selected = @selected.present? ? @selected : current_user.default_address %>
+<!-- 传递被选中的地址，在页面上不显示 -->
 <input type="hidden" name="selected_address" value="<%= selected.nil? ? 'none' : selected.id %>" id="selected-address"/>
+<!-- 给js读取地址数量用，在页面上不显示 -->
 <input type="hidden" value="<%= current_user.addresses.count %>" id="addresses-count"/>
 <table class="table">
   <% @addresses.each_with_index do |address, index| %>
-  <tr>
-    <td>
-      <a href="" class="btn btn-raised btn-<%= address == selected ? 'danger' : 'white' %> address-label" id="address-<%= index %>">
-        <%= address.label %>
-      </a>
-      <input type="hidden" value="<%= address.id %>" id="address-id-<%= index %>"/>
-    </td>
-    <td><%= address.name %></td>
-    <td width="40%"><%= address.address %></td>
-    <td><%= address.cellphone %></td>
-    <td>
-      <% selected_id = selected.nil? ? '' : selected.id %>
-      <%= link_to("设为默认", set_default_account_address_path(address, selected: selected_id),
-      method: :post, remote: true, id: "checkout-btn-set-default-#{index}",
-      class: "btn btn-info btn-round btn-sm #{address.default? ? 'invisible' : 'visible'}") %>
-    </td>
-  </tr>
+    <tr>
+      <!-- 标签，如：公司、家 -->
+      <td>
+        <a href="" class="btn btn-raised btn-<%= address == selected ? 'danger' : 'white' %> address-label" id="address-<%= index %>">
+          <%= address.label %>
+        </a>
+        <input type="hidden" value="<%= address.id %>" id="address-id-<%= index %>"/>
+      </td>
+      <!-- 收货人 -->
+      <td><%= address.name %></td>
+      <!-- 详细地址 -->
+      <td width="40%"><%= address.address %></td>
+      <!-- 手机号码 -->
+      <td><%= address.cellphone %></td>
+      <!-- 设为默认按钮 -->
+      <td>
+        <% selected_id = selected.nil? ? '' : selected.id %>
+        <%= link_to("设为默认", set_default_account_address_path(address, selected: selected_id),
+        method: :post, remote: true, id: "checkout-btn-set-default-#{index}",
+        class: "btn btn-info btn-round btn-sm #{address.default? ? 'invisible' : 'visible'}") %>
+      </td>
+    </tr>
   <% end %>
+  <!-- 新增收货地址的按钮 -->
   <tr>
     <td colspan="5">
       <%= link_to fa_icon("plus", text: "新增"), new_account_address_path, class: "btn btn-raised btn-info" %>

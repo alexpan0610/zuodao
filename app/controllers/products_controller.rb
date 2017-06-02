@@ -15,24 +15,27 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  # 对商品的操作，包括加入购物车和立即下单
   def operations
     @product = Product.find(params[:id])
     @quantity = params[:quantity].to_i
+    # 判断操作类型
     case params[:commit]
     when "add_to_cart"
-      return if over_sell?
       # 加入购物车
       if current_cart.add!(@product, @quantity)
         flash.now[:notice] = "课程 #{@product.title} 的 #{@quantity} 个名额已加入购物车！"
       else
-        flash.now[:warning] = "您选择的数量超出课程 #{@product.title} 的名额！"
+        flash.now[:warning] = "您加入购物车的数量超出课程 #{@product.title} 的名额！"
       end
       respond_to do |format|
         format.js { render "products/add_to_cart" }
       end
     when "order_now"
-      return if over_sell?
       # 立即下单
+      if @quantity > @product.quantity
+        return redirect_to product_path(@product), warning: "您下单的数量超出课程 #{@product.title} 的名额！"
+      end
       item = CartItem.new(product: @product, quantity: @quantity)
       if item.save
         redirect_to checkout_cart_path(item_ids:[item.id])
@@ -44,20 +47,17 @@ class ProductsController < ApplicationController
 
   private
 
-  # 是否超卖
-  def over_sell?
-    @quantity > @product.quantity
-  end
-
   def validate_search_key
     @query = params[:query].gsub(/\|\'|\/|\?/, "") if params[:query].present?
   end
 
+  # 配置搜索的字段
   def search_criteria
     {
-      category_name_cont: @query,
-      title_cont: @query,
-      description_cont: @query,
+      category_name_cont: @query, # 课程类型
+      title_cont: @query, # 课程名称
+      description_cont: @query, # 课程描述
+      catalog_cont: @query, # 课程目录
       m: 'or'
     }
   end

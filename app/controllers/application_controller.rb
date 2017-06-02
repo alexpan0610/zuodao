@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Base
     @categories = Category.all
   end
 
+  # 找一个临时购物车
   def find_session_cart
     cart = Cart.find_by(id: session[:cart_id])
     if cart.blank?
@@ -38,6 +39,7 @@ class ApplicationController < ActionController::Base
     cart
   end
 
+  # 找到用户的专属购物车
   def find_user_cart
     cart = current_user.cart
     if cart.blank?

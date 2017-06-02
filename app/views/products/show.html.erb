@@ -33,13 +33,15 @@
                     <%= @product.quantity == 0 ? '已报满' : @product.quantity %>
                   </span>
                 </div>
-
+                <!-- 商品操作表单，提交加入购物车或立即下单的数据 -->
                 <%= simple_form_for @product, method: :post, remote: true, url: operations_product_path(@product) do |f| %>
+                  <!-- 商品数量 -->
                   <div class="buy-quantity">
                     <%= link_to(mi.remove, "", id: "quantity-minus", class: "quantity-minus btn btn-white btn-sm btn-simple disabled") %>
                     <%= f.input_field "", name: "quantity", value: 1, max: @product.quantity, id: "quantity-input", class: "quantity-input" %>
                     <%= link_to(mi.add, "", id: "quantity-plus", class: "quantity-plus btn btn-white btn-sm btn-simple #{@product.quantity <= 1 ? 'disabled' : ''}") %>
                   </div>
+                  <!-- 操作按钮，加入购物车及立即下单 -->
                   <div class="operations">
                     <button type="submit" name="commit" value="add_to_cart" class="btn btn-warning btn-wd btn-round <%= @product.quantity == 0 ? 'disabled' : '' %>">
                       <%= fa_icon("cart-arrow-down", text: "加入购物车") %>
@@ -48,6 +50,7 @@
                       立刻下单
                     </button>
                   </div>
+                  <!-- 收藏按钮 -->
                   <span id="favorite">
                     <%= render "products/favorites", product: @product %>
                   </span>
@@ -69,7 +72,7 @@
               <div class="profile-tabs">
                 <div class="nav-align-center">
                   <ul class="nav nav-pills nav-pills-info" role="tablist">
-
+                    
                     <li class="active">
                       <a href="#intro" role="tab" data-toggle="tab">
                         <i class="material-icons">dashboard</i>

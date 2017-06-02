@@ -1,3 +1,4 @@
+<!-- 购物车内容区 -->
 <div class="card-content">
   <% if current_cart.empty? %>
     <div class="cart-empty">
@@ -7,12 +8,14 @@
       </h4>
     </div>
   <% else %>
+    <!-- 接收批量删除、批量结算、单个课程删除操作的大表单 -->
     <%= form_for current_cart, url: operations_cart_path(current_cart), method: :post, remote: true do |f|%>
       <input type="hidden" value="<%= current_cart.cart_items_count %>" id="cart-items-count">
       <div class="table-responsive">
         <table class="table table-shopping">
           <thead>
             <tr>
+              <!-- 全选框 -->
               <th>
                 <div class="checkbox">
                   <label>
@@ -29,6 +32,7 @@
             </tr>
           </thead>
           <tbody>
+            <!-- 使用each_with_index方法，给每个课程加上序号，用序号组成id，控制js -->
             <% @cart_items.each_with_index do |item, index| %>
               <%= render "carts/cart_item", f: f, item: item, index: index %>
             <% end %>

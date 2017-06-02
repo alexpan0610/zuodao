@@ -7,27 +7,29 @@ class CartsController < ApplicationController
     @item_ids = []
   end
 
+  # 用户对购物车的操作都经过这里
   def operations
-    if params[:delete_item].present?
+    if params[:delete_item].present? # 用户删除单个课程
       delete_item
-    elsif params[:delete_items].present?
+    elsif params[:delete_items].present? # 用户删除多个课程
       delete_items
-    elsif params[:checkout].present?
+    elsif params[:checkout].present? # 用户进行结算
       do_checkout
     end
   end
 
+  # 结算页
   def checkout
-    @items = []
-    params[:item_ids].each do |item_id|
-      @items << CartItem.find(item_id)
-    end
+    # 获取购物清单
+    @items = CartItem.where(id: params[:item_ids])
     @order = Order.new
+    # 获取用户的地址列表
     @addresses = current_user.addresses
   end
 
   private
 
+  # 删除单个课程
   def delete_item
     @item_ids = params[:item_ids].present? ? params[:item_ids].to_a : []
     @cart_item = CartItem.find(params[:delete_item])
@@ -39,18 +41,18 @@ class CartsController < ApplicationController
     end
   end
 
+  # 删除多个课程
   def delete_items
     unless params[:item_ids].present?
       flash[:warning] = "请至少选中一门课程"
     else
-      params[:item_ids].each do |item_id|
-        CartItem.find(item_id).destroy
-      end
+      CartItem.where(id: params[:item_ids]).destroy_all
       flash[:alert] = "已删除选中的 #{params[:item_ids].size} 门课程"
     end
     redirect_to carts_path
   end
 
+  # 进行结算
   def do_checkout
     unless params[:item_ids].present?
       flash[:warning] = "请至少选中一门课程"

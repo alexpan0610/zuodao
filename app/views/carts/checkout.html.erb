@@ -1,6 +1,8 @@
+<!-- 购物结算，分为收货信息、付款信息和购物清单三块 -->
 <div class="my-content checkout">
   <div class="container">
     <div class="card">
+      <!-- 结算图标 -->
       <div class="card-header card-header-icon" data-background-color="blue">
         <i class="material-icons">monetization_on</i>
       </div>
@@ -11,23 +13,30 @@
           填写并核对订单信息
         </small>
       </h4>
+      <!-- 接收收货信息、付款信息和购物清单参数的大表单 -->
       <%= form_for [:account, @order] do |f| %>
         <div class="card-content">
+          <!-- 收货信息 -->
           <div class="page-header">
             <h4>收货信息</h4>
           </div>
+          <!-- 使用partial渲染收货地址列表，用户可以在这里设置默认地址，而不用刷新整个页面 -->
           <div class="addresses" id="checkout-addresses">
             <%= render "checkout_addresses" %>
           </div>
+          <!-- 支付信息 -->
           <div class="payment-method">
             <div class="page-header">
               <h4>付款信息</h4>
             </div>
+            <!-- 用来传递用户选中支付方式，在页面上不显示 -->
             <input type="hidden" name="payment_method" value="none" id="payment-method"/>
+            <!-- 支付方式选择按钮 -->
             <%= link_to("微信支付", "javascript:;", class: "wechat btn btn-raised btn-white") %>
             <%= link_to("支付宝", "javascript:;", class: "alipay btn btn-raised btn-white") %>
             <hr/>
           </div>
+          <!-- 购物清单 -->
           <div class="details">
             <div class="page-header">
               <h4>购物清单
@@ -51,29 +60,35 @@
                   <% @items.each do |item| %>
                     <input type="hidden" name="items[]" value="<%= item.id %>">
                     <tr>
+                      <!-- 课程图片 -->
                       <td>
                         <div class="img-container img-rounded img-raised">
                           <%= render_product_image_thumb(item.product) %>
                         </div>
                       </td>
+                      <!-- 名称及简介 -->
                       <td class="td-name">
                         <%= item.product.title %>
                         <br/>
                         <small><%= render_product_description(item.product) %></small>
                       </td>
+                      <!-- 单价 -->
                       <td class="td-number text-right">
                         <small>￥</small>
                         <%= render_price(item.product.price) %>
                       </td>
+                      <!-- 名额 -->
                       <td class="td-number quantity">
                         x<%= item.quantity %>
                       </td>
+                      <!-- 小计 -->
                       <td class="td-number">
                         <small>￥</small>
                         <%= render_price(item.quantity * item.product.price) %>
                       </td>
                     </tr>
                   <% end %>
+                  <!-- 底部 -->
                   <tr>
                     <td colspan="4" class="td-number">
                       <h4 class="text-danger">

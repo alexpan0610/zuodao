@@ -1,4 +1,6 @@
+<!-- 购物车中的每一条课程信息 -->
 <tr>
+  <!-- 复选框 -->
   <td>
     <div class="checkbox">
       <label>
@@ -6,20 +8,24 @@
       </label>
     </div>
   </td>
+  <!-- 课程图片 -->
   <td>
     <%= link_to product_path(item.product), class: "img-container img-rounded img-raised" do %>
       <%= render_product_image_thumb(item.product) %>
     <% end %>
   </td>
+  <!-- 名称和描述 -->
   <td class="td-name">
     <%= link_to(item.product.title, product_path(item.product)) %>
     <br/>
     <small><%= render_product_description(item.product) %></small>
   </td>
+  <!-- 单价 -->
   <td class="td-number text-right">
     <small>￥</small>
     <%= render_price(item.product.price) %>
   </td>
+  <!-- 数量 -->
   <td class="td-number quantity">
     <input type="text" name="quantities[]" value="<%= item.quantity == 0 ? '已报满' : item.quantity %>" id="quantity-input-<%= index %>" class="quantity-input" disabled>
     <div class="btn-group">
@@ -33,17 +39,21 @@
       <% end %>
     </div>
   </td>
+  <!-- 合计 -->
   <td class="td-number">
     <small>￥</small>
     <span id="cart-item-subtotal-<%= index %>">
       <%= render_price(item.quantity * item.product.price) %>
     </span>
   </td>
+  <!-- 删除按钮 -->
   <td class="td-actions text-center">
+    <!-- 伪装的删除按钮，用来呼出确认删除对话框 -->
     <button type="button" rel="tooltip" title="Remove item" class="btn btn-simple"
     data-toggle="modal" data-target="#confirm-dialog" onclick='confirmRemoveCartItem("<%= item.id %>", "确认将课程 <%= item.product.title %> 移出购物车吗？")'>
       <i class="material-icons">close</i>
     </button>
+    <!-- 实际的删除按钮，在页面上不显示，点击确认删除的确定按钮时再触发 -->
     <%= f.button '删除', type: :submit, name: "delete_item", value: item.id, class: "invisible", id: "cart-btn-delete-#{item.id}" %>
   </td>
 </tr>

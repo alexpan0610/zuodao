@@ -7,13 +7,15 @@ class CartItemsController < ApplicationController
     redirect_to carts_path
   end
 
+  # 增加数量
   def increase
-    # 增加名额
+    # 加入购物车的数量不能超过库存数量
     if @cart_item.quantity < @cart_item.product.quantity
       @cart_item.change_quantity!(1)
     end
 	end
 
+  # 减少数量
 	def decrease
     # 课程数量最少为1件
 		if @cart_item.quantity > 1
