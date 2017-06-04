@@ -2,17 +2,18 @@
 #
 # Table name: products
 #
-#  id          :integer          not null, primary key
-#  image       :string
-#  title       :string
-#  description :text
-#  price       :float
-#  quantity    :integer          default(0)
-#  is_hidden   :boolean          default(TRUE)
-#  category_id :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  catalog     :text
+#  id              :integer          not null, primary key
+#  image           :string
+#  title           :string
+#  description     :text
+#  price           :float
+#  quantity        :integer          default(0)
+#  is_hidden       :boolean          default(TRUE)
+#  category_id     :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  catalog         :text
+#  favorites_count :integer          default(0)
 #
 
 class Product < ApplicationRecord

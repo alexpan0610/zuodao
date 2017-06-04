@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_cart
 
   def admin_required
+    if current_user.guest?
+      flash[:alert] = "预览账户没有操作权限！"
+      return back root_path
+    end
     unless current_user.admin?
       redirect_to root_path, alert: "您没有权限！"
     end

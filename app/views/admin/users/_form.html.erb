@@ -2,7 +2,7 @@
   <div class="form-inputs">
     <%= f.input :email, label: "E-mail", autofocus: true %>
     <%= f.input :password, label: "登录密码" %>
-    <%= f.input :is_admin, label: "管理员" %>
+    <%= f.input :role_type, label: "用户角色", as: :select, collection: { "用户" => 0, "管理员" => 31, "预览" => 13} %>
   </div>
   <div class="form-actions">
     <%= link_to("取消", :back, class: "btn btn-raised btn-white") %>

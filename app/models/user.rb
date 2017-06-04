@@ -15,7 +15,7 @@
 #  last_sign_in_ip        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  is_admin               :boolean          default(FALSE)
+#  role_type              :integer          default(0)
 #
 
 class User < ApplicationRecord
@@ -40,7 +40,11 @@ class User < ApplicationRecord
   scope :asc, -> { order("created_at ASC") }
 
   def admin?
-    is_admin
+    role_type == 31
+  end
+
+  def guest?
+    role_type == 13
   end
 
   def favorite!(course)

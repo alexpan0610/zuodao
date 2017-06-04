@@ -1,6 +1,6 @@
 <% if flash.any? %>
   <% user_facing_flashes.each do |key, value| %>
-    <div class="alert alert-fixed alert-<%= flash_class(key) %> <%= params[:controller].include?(" admin") ? " admin-alert" : " my-alert" %>">
+    <div class="alert alert-fixed alert-<%= flash_class(key) %> <%= params[:controller].include?("admin") ? "admin-alert" : "my-alert" %>">
       <div class="container-fluid">
         <div class="alert-icon">
           <%= render_alert_icon(key) %>
