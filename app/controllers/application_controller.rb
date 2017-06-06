@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_cart
+    # 如果用户登陆了，找到用户的专属购物车
     if current_user
       @current_cart ||= find_user_cart
     else
@@ -58,11 +59,19 @@ class ApplicationController < ActionController::Base
 
   # 找到一个空购物车
   def find_empty_cart
-    cart = Cart.where(user_id: nil).first
-    if cart.nil? || !cart.empty?
-      cart = Cart.create
+    # 找到所有不是用户专属的购物车
+    carts = Cart.where(user_id: nil)
+    if carts.empty?
+      # 如果没有，新建一个
+      return Cart.create
+    else
+      # 找到一个空购物车
+      carts.each do |cart|
+        return cart if cart.empty?
+      end
+      # 如果没有空购物车，新建一个
+      return Cart.create
     end
-    cart
   end
 
   def save_back_url
