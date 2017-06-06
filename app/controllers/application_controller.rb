@@ -35,10 +35,7 @@ class ApplicationController < ActionController::Base
 
   # 找一个临时购物车
   def find_session_cart
-    cart = Cart.find_by(id: session[:cart_id])
-    if cart.blank?
-      cart = Cart.create
-    end
+    cart = Cart.find_by(id: session[:cart_id]) || find_empty_cart
     session[:cart_id] = cart.id
     cart
   end
@@ -46,8 +43,8 @@ class ApplicationController < ActionController::Base
   # 找到用户的专属购物车
   def find_user_cart
     cart = current_user.cart
-    if cart.blank?
-      cart = Cart.create
+    if cart.nil?
+      cart = find_empty_cart
       current_user.cart = cart
     end
     session_cart = find_session_cart
@@ -55,6 +52,15 @@ class ApplicationController < ActionController::Base
     unless session_cart.empty?
       cart.merge!(session_cart)
       session_cart.clean!
+    end
+    cart
+  end
+
+  # 找到一个空购物车
+  def find_empty_cart
+    cart = Cart.where(user_id: nil).first
+    if cart.nil? || !cart.empty?
+      cart = Cart.create
     end
     cart
   end

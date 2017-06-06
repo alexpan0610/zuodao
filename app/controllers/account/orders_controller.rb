@@ -1,8 +1,8 @@
 class Account::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_order_info, only: :create
-  before_action :find_order_by_number, only: [:show, :pay, :cancel, :make_payment, :apply_for_cancel, :confirm_receipt, :apply_for_return]
-  before_action :save_back_url, only: [:create, :pay, :cancel, :make_payment, :apply_for_cancel, :confirm_receipt, :apply_for_return]
+  before_action :find_order_by_number, except: [:index, :create]
+  before_action :save_back_url, except: [:index, :show]
 
   def index
     if params[:start_date].present?
@@ -223,7 +223,7 @@ class Account::OrdersController < ApplicationController
       @order.destroy
     end
     flash[level] = msg
-    redirect_to carts_path
+    back carts_path
     false
   end
 
