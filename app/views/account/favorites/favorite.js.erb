@@ -1,5 +1,6 @@
 $("#favorites-" + <%= @product.id %>).html('<%= escape_javascript render "products/favorites_small", product: @product %>');
 $("#favorite").html('<%= escape_javascript render "products/favorites", product: @product %>');
+$('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
 // 显示提示消息
 $('.navbar').after('<%= escape_javascript render(partial: "common/flashes") %>');
 slideUpAlert();

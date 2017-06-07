@@ -39,6 +39,9 @@ gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-aws'
 gem "mini_magick"
 gem 'font-awesome-rails'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
+gem 'omniauth-github'
 gem 'figaro'
 gem 'aasm'
 

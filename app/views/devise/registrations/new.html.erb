@@ -7,15 +7,15 @@
             <div class="header header-info text-center ">
               <h4>注册</h4>
               <div class="social-line">
-                <a href="#pablo" class="btn btn-simple btn-just-icon">
-                  <i class="fa fa-weixin"></i>
-                </a>
-                <a href="#pablo" class="btn btn-simple btn-just-icon">
-                  <i class="fa fa-weibo"></i>
-                </a>
-                <a href="#pablo" class="btn btn-simple btn-just-icon">
-                  <i class="fa fa-github"></i>
-                </a>
+                <%= link_to user_github_omniauth_authorize_path, class: "btn btn-simple btn-just-icon" do %>
+                  <%= fa_icon("github") %>
+                <% end %>
+                <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-simple btn-just-icon" do %>
+                  <%= fa_icon("facebook") %>
+                <% end %>
+                <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-simple btn-just-icon" do %>
+                  <%= fa_icon("google") %>
+                <% end %>
               </div>
             </div>
             <p class="text-divider">邮箱注册</p>
