@@ -19,7 +19,7 @@ class OmniauthCallbacksController < ApplicationController
   def authenticate(kind)
     @user = User.identify(request.env["omniauth.auth"], current_user)
 
-    if @user.persisted?
+    if @user && @user.persisted?
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: kind
       sign_in_and_redirect @user, event: :authentication
     else
